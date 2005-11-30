@@ -1,0 +1,312 @@
+
+\section{Motivation}
+\label{sec:intro}
+
+Ich erstelle halt meine Dokumentation in erster Linie mit \LaTeX{} und
+der Wechsel zu Ant sollte natürlich so leicht wie möglich gemacht
+werden \ldots Also ging es daran ein Tool zu suchen, dass \LaTeX{} in
+Ant einbindet. Es wurde auch eines gefunden: \code{anttex\_1.0}, nur
+leider wollte dieses Teil nicht mit \code{*.ltx} Dateien
+zusammenarbeiten und ich werde deswegen nicht alle meine Dateien
+umstellen \ldots Zum Anderen läuft dieses Tool stur dreimal über die
+LaTeX-Datei ohne auf die vollständige Auflösung der Referenzen zu
+achten, dies gilt insbesondere bei \GlossTeX{} zubeachten!.
+
+Deswegen musste ich eine eigene Lösung entwickeln:
+
+\begin{itemize}
+\item Lässt optional BibTeX laufen
+\item Lässt optional MakeIndex laufen
+\item Lässt optional (jx)\GlossTeX{} laufen
+\item Die drei vorgenannten Prozesse sind einmal integriert in einem
+        LaTeX-Lauf oder können als eigene Tasks definiert werden.
+\item PDFLaTeX oder LaTeX als Prozessor auswählbar
+\item \code{multibib} Bibliographien werden unterstützt.
+\end{itemize}
+
+\section{Benutzung}
+\label{sec:benutzung}
+
+Es gibt einmal die Möglichkeit einen \LaTeX{}-Task zu definieren in
+dem alle notwendigen Durchläufe von \BibTeX{}, makeindex etc.
+ausgeführt werden, eine zweite Möglichkeit besteht darin, jede
+Anwendung als eigenen Task zu definieren und auszuführen.
+
+
+\subsection{Gesamtaufruf}
+\label{sec:gesamt:aufruf}
+
+
+Zuerst der Task mit:
+\begin{verbatim}
+  <taskdef name="latex"    classname="de.dokutransdata.antlatex.LaTeX"
+    classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
+\end{verbatim}
+%
+zu definieren. Anschliessend kann der komplexe Task benutzt werden:
+%
+\begin{verbatim}
+  <target name="doLaTeX">
+    <latex 
+      latexfile="${ltx2.file}" 
+      verbose="on" 
+      clean="on" 
+      pdftex="off"
+      workingDir="${basedir}"
+    />
+  </target>
+\end{verbatim}
+
+Damit ist ein einfacher \LaTeX{}-Lauf definiert, dies hätte aber auch
+mit einem \code{exec}-Element erreicht werden können. 
+
+\minisec{Parameter zum \LaTeX{}-Task}
+\begin{supertabular}{lp{19.5em}p{10em}}
+\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\code{latexfile} & Die \LaTeX{}-Datei, es werden Dateien mit
+  der Endung \code{.tex} oder \code{.ltx} akzeptiert. & Ja \\
+\code{verbose} & Gibt bei \code{on} Informationen auf der
+  Standardausgabe aus. & Nein. Default: off\\
+\code{clean} & Bei \code{on} werden die temporären Dateien nach
+  dem \LaTeX{}-Lauf gelöscht, zusätzliche Filter können mit dem
+  Element \code{deletetempfiles} ergänzt werden. & Nein. Default: off\\
+\code{pdftex} & Mit \code{on} wird PDF\LaTeX{} aufgerufen. & Nein. Default: off\\
+\code{workingDir} & Arbeitsverzeichnis setzen & Nein. Default: \code{basedir}\\
+\code{reRunPattern} & Pattern nach dem in der Log-Datei von
+  \LaTeX{} zu suchen ist, um zu entscheiden ob ein weiterer Durchlauf
+  notwendig ist. & Nein. \\
+\code{command} & Auszuführender Befehl & Nein. Default: latex\\
+\end{supertabular}
+
+\noindent
+Der Standardwert für \code{reRunPattern} ist:\\
+\verb/(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term )/\\
+
+Um jetzt zum Beispiel einen \code{makeindex}-Lauf zu integrieren ist
+folgende Definition notwendig:
+%
+\begin{verbatim}
+  <target name="doLaTeX">
+    <latex 
+      latexfile="${ltx2.file}" 
+      .
+      .
+      .
+    > 
+      <makeindex 
+        run="on" 
+        idxstyle="${ltx2.idx.style}"
+        protocolFile="${ltx2.idx.protocolFile}"
+        outFile="${ltx2.idx.outputFile}"
+        workingDir="${basedir}"
+        >
+        <fileset dir="${basedir}">
+          <include name="*.nlo"/>
+        </fileset>
+      </makeindex>
+    </latex>
+  </target>
+\end{verbatim}
+
+Das \code{fileset}-Element für \code{makeindex} ist im Normalfall
+nicht notwendig, weil der Hauptprozess dafür sorgt das
+\code{makeindex} die \code{idx}-Datei als Parameter erhält.
+
+Auf ähnliche Weise kann jetzt \BibTeX{} und \GlossTeX{} in den Prozess
+eingebunden werden. Ein komplettes Beispiel finden Sie im Anhang.
+
+\begin{verbatim}
+  <target name="doLaTeX">
+    <latex 
+      latexfile="${ltx2.file}" 
+      .
+      .
+      .
+    > 
+      <bibtex 
+        terse="${ltx2.bib.terse}" 
+        minCrossrefs="${ltx2.bib.minCrossrefs}"
+        run="on"
+        workingDir="${basedir}"
+        />
+
+      <glosstex
+        glossarDefinitionFiles="${ltx2.gloss.databases}"
+        run="on" 
+        >
+        <makeindex 
+          germanWordOrder="${ltx2.idx.germanWordOrder}"
+          idxstyle="${ltx2.gloss.style}"
+          />
+      </glosstex>
+    </latex>
+  </target>
+\end{verbatim}
+
+Durch den Parameter \code{run} kann mit \code{on} gesteuert werden, ob
+der Sub-Prozess aufgerufen werden soll. Bei den Sub-Prozessen werden
+die benötigten Input-Dateien durch den Hauptprozess gesetzt. Ausnahme
+bildet nur \code{makeindex}, wo ein gesetztes \code{fileset}-Element
+Vorrang bekommt\footnote{Dieser Hinweis stammt von Thomas Reuter}. 
+
+Zu \code{glosstex} gibt es eine Alternative die auf einfache XML-Dateien
+basiert und folgenden Aufruf im \code{latex}-Element akzeptiert:
+
+\begin{verbatim}
+  <jxGlosstex
+      dataFile="${ltx2.gloss.databases.xml}"
+      maxdepth="${ltx2.gloss.maxdepth}"
+      language="${ltx2.gloss.language}"
+      run="${ltx2.doGLOSSTEX}"
+  />
+\end{verbatim}
+
+
+\subsection{Einzelaufruf}
+\label{sec:einzel:aufruf}
+
+Die Tasks können ebenfalls einzeln aufgerufen werden.
+
+\subsubsection{Makeindex}
+
+\begin{verbatim}
+<target name="MakeIndex">
+  <makeindex 
+        compressIntermediateBlanks="${ltx2.idx.compressIntermediateBlanks}"
+        germanWordOrder="${ltx2.idx.germanWordOrder}"
+        letterOrder="${ltx2.idx.letterOrder}"
+        idxstyle="${ltx2.idx.style}"
+        protocolFile="${ltx2.idx.protocolFile}"
+        startingPageNumber="${ltx2.idx.startingPageNumber}"
+        pageRangeFormation="${ltx2.idx.pageRangeFormation}"
+        outFile="${ltx2.idx.outputFile}"
+        workingDir="${basedir}"
+  >
+    <fileset dir="${basedir}">
+      <include name="*.nlo"/>
+    </fileset>
+  </makeindex>
+</target>
+\end{verbatim}
+%$
+\minisec{Parameter zum MakeIndex{}-Task}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
+\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\code{idxstyle} & Eigener Style für die Ausgabe der Indexseiten & Nein. Default: interner Style\\
+\multicolumn{2}{l}{\code{compressIntermediateBlanks}}&\\
+                                  & Ignoriere Zwischenräume (Leerzeichen, Tabulatoren) & Nein. Default: false\\
+\multicolumn{2}{l}{\code{germanWordOrder}}\\
+                                  & Deutsche Sortierung nach DIN 5007. Benötigt auch zusätzlich einen modifizierten Index-Style! & Nein. Default: false\\
+\code{letterOrder} & Buchstabensortierung & Nein. Default: Wortsortierung\\
+\multicolumn{2}{l}{\code{protocolFile}} \\
+                                  & Ausgabe der Protokollinformationen in diese Datei & Nein. Default: $<$hauptdatei$>$.ilg\\
+\multicolumn{2}{l}{\code{startingPageNumber}}\\
+                                  & Die Seitennummerierung startet bei der angegebenen Seite bzw. Steuerung über 'any', 'even', 'odd' & Nein. Default: -1\\
+\multicolumn{2}{l}{\code{pageRangeFormation}}\\
+                                  & Formatierung der Seitenbereiche abschalten & Nein. Default: false\\
+\code{outFile} & Name der Ausgabedatei & Nein. Default: $<$hauptdatei$>$.ind\\
+\code{workingDir} & Arbeitsverzeichnis & Nein. Default: basedir\\
+\code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
+\code{command} & Auszuführender Befehl & Nein. Default: makeindex\\
+\end{supertabular}
+
+Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{makeindex}!
+
+\subsubsection{\BibTeX{}}
+\begin{verbatim}
+<target name="BibTeX">
+  <bibtex
+        workingDir="${basedir}"
+        terse="${ltx2.bib.terse}" 
+        minCrossrefs="${ltx2.bib.minCrossrefs}"
+  >
+    <fileset dir="${basedir}">
+      <include name="*.aux"/>
+    </fileset>
+  </makeindex>
+</target>
+\end{verbatim}
+%
+\minisec{Parameter zum \BibTeX{}-Task}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
+\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\code{workingDir} & Arbeitsverzeichnis & Nein. Default: basedir\\
+\code{terse} & Keine Informationen ausgeben & Nein. Default: false\\
+\multicolumn{2}{l}{\code{minCrossrefs}}\\
+             & Wieviele Referenzen müssen vorhanden sein, um einen Eintrag automatisch ins Verzeichnis aufzunehmen & Nein. Default: \BibTeX{}-Interner Wert\\
+\code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
+\code{command} & Auszuführender Befehl & Nein. Default: bibtex\\
+\end{supertabular}
+
+Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{bibtex}!
+
+\subsubsection{GlossTeX}
+
+\begin{verbatim}
+<target name="GlossTeX">
+  <glosstex
+      glossarDefinitionFiles="${ltx2.gloss.databases}"
+      run="${ltx2.doGLOSSTEX}" verbose="on" verboseLevel="5"
+  >
+    <makeindex 
+        germanWordOrder="${ltx2.idx.germanWordOrder}"
+        idxstyle="${ltx2.gloss.style}"
+    />
+    <fileset dir=".">
+      <include name="*.aux"/>
+    </fileset>
+ </glosstex>
+</target>
+\end{verbatim}
+%
+\minisec{Parameter zum \GlossTeX{}-Task}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
+\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\code{verbose} & Meldungen ausgeben & Nein. Default: off\\
+\multicolumn{2}{l}{\code{glossarDefinitionFiles}}\\
+               & Glossardatenbanken & Ja.\\
+\multicolumn{2}{l}{\code{verboseLevel}} \\
+               & Level der Meldungen & Nein. Default: 0\\
+\code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
+\code{command} & Auszuführender Befehl & Nein. Default: glosstex\\
+\end{supertabular}
+
+Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{glosstex}!
+
+Es muss natürlich \GlossTeX{} installiert sein ;-)
+
+\subsubsection{jxGlossar}
+
+\begin{verbatim}
+<target name="jxGlossar">
+  <glossar
+    dataFile="${ltx2.gloss.databases.xml}"
+    auxFile="${ltx2.auxfile}"
+    verbose="off"
+    quiet="on"
+    maxdepth="${ltx2.gloss.maxdepth}"
+    language="${ltx2.gloss.language}"
+  />
+</target>
+\end{verbatim}
+%
+
+\minisec{Parameter zum jxGlossar{}-Task}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
+\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\code{dataFile} & XML-Glossardatenbank & Ja.\\
+\code{auxFile}  & Datei der benutzten Referenzen aus dem \LaTeX{}-Lauf & Ja\\
+\code{verbose}  & Schreibt einige Informationen in die Standardausgabe. & Nein. Default: off\\
+\code{quiet}    & Schreibt keine Informationen in die Standardausgabe. & Nein. Default: off\\
+\code{maxdepth} & Wieviel Durchläufe sind erlaubt um Crossreferenzen
+    den Glossar-Einträge aufzulösen. Existieren danach immer noch
+    unaufgelöste Referenzen, so wird eine Meldung ausgegeben und die
+    Referenzen werden unterdrückt! & Nein. Default: 10\\
+\code{language} & Welche Sprache der Glossardefinition soll berücksichtigt werden. & Nein. Default: de\\
+\code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
+\end{supertabular}

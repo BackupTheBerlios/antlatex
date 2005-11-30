@@ -1,0 +1,143 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Präambel
+%
+%       Hier werden einige globale Einstellungen vorgenommen.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper,
+bibtotoc,    % Literaturverzeichnis im Inhaltsverzeichnis aufführen
+idxtotoc,    % Stichwortverzeichnis im Inhaltsverzeichnis aufführen
+%lortotoc,    % Struktogrammverzeichnis im Inhaltsverzeichnis aufführen
+%lostotoc,    % Sourcecodeverzeichnis im Inhaltsverzeichnis aufführen
+liststotoc,  % Verzeichnisse (Abbildungen/Tabellen) im Inhaltsverzeichnis aufführen
+%glototoc,    % Glossar im Inhaltsverzeichnis aufführen
+twoside,     % Zweiseitiger Druck
+pointlessnumbers, % Kapitelnummern ohne abschliessenden Punkt
+%openright,   % Kapitel öffnen immer auf der rechten Seite, wenn auf Report umgeschaltet wird 
+%titlepage,   % Eigenständige Titelseite (spez. für Artikel einschalten)
+%abstracton,  % Zusammenfassung ist ein betitelter Abschnitt
+german]{scrartcl}%{scrreprt}% Wenn auf Report umgeschaltet wird, muss
+                 %evtl. von Section auf Chapter umgeschaltet werden!
+\usepackage[latin1]{inputenc}
+\usepackage[left=20mm]{geometry}
+\usepackage{float,makeidx,german,array,graphicx,bibgerm,texnames}
+% float = Figures/Tables koennen mit [H] genau an dieser Stelle positioniert
+% werden.
+% makeidx = Befehle zum Erzeugen eines Stichwortverzeichnisses
+% german  = Befehle/Texte für deutsche Texte
+% array   = Erweiterungen zur tabular/array-Umgebung.
+% graphicx = Das Paket zum Einbinden von Grafiken (eps, png)
+% bibgerm  = Befehle und Layout für ein deutsches Literaturverzeichnis.
+%usepackage{psboxit}
+% psboxit = Farblich unterlegte und umrahmte Box mittels PS-Befehlen
+\usepackage{supertabular}
+% supertabular = Eine Tabelle ueber mehrere Seiten.
+\usepackage[%colorlinks, 
+bookmarks, 
+%latex2html, 
+%dvips,
+%dvipdf,
+pdftitle={HOWTO zu ant_latex},
+pdfcreator={DokuTransData, Aachen},
+pdfproducer={DokuTransData, Aachen},
+pdfauthor={Juergen A. Lamers},
+pdfsubject={Handbuch},
+pdfkeywords={Ant, LaTeX, DokuTransData}
+]{hyperref}
+% hyperef = Wichtiges Paket im Zusammenspiel mit HTML/PDF. Erlaubt u.a. aktive
+% Links in ein Dokument einzubinden.
+%\usepackage{html}
+% html = Hilfsstyle fuer latex2html, damit kann u.a. RAW-HTML in LaTeX
+% eingebunden werden.
+\usepackage{verbatimfiles}
+% verbatimfiles = Erweiterungen von verbatim, wichtig fuer latex2html
+% {{{ Koma-ScrPage
+\usepackage{scrtime, scrpage}
+% scrpage = Definition eigener Fuss/Kopfzeilen
+\pagestyle{dtdStandardC}
+% }}}
+%\usepackage[dvips]{color}
+\usepackage[nobgcolor]{giaAPI}
+% giaAPI = Unsere Style-Datei mit wichtigen Umgebungen zur Dokumentation von
+% Programmen.
+\usepackage{giaGlossar}
+% giaGlossar = Style zur Erzeugung/Verwaltung eines Glossars. Erweiterungen von gloidx und glosstex. 
+%\usepackage{giaColor}
+% giaColor  = Vorsicht neue Defintionen der Section, SubSection-Header mit
+% eigener Farbe! Funktoniert nur mit scrbook|scrreprt|scrartcl
+% \usepackage{psboxit}
+% \PScommands
+% Wenn psboxit eingebunden ist, muss diese Befehl in der Präambel auftauchen.
+
+\def\textsb#1{\textbf{\textsf{#1}}}
+\def\code#1{\texttt{#1}}
+%\usepackage{html_listing}
+% \HtmlRelPath{../}
+% % Relativer Pfad zum SourceVerzeichnis
+% \SourceDir{../src}
+% \def\StruktoDir{../struktos}
+% \begin{htmlonly}
+%   \def\SourceDirName{../src}
+% \def\HtmlRelPathName{../}
+% \end{htmlonly}
+
+%\makeindex
+% Einschalten der Registrierung von Stichwoertern <= makeidx
+%\makeglossary
+% Einschalten der Registrierung von Glossareintraegen <= giaGlossar
+
+\let\raggedsection\relax
+% Kapitelueberschriften duerfen getrennt werden
+
+\setcapindent{1em}
+% Bild/Tabellen-Unterschriften werden in der zweiten Zeile 1em eingerückt.
+
+%\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+% Bei zweiseitigem Druck kann mit diesem Befehl eine leere Seite erzwungen
+% werden. Eigentlich nur wichtig in der Titelei.
+
+% Die nachfolgenden Variablen werden in titlepage bzw. maketitle ausgewertet.
+\subject{Kurzanleitung}
+\def\shortdescription{Wie kann ant\_latex eingesetzt werden.} % Dieser Text erscheint auf
+                                % der Seite nach dem Titel und den Hinweisen
+                                % zur Rechtslage als /Ueberschrift/ fuer den
+                                % internen Hinweis.
+\title{ant\_latex}
+\author{
+%  Name des Autors / der Autorin  \\
+  \htmladdnormallink{Jürgen A.Lamers}{mailto:jaloma@dokutransdata.de}
+  }
+\publishers{DokuTransData}
+
+%\input{titlepage.tex}
+% Standarddefinitionen fuer die Titelseite(n)
+
+\graphicspath{{../Bilder/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%       Hier beginnt das Dokument
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \thispagestyle{empty}
+% \begin{quote}
+%   \textbf{Vorsicht} Diese Anleitung ist im Grunde nur auf \texttt{Curly-Sue}
+%   anwendbar, da ich mittlerweile \emph{soviele} Spezialitäten entwickelt habe, die
+%   ich für andere System noch nicht bereit bin freizugeben.
+% \end{quote}
+\pagenumbering{roman} % Titelei wird mit römischen Ziffern paginiert.
+\maketitle
+\input{disclaimer.tex} % Beinhaltet die kurze Zusammenfassung sowie fuer die
+                       % WebSeiten einen Hinweis.
+
+
+\pagenumbering{arabic} % Der Haupttext bekommt wieder arabische Ziffern.
+% Vorsicht: \include generiert grundsaetzlich einen Seitenumbruch und will
+% eine Datei mit der Endung .tex haben (im Gegensatz zu \input).
+\input{script} % Hier steht jetzt der eigentliche Text bzw. es werden
+                 % weitere LaTeX-Dateien eingebunden.
+\include{appendix} % Anschliessend folgt der Anhang, evtl. mit weiteren
+                   % Abschnitten. Hauptsaechlich aber mit de Verzeichnissen:
+                   % Literaturverzeichnis, Glossar, Stichwortverzeichnis etc.
+\end{document}

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE project SYSTEM "y:/Ant/dtd/ant.dtd">
+<!-- 
+Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
+-->
+<project
+ name="ant_howto"
+ basedir="."
+ default="doLaTeX">
+   <property
+    name="buildProperties"
+    value="./build.properties" />
+
+   <property
+    file="${buildProperties}" />
+
+   <target
+    name="doLaTeX">
+      <ant
+       target="ltx2"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doChkTeX">
+      <ant
+       target="chkTeX"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doHTML"
+    depends="doLaTeX">
+      <ant
+       target="doHTLaTeX"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doPDFLaTeX">
+      <ant
+       target="pdfLaTeX"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doMakeIndex">
+      <ant
+       target="MakeIndex"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="clean">
+      <delete>
+         <fileset
+          dir="."
+          includes="*.html" />
+      </delete>
+
+      <delete
+       file="_region_.tex" />
+
+      <delete
+       file="${main.filename}.4ct" />
+
+      <delete
+       file="${main.filename}.4tc" />
+
+      <delete
+       file="${main.filename}.idv" />
+
+      <delete
+       file="${main.filename}.lg" />
+
+      <delete
+       file="${main.filename}.xref" />
+
+      <delete
+       file="${main.filename}.css" />
+
+      <delete
+       file="${main.filename}.aux" />
+
+      <delete
+       file="${main.filename}.bbl" />
+
+      <delete
+       file="${main.filename}.blg" />
+
+      <delete
+       file="${main.filename}.idx" />
+
+      <delete
+       file="${main.filename}.ilg" />
+
+      <delete
+       file="${main.filename}.ind" />
+
+      <delete
+       file="${main.filename}.lof" />
+
+      <delete
+       file="${main.filename}.log" />
+
+      <delete
+       file="${main.filename}.los" />
+
+      <delete
+       file="${main.filename}.out" />
+
+      <delete
+       file="${main.filename}.tmp" />
+
+      <delete
+       file="${main.filename}.toc" />
+
+      <delete
+       file="${main.filename}.xal" />
+
+      <delete
+       file="${main.filename}.xgl" />
+
+      <delete
+       file="${main.filename}.pdf" />
+
+      <delete
+       file="${main.filename}.dvi" />
+   </target>
+
+   <target
+    name="all"
+    depends="doPDFLaTeX, doHTML" />
+</project>
+

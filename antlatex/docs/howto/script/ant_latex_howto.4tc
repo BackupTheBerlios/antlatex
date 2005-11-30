@@ -1,0 +1,10 @@
+\expandafter\ifx\csname doTocEntry\endcsname\relax \expandafter\endinput\fi
+\doTocEntry\tocsection{1}{\csname a:TocLink\endcsname{4}{x4-10001}{QQ2-4-1}{Motivation}}{1}\relax 
+\doTocEntry\tocsection{2}{\csname a:TocLink\endcsname{5}{x5-20002}{QQ2-5-2}{Benutzung}}{3}\relax 
+\doTocEntry\tocsubsection{2.1}{\csname a:TocLink\endcsname{6}{x6-30002.1}{QQ2-6-3}{Gesamtaufruf}}{3}\relax 
+\doTocEntry\tocsubsection{2.2}{\csname a:TocLink\endcsname{8}{x8-40002.2}{QQ2-8-4}{Einzelaufruf}}{10}\relax 
+\doTocEntry\tocsubsubsection{2.2.1}{\csname a:TocLink\endcsname{8}{x8-50002.2.1}{QQ2-8-5}{Makeindex}}{10}\relax 
+\doTocEntry\tocsubsubsection{2.2.2}{\csname a:TocLink\endcsname{8}{x8-60002.2.2}{QQ2-8-6}{\textsc  {Bib}\kern -.08em TEX{}}}{12}\relax 
+\doTocEntry\tocsubsubsection{2.2.3}{\csname a:TocLink\endcsname{8}{x8-70002.2.3}{QQ2-8-7}{GlossTeX}}{13}\relax 
+\doTocEntry\tocsubsubsection{2.2.4}{\csname a:TocLink\endcsname{8}{x8-80002.2.4}{QQ2-8-8}{jxGlossar}}{14}\relax 
+\doTocEntry\tocsection{A}{\csname a:TocLink\endcsname{9}{x9-9000A}{QQ2-9-9}{Beispieldateien}}{18}\relax 

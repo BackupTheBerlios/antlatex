@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE project SYSTEM "y:/Ant/dtd/ant.dtd">
+<project
+ name="do_latex">
+   <taskdef
+    name="latex"
+    classname="de.dokutransdata.antlatex.LaTeX"
+    classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar" />
+
+   <target
+    name="ltx2full">
+      <latex
+       latexfile="${ltx2.file}"
+       verbose="off"
+       clean="${ltx2.doTEXCLEAN}"
+       pdftex="${ltx2.doPDF}"
+       workingDir="${basedir}">
+         <makeindex
+          run="${ltx2.doMAKEINDEX}"
+          compressIntermediateBlanks="${ltx2.idx.compressIntermediateBlanks}"
+          germanWordOrder="${ltx2.idx.germanWordOrder}"
+          letterOrder="${ltx2.idx.letterOrder}"
+          idxstyle="${ltx2.idx.style}"
+          protocolFile="${ltx2.idx.protocolFile}"
+          startingPageNumber="${ltx2.idx.startingPageNumber}"
+          pageRangeFormation="${ltx2.idx.pageRangeFormation}"
+          outFile="${ltx2.idx.outputFile}"
+          workingDir="${basedir}">
+            <fileset
+             dir="${basedir}">
+               <include
+                name="*.nlo" />
+            </fileset>
+         </makeindex>
+
+         <bibtex
+          terse="${ltx2.bib.terse}"
+          minCrossrefs="${ltx2.bib.minCrossrefs}"
+          run="${ltx2.doBIBTEX}"
+          workingDir="${basedir}" />
+
+         <glosstex
+          glossarDefinitionFiles="${ltx2.gloss.databases}"
+          run="${ltx2.doGLOSSTEX}">
+            <makeindex
+             germanWordOrder="${ltx2.idx.germanWordOrder}"
+             idxstyle="${ltx2.gloss.style}" />
+         </glosstex>
+      </latex>
+   </target>
+
+   <target
+    name="ltx2">
+      <latex
+       latexfile="${ltx2.file}"
+       verbose="on"
+       clean="${ltx2.doTEXCLEAN}"
+       pdftex="${ltx2.doPDF}"
+       workingDir="${basedir}">
+         <makeindex
+          run="${ltx2.doMAKEINDEX}"
+          verbose="on">
+         </makeindex>
+
+         <bibtex
+          run="${ltx2.doBIBTEX}"
+          workingDir="${basedir}" />
+
+         <jxGlosstex
+          dataFile="${ltx2.gloss.databases.xml}"
+          maxdepth="${ltx2.gloss.maxdepth}"
+          language="${ltx2.gloss.language}"
+          run="${ltx2.doGLOSSTEX}" />
+      </latex>
+   </target>
+
+   <target
+    name="pdfLaTeX">
+      <latex
+       latexfile="${ltx2.file}"
+       verbose="off"
+       clean="${ltx2.doTEXCLEAN}"
+       pdftex="on"
+       workingDir="${basedir}">
+         <makeindex
+          run="${ltx2.doMAKEINDEX}" />
+
+         <bibtex
+          run="${ltx2.doBIBTEX}"
+          workingDir="${basedir}"
+          terse="${ltx2.bib.terse}"
+          minCrossrefs="${ltx2.bib.minCrossrefs}" />
+
+         <jxGlosstex
+          dataFile="${ltx2.gloss.databases.xml}"
+          maxdepth="${ltx2.gloss.maxdepth}"
+          language="${ltx2.gloss.language}" />
+      </latex>
+   </target>
+
+   <target
+    name="doGlossar">
+      <glossar
+       dataFile="${ltx2.gloss.databases.xml}"
+       auxFile="${ltx2.auxfile}"
+       verbose="off"
+       quiet="on"
+       maxdepth="${ltx2.gloss.maxdepth}"
+       language="${ltx2.gloss.language}" />
+   </target>
+
+   <target
+    name="doGlossTeX">
+      <glosstex
+       glossarDefinitionFiles="${ltx2.gloss.databases}"
+       run="${ltx2.doGLOSSTEX}"
+       verbose="on"
+       verboseLevel="5">
+         <makeindex
+          germanWordOrder="${ltx2.idx.germanWordOrder}"
+          idxstyle="${ltx2.gloss.style}" />
+
+         <fileset
+          dir=".">
+            <include
+             name="*.aux" />
+         </fileset>
+      </glosstex>
+   </target>
+
+   <target
+    name="MakeIndex">
+      <makeindex
+       run="${ltx2.doMAKEINDEX}"
+       workingDir="${basedir}">
+         <fileset
+          dir="${basedir}">
+            <include
+             name="*.nlo" />
+         </fileset>
+      </makeindex>
+   </target>
+
+   <target
+    name="doHTLaTeX">
+      <exec
+       executable="htlatex">
+         <arg
+          value="--cleanup" />
+
+         <arg
+          value="--dtd=xhtml" />
+
+         <arg
+          value="${htltx.file}" />
+
+         <arg
+          value='"local,frames,${htlatex.split.level},png"' />
+      </exec>
+   </target>
+
+   <target
+    name="chkTeX">
+      <exec
+       executable="chktex">
+         <arg
+          value="--wipeverb" />
+
+<!--arg value='"${chktex.exclude.list}"' /-->
+         <arg
+          value="${ltx2.file}" />
+      </exec>
+   </target>
+</project>
+

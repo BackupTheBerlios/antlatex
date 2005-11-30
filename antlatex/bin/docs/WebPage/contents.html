@@ -1,0 +1,115 @@
+<!--
+ $Id: contents.html,v 1.1 2005/11/30 09:20:58 jaloma Exp $
+-->
+
+<!-- {{{ Haupttext -->
+<h1><a id="intro" title="Motivation" name="intro">Motivation</a></h1>
+<p>Ich erstelle halt meine Dokumentation in erster Linie mit LaTeX und
+der Wechsel zu Ant sollte natürlich so leicht wie möglich gemacht
+werden... Also ging es daran ein Tool zu suchen, dass LaTeX in Ant
+einbindet. Es wurde auch eines gefunden: <code>anttex_1.0</code>, nur
+leider wollte dieses Teil nicht mit <code>*.ltx</code> Dateien
+zusammenarbeiten und ich werde deswegen nicht alle meine Dateien
+umstellen... Zum Anderen läuft dieses Tool stur dreimal über die
+LaTeX-Datei ohne auf die Auflösung der Referenzen zu achten.</p>
+
+<p>
+Deswegen musste ich eine eigene Lösung entwickeln:
+</p>
+
+<ul>
+<li>Lässt optional BibTeX laufen</li>
+<li>Lässt optional MakeIndex laufen</li>
+<li>Lässt optional (jx)GlossTeX laufen</li>
+<li>Die drei vorgenannten Prozesse sind einmal integriert in einem
+	LaTeX-Lauf oder können als eigene Tasks definiert werden.</li>
+<li>PDFLaTeX oder LaTeX als Prozessor auswählbar</li>
+<li><code>multibib</code> Bibliographien werden unterstützt.</li>
+</ul>
+
+<h2><a id="entwicklung" name="entwicklung" title="Entwicklung">Entwicklungsgeschichte</a></h2>
+<dl>
+	<dt><strong>[0.0.4 (2005-11-26)]</strong></dt>
+	<dd>
+	<ul>
+		<li>Es gab zwar die Möglichkeit mit &lt;fileset&gt; einen Filter f&uuml;r &lt;makeindex&gt; zu setzen, doch dieses Element wurde innerhalb eines &lt;latex&gt; Tasks nicht ausgewertet. (Gefunden von Thomas Reuter)</li>
+<li>Das XML-basierte <strong>jxGlossar</strong> wurde mit eingebunden.</li>
+<li>Das Element &lt;delete&gt; wurde ersetzt durch &lt;deletetempfile&gt;</li>
+		</ul>
+		</dd>
+	<dt><strong>[0.0.3 (2005-09-23)]</strong></dt>
+	<dd>
+	<ul>
+		<li>Das Attribut <code>if</code> stimmte nicht mit der normalen Semantik von Ant überein, deswegen wurde jetzt das Attribut <code>run</code> zum Ein/Ausschalten des Tasks eingef&uuml;hrt.</li>
+		</ul>
+		</dd>
+	<dt><strong>[0.0.2 (2005-09-07)]</strong></dt>
+	<dd>
+	<ul>
+		<li>Beim Task <code>LaTeX</code> die Elemente <code>makeindex</code>, <code>bibtex</code> und <code>glosstex</code>
+		zugelassen um die "komplexeren" Attribute durchreichen zuk&ouml;nnen.</li>
+		<li>Mit dem <code>if</code>-Attribut k&ouml;nnen jetzt die Tasks ein- bzw. ausgeschaltet werden. </li>
+	</ul>
+	<br />
+	</dd>
+	<dt><strong>[0.0.1 (2005-09-02)]</strong></dt>
+	<dd>
+	<ul>
+		<li>Erste Veröffentlichung</li>
+	</ul>
+	<br />
+	</dd>
+</dl>
+
+
+<h2><a id="license" title="Lizenz" name="license">Lizenz</a></h2>
+
+Dieses Programm ist freie Software. Sie k&ouml;nnen es heraus- und/oder
+weitergeben. Modifizierung des Programms ist nur dann erlaubt, wenn Sie
+sich das Einverst&auml;ndnis des Lizenz-Inhabers einholen.
+<p>Die Ver&ouml;ffentlichung dieses Programms erfolgt in der Hoffnung,
+da&szlig; es Ihnen von Nutzen sein wird, aber OHNE JEDE
+GEW&Auml;HRLEISTUNG - sogar ohne die implizite Gew&auml;hrleistung der
+MARKTREIFE oder der EIGNUNG F&Uuml;R EINEN BESTIMMTEN ZWECK.</p>
+
+<h2><a id="warranty" title="Gew&auml;hrleistung" name="warranty">Gew&auml;hrleistung</a></h2>
+
+Da das Programm ohne jegliche Kosten lizenziert wird, besteht keinerlei
+Gew&auml;hrleistung f&uuml;r das Programm, soweit dies gesetzlich
+zul&auml;ssig ist. Sofern nicht anderweitig schriftlich best&auml;tigt,
+stellen die Copyright-Inhaber und/oder Dritte das Programm so zur
+Verf&uuml;gung, "wie es ist", ohne irgendeine Gew&auml;hrleistung, weder
+ausdr&uuml;cklich noch implizit, einschlie&szlig;lich - aber nicht
+begrenzt auf - Marktreife oder Verwendbarkeit f&uuml;r einen bestimmten
+Zweck. Das volle Risiko bez&uuml;glich Qualit&auml;t und
+Leistungsf&auml;higkeit des Programms liegt bei Ihnen. Sollte sich das
+Programm als fehlerhaft herausstellen, liegen die Kosten f&uuml;r
+notwendigen Service, Reparatur oder Korrektur bei Ihnen.
+
+<p>In keinem Fall, au&szlig;er wenn durch geltendes Recht gefordert oder
+schriftlich zugesichert, ist irgendein Copyright-Inhaber oder irgendein
+Dritter, der das Programm wie oben erlaubt modifiziert oder verbreitet
+hat, Ihnen gegen&uuml;ber f&uuml;r irgendwelche Sch&auml;den haftbar,
+einschlie&szlig;lich jeglicher allgemeiner oder spezieller Sch&auml;den,
+Sch&auml;den durch Seiteneffekte (Nebenwirkungen) oder
+Folgesch&auml;den, die aus der Benutzung des Programms oder der
+Unbenutzbarkeit des Programms folgen (einschlie&szlig;lich - aber nicht
+beschr&auml;nkt auf - Datenverluste, fehlerhafte Verarbeitung von Daten,
+Verluste, die von Ihnen oder anderen getragen werden m&uuml;ssen, oder
+dem Unverm&ouml;gen des Programms, mit irgendeinem anderen Programm
+zusammenzuarbeiten), selbst wenn ein Copyright-Inhaber oder Dritter
+&uuml;ber die M&ouml;glichkeit solcher Sch&auml;den unterrichtet worden
+war.
+</p>
+
+<h2><a id="authors" title="Autor" name="authors">Autor</a></h2>
+
+<address><a href="mailto:jaloma@dokutransdata.de">J&uuml;rgen A. Lamers</a><br />
+</address>
+
+<h2><a id="download" title="Download" name="download">Download</a></h2>
+<a href="http://www.longdistcalc.de/service/download.php?fileTag=ant_latex">Ant_LaTeX</a> (jar-Archiv)<br />
+<img src="http://www.longdistcalc.de/service/icon.php?tag=ant_latex" alt="" />
+
+<!-- }}} Haupttext -->
+

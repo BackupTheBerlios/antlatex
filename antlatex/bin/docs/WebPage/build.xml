@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE project SYSTEM "y:/Ant/dtd/ant.dtd">
+<!-- 
+Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
+-->
+<project name="WebPage" default="all">
+  <property name="antRoot" value="y:/Ant">
+  </property>
+
+  <target name="all" depends="makeIndex, api">
+  </target>
+  <target name="makeIndex">
+    <exec executable="perl" output="index.html">
+      <arg value="Y:/Tools/bin/html_insert_text.pl"/>
+      <arg value="ant_latex -- LaTeX-Task f&amp;uuml;r Ant"/>
+      <arg value="navigation.html"/>
+      <arg value="contents.html"/>
+      <arg value="dtd_index_rahmen.html"/>
+      <arg value="meta_info.html"/>
+      <arg value="css.link"/>
+      <arg value="Dein Ant-Task fuer LaTeX"/>
+    </exec>
+    <ant target="doTidy" antfile="${antRoot}/tidy.xml">
+      <property name="htmlFile" value="index.html"/>
+    </ant>
+    <ant antfile="${antRoot}/showIndex.xml">
+      <property name="htmlFile" value="index.html"/>
+    </ant>
+  </target>
+
+  <target name="api">
+<!-- javadoc ist nicht im Pfad -->
+<!--
+    <ant dir="../" antfile="javadoc.xml">
+    </ant>
+-->
+  </target>
+</project>

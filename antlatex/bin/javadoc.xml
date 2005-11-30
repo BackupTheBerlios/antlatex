@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+	<target name="javadoc">
+		<javadoc access="protected" author="false" classpath="C:\Programme\Apache Software Foundation\apache-ant\lib\ant.jar" destdir="docs/WebPage/api" doctitle="ant_latex -- Ant-Task für LaTeX" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="C:\Projekte\ant_latex\docs\WebPage\api_contents.html" packagenames="de.dokutransdata.antlatex" source="1.3" sourcepath="." splitindex="true" use="true" version="true">
+			<link href="file:/C:/Projekte/ant_latex/docs/WebPage/api/" />
+			<link href="file:/C:/Programme/Apache Software Foundation/apache-ant/docs/manual/api/" />
+		</javadoc>
+	</target>
+</project>

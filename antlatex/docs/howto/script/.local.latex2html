@@ -1,0 +1,31 @@
+$ADDRESS = "<div  align=\"right\" class=\"klein\">" .
+    "&copy; 2002 Geodätisches Institut, Aachen<br />".
+    $address_data[1]."<br />".	
+#    "24. Februar 2002<br />".	
+    "<A HREF=\"mailto:jaloma\@gia.rwth-aachen.de?subject=Wie programmiere ich?\">J&uuml;rgen A. Lamers</A><BR>" .
+    "</div>";
+
+### Meta Information #####################################################
+# 
+# This information will be inserted in the HEAD of the generated
+# HTML file. It can be used by automatic indexing scripts (eg
+# site-index.pl at http://www.ai.mit.edu/tools/site-index.html) 
+# You can change the description, keywords, etc. values.
+sub meta_information {
+    local($_) = @_;
+    # Cannot have nested HTML tags...
+    do { s/<[^>]*>//g;
+#	"<LINK REV=\"made\" HREF=\"mailto:jaloma\@dokutransdata.de\">\n" .
+#	"<LINK REV=\"owns\" TITLE=\"Jürgen A. Lamers, Aix la Chapelle, Germany\" HREF=\"mailto:jaloma\@dokutransdata.de\">\n" .
+	 "<META NAME=\"description\" CONTENT=\"$_, Handbuch zu CVS\">\n" .
+	 "<META NAME=\"keywords\" CONTENT=\"$FILE Programmierung, Dokumentation, Softwareentwicklung, Manual\">\n" .
+	 "<META name=\"Author\" content=\"Jürgen A. Lamers\">\n" .
+	 "<META name=\"Copyright\" content=\"Jürgen A. Lamers, Geodätisches Institut, Aachen 2002\">\n" .
+	 "<META name=\"Publisher\" content=\"Geodätisches Institut Aachen 2002\">\n" .
+	 "<META NAME=\"page-type\" CONTENT=\"Vortrag\">\n" .
+	 "<META NAME=\"page-topic\" CONTENT=\"Schulung\">\n" .
+	 "<META NAME=\"resource-type\" CONTENT=\"document\">\n" .
+         "<META NAME=\"distribution\" CONTENT=\"global\">\n" .
+	 "<LINK REL=\"STYLESHEET\" HREF=\"style.css\">\n"
+	 } if $_;
+}

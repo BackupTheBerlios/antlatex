@@ -1,0 +1,39 @@
+<target name="help">
+    <echo message="Please run: $ ant -v -projecthelp"/>
+</target>
+
+<property name="version" value="0.0.4"/>
+
+<target name="dist" description="Fuer die Distribution aufbereiten">
+  <copy file="C:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar" tofile="dist/ant_latex_${version}.jar">
+  </copy>
+</target>
+
+  <target name="createHTMLScript">
+    <move todir="dist/manual">
+    <fileset dir="docs/howto/script" includes="*.html"/>
+    <fileset dir="docs/howto/script" includes="*.css"/>
+    <fileset dir="docs/howto/script" includes="*.png"/>
+    <fileset dir="docs/howto/script" includes="*.gif"/>
+    </move>
+    <copy todir="dist/manual/beispiele">
+    <fileset dir="docs/howto/script/beispiele" />
+    </copy>
+  </target>
+
+<target name="createIndexPage">
+<copy todir="dist">
+<fileset dir="docs/WebPage/" includes="index.html"/>
+</copy>
+</target>
+
+<target name="createApiPage">
+<copy todir="dist/api">
+<fileset dir="docs/WebPage/api"/>
+</copy>
+</target>
+
+<target name="distAll" depends="dist, createHTMLScript, createIndexPage, createApiPage">
+<move file="docs/howto/script/ant_latex_howto.pdf" tofile="dist/ant_latex_howto.pdf"/>
+</target>
+

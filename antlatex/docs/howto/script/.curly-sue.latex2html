@@ -1,0 +1,88 @@
+# -*- perl -*-
+require '/usr/local/share/texmf/latex2html/wwwlst.perl';
+
+@Month = ('', 'Januar', 'Februar', 'M&auml;rz', 'April', 'Mai',
+	  'Juni', 'Juli', 'August', 'September', 'Oktober',
+	  'November', 'Dezember');
+# Supply your own string if you don't like the default <Name> <Date>
+@address_data = &address_data("'%02d.%s %4d'","\$d, \$Month[\$m+1], 1900+\$y");
+require(".local.latex2html");
+$EXTERNAL_NAVIGATION=1;
+$CHILDLINE = "<BR>\n";
+$WORDS_IN_NAVIGATION_PANEL_TITLES = 5;
+$EXTERNAL_UP_LINK = "/";
+$EXTERNAL_UP_TITLE = "Hauptseite";
+$DO_INCLUDE = "html_listing:".$DO_INCLUDE;
+
+$ISOLANG = "de";
+$isolanguage = "DE";
+
+sub top_navigation_panel {
+    "<table summary=\"\" width=\"100%\" class=\"navtable\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">" .
+    "<tr class=\"navtable\">" .
+    "<td class=\"navtable\" align=\"left\" valign=\"top\"><img src=\"blank.gif\" border=\"0\" alt=\"\" height=\"50\"></td>" .
+#    "<td align=\"center\" valign=\"middle\"><span class=\"title\">$TITLE</span></td>" .
+    "<td class=\"navtable\" align=\"right\" valign=\"top\"><span class=\"klein\">" .
+#    "<a href=\"mailto:jaloma\@dokutransdata.de\" class=\"nodecoration\">J&uuml;rgen A. Lamers</a></span><br/>" .
+    "<a href=\"/\" class=\"kleine\">MaTA-Server</a><br />" .
+    "</td>" .
+    "</tr>" .
+    "</table>" .
+    "<table width=\"100%\" summary=\"\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">" .
+    "<tr>" .
+    "<td valign=\"top\">" .
+    "<table width=\"125\" height=\"400\" class=\"navtable\" summary=\"Navigation\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">" .
+    "<tr>" .
+    "<td valign=\"top\" width=\"110\" height=\"150\" class=\"navtable\">" .
+    "<BR>\n" .		# Line break
+    # If ``next'' section exists, add its title to the navigation panel
+    ($NEXT_TITLE ? "<B> &gt;</B> $NEXT_TITLE<BR>\n\n" : "<BR>\n\n") . 
+    # ... and the ``previous'' title
+    ($PREVIOUS_TITLE ? "<B> &lt;</B> $PREVIOUS_TITLE<BR>\n\n" : undef) .
+    # Similarly with the ``up'' title ...
+    "</td>" .
+    "</tr>" .
+    "<tr>" .
+    "<td valign=\"top\" width=\"110\" class=\"navtable\">" .
+    "<br />" .
+    ($UP_TITLE ? "<B>^</B> $UP_TITLE<BR>\n\n" : undef) . 
+    "</td>" .
+    "</tr>" .
+    "<tr>" .
+    "<td valign=\"top\" width=\"110\" class=\"navtable\">" .
+    "<br />" .
+    "$CUSTOM_BUTTONS<br />\n" .
+    "</td>" .
+    "</tr>" .
+    "<tr>" .
+    "<td valign=\"top\" width=\"110\" class=\"navtable\">" .
+    "$CONTENT_LINK<BR>\n $INDEX_LINK" .
+    "<br />" .
+    "</td>" .
+    "</tr>" .
+    "</table>" .
+    "</td>" .
+    "<td valign=\"top\" align=\"left\">&nbsp;</td>" .
+    "<td valign=\"top\" align=\"left\" width=\"90%\" class=\"maintext\">" .
+    "<br />" .
+    "\n<!-- {{{ Haupttext -->\n\n".
+    "\n".
+    "\n"  
+}
+
+sub bot_navigation_panel {
+"\n\n<!-- }}} Haupttext -->" .
+"</td>" .
+"</tr>" .
+"</table>" .
+"<br /><br />".
+"<hr />".
+"<span class=\"klein\" align=\"right\">\n".
+    # If ``next'' section exists, add its title to the navigation panel
+    ($NEXT_TITLE ? "<B> &gt;</B> $NEXT_TITLE<BR>\n\n" : undef) . 
+    # ... and the ``previous'' title
+    ($PREVIOUS_TITLE ? "<B> &lt;</B> $PREVIOUS_TITLE\n\n" : undef) .
+"</span>\n"
+}
+
+1;

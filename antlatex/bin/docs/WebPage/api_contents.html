@@ -1,0 +1,36 @@
+<!--
+ $Id: api_contents.html,v 1.1 2005/11/30 09:20:58 jaloma Exp $
+-->
+<body>
+<!-- {{{ Haupttext -->
+<h1><a name="intro">Motivation</a></h1>
+<p>Ich erstelle halt meine Dokumentation in erster Linie mit LaTeX und
+der Wechsel zu Ant sollte natürlich so leicht wie möglich gemacht
+werden... Also ging es daran ein Tool zu suchen, dass LaTeX in Ant
+einbindet. Es wurde auch eines gefunden: <code>anttex_1.0</code>, nur
+leider wollte dieses Teil nicht mit <code>*.ltx</code> Dateien
+zusammenarbeiten und ich werde deswegen nicht alle meine Dateien
+umstellen... Zum Anderen läuft dieses Tool stur dreimal über die
+LaTeX-Datei ohne auf die Auflösung der Referenzen zu achten.</p>
+
+<p>
+Deswegen musste ich eine eigene Lösung entwickeln:
+</p>
+<ul>
+<li>Lässt optional BibTeX laufen</li>
+<li>Lässt optional MakeIndex laufen</li>
+<li>Lässt optional GlossTeX laufen</li>
+<li>Die drei vorgenannten Prozesse sind einmal integriert in einem
+	LaTeX-Lauf oder können als eigene Tasks definiert werden.</li>
+<li>PDFLaTeX oder LaTeX als Prozessor auswählbar</li>
+<li><code>multibib</code> Bibliographien werden unterstützt.</li>
+</ul>
+
+<!--
+<h2><a name="authors">Autor</a></h2>
+
+<address><a href="mailto:jaloma@dokutransdata.de">J&uuml;rgen A. Lamers</a><br />
+</address>
+-->
+<!-- }}} Haupttext -->
+</body>

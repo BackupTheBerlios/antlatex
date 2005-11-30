@@ -1,0 +1,166 @@
+body, td	{
+                background-color: #FFFFFF;
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px;
+                color:#000000;
+                margin-top: 0px;
+                }
+.menue     {
+                border: 1px solid black;
+                }
+.selected  {
+                border: 1px solid black;
+                background-color: #839ccd;
+                font-family: Verdana,Arial,Helvetica;
+                font-weight: bold;
+                font-size:13px;
+                }
+.haupt      {
+                border: 1px solid black;
+                background-color: #1809b8;
+                font-family: Verdana,Arial,Helvetica;
+                font-size:12px;
+                color:#ffffd3;
+                }
+.leiste		{
+                border: 1px solid black;
+                background-color: #1809b8;
+                font-family: Verdana,Arial,Helvetica;
+                font-size:12px;
+                color:#ffffd3;
+                }
+.kasten         {
+                border-left: 1px solid black;
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                }
+.bib_menue_left {
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-left: 1px solid black;
+	        background-color:#92a0e2;
+                color:#000000;
+                }
+.bib_menue_right {
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+	        background-color:#92a0e2;
+                color:#000000;
+                }
+th              {
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                background-color: #1809b8;
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px;
+                font-weight: normal;
+                color:#ffffd3;
+                }
+ul, ol          {
+                list-style-type: none;
+/*
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px
+*/
+                }
+input        {
+                background-Color: #dddddd;
+                BORDER-LEFT: black thin solid;
+                BORDER-RIGHT: white thin solid;
+                BORDER-TOP: white thin solid;
+                BORDER-BOTTOM: black thin solid;
+                font-family: Verdana,Arial,Helvetica;
+                font-size:12px
+                }
+a              {
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px;
+                text-decoration: none;
+                color:#000000;
+                font-weight: bold
+                }
+th a            {
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px;
+                text-decoration: none;
+                color:#FFFFFF;
+                font-weight: bold
+                }
+a:hover   	{
+                font-family: Verdana,Arial,Helvetica;
+                font-size:13px;
+                text-decoration: underline;
+                font-weight: bold;
+                color:#cccccc;
+                }
+.disclaimer     {
+		background-color:#ffffcc;
+}
+td.disclaimertitle { font-weight:bold;
+	      color:#000000;
+	      font-size:125%;
+	      text-align:center;
+	      background-color:#ffffcc;
+}
+.navtable {text-decoration:none; 
+                font-family:Arial,Lucida; font-weight: bold;
+                font-size:small;
+/*	      background-color:#ffffcc; */
+         background : #BEDFFF
+
+}
+h1 { font-size:24pt; color:#000080; }
+h2 { font-size:20pt; color:#99ccff;}
+h3 { font-size:16pt; }
+h4 { font-size:14pt; }
+h5 { font-size:12pt; }
+.klein { font-size:7pt;   font-weight:normal;font-family:sans-serif;}
+div.klein a {
+font-size:7pt;
+}
+dt.glossitem {
+    font-weight:bold;
+}
+dd.glosstext {
+    margin-right:20pt;
+    text-align:justify;
+}
+
+h2 a {
+font-size:20pt; 
+color:#99ccff;
+font-weight:bold;
+}
+
+.parameter {
+    font-size:16pt;
+    font-weight:bold;
+}
+.paramname {
+    font-size:10pt;
+    font-style:italic;
+/*  font-weight:bold; */
+}
+.beschreibung {
+    font-size:16pt;
+    font-weight:bold;
+}
+.attribute {
+    font-size:16pt;
+    font-weight:bold;
+}
+.rueckgabe {
+    font-size:16pt;
+    font-weight:bold;
+}
+.fkttitle {
+    font-weight:bold;
+ font-size:20pt; /*color:#99ccff; */
+}
+.fktbody {
+    background-color:lightgray;
+}
+.bspbox {
+    background-color:lightgray;
+}

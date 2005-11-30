@@ -1,0 +1,61 @@
+\appendix
+
+\section{Beispieldateien}
+\label{sec:beispiel:dateien}
+
+\begin{center}
+  \textsb{Beispiel einer Build-Datei}
+\ifHtml
+\Link[beispiele/build.xml]{}{}build.xml\EndLink
+\fi
+\end{center}
+%{\footnotesize
+\verbatimfile{beispiele/build.xml}
+%}
+
+\begin{center}
+  \textsb{Beispiel einer Definionsdatei}  
+\ifHtml
+\Link[beispiele/build.properties]{}{}build.properties\EndLink
+\fi
+\end{center}
+%{\footnotesize
+\verbatimfile{beispiele/build.properties}
+%}
+
+\begin{center}
+  \textsb{Grundlegende Definionen der Tasks und Targets}  
+\ifHtml
+\Link[beispiele/latex.xml]{}{}latex.xml\EndLink
+\fi
+\end{center}
+%{\footnotesize
+\verbatimfile{beispiele/latex.xml}
+%}
+%\begin{latexonly}
+% Ausdruck des Glossarverzeichnisses
+%\printglossary
+%\end{latexonly}
+% \begin{htmlonly}
+%   \newglossary
+%   \input{hauptdokument.glx}
+% \end{htmlonly}
+% Ausdruck des Literaturverzeichnisses. Es muessen evtl. die Datenbanken noch
+% angepasst werden.
+%\bibliographystyle{geralpha}
+%\bibliography{tex_database,programming_database,datafiles/local}
+
+%\listoffigures
+%\listoftables
+% % Diese Verzeichnisse werden in der HTML-Version nicht /vernuenftig/ ausgedruckt.
+% %\begin{latexonly}
+% \listofstruktos %% Spezialbefehl bei Verwendung von strukto.sty
+% %bzw. giaAPI.sty zur Ausgabe eines Verzeichnis der Struktogramme.
+% \listofsources %% Spezialbefehl bei der Verwendung von giaAPI.sty zur Ausgabe
+% %eines Verzeichnis der Listings.
+% %\end{latexonly}
+
+% Zum Abschluss das Stichwortverzeichnis.
+% Vorsicht: Es wird an dieser auf zweispaltig umgeschaltet und bedeutet ein
+% Seitenumbruch zur rechten Seite, d.h. es kann eine Leerseite auftauchen.
+%\printindex

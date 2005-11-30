@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE project SYSTEM "y:/Ant/dtd/ant.dtd">
+<!-- 
+Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
+-->
+<project
+ name="ant_howto"
+ basedir="."
+ default="doLaTeX">
+   <property
+    name="buildProperties"
+    value="./build.properties" />
+
+   <property
+    file="${buildProperties}" />
+
+   <target
+    name="doLaTeX">
+      <ant
+       target="ltx2"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doHTML"
+    depends="doLaTeX">
+      <ant
+       target="doHTLaTeX"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="doPDFLaTeX">
+      <ant
+       target="pdfLaTeX"
+       antfile="${antRoot}/latex.xml">
+      </ant>
+   </target>
+
+   <target
+    name="all"
+    depends="doPDFLaTeX, doHTML" />
+</project>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/ant_latex/ant_latex.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="true" manifestLocation="/ant_latex/manifest.txt" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+<sealing sealJar="true">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=ant_latex/&lt;de.dokutransdata.antlatex"/>
+<javaElement handleIdentifier="=Glossar/src"/>
+</selectedElements>
+</jardesc>

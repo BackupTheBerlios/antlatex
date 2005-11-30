@@ -1,0 +1,72 @@
+/* ant_latex_howto.css from ant_latex_howto.tex (TeX4ht, 2005-11-27 19:32:00)
+*/
+
+table.abstract {
+  text-align:center;
+/* background-color:rgb(211,211,211);*/
+}
+.maketitle {text-align:center;}
+.maketitle .minipage .pbkl8t-x-x-109 {font-size:80%; text-align:right;}
+.maketitle .minipage .pagd8t-x-x-109 {font-size:80%; text-align:right;}
+.titleHead {font-size:2em; font-weight:bold; font-family:sans-serif;}
+.author {font-style:italic;}
+.subject {font-family:small-caps; text-transform:capitalize; font-weight:bold}
+.crosslinks {
+  background-color: #17479b;
+background-color: #3058ab;
+  font-family:sans-serif;
+}
+div.crosslinks a{
+  text-align:right;
+  font-size:90%;
+  font-weight:medium-bold;
+color:white;
+text-decoration:none;
+}
+dt {font-weight:bold;font-family:sans-serif;}
+pre  {
+  background-color:#839ccd;
+}
+div.tableofcontents {
+/*  background-color: #17479b;*/
+background-color: #3058ab;
+  color:rgb(192,192,192);
+  height:600px;
+width:200px;
+}
+div.tableofcontents a {
+  text-align:right;
+  font-size:90%;
+  font-weight:medium-bold;
+                                                                                       
+
+                                                                                       
+color:white;
+text-decoration:none;
+font-family:sans-serif;
+}
+span.sectionToc {color:black; font-weight:bold; font-family:sans-serif;
+margin-right:2ex;}
+span.subsectionToc {color:black; font-weight:bold; font-family:sans-serif;}
+span.subsubsectionToc {color:black; font-weight:bold; font-family:sans-serif;}
+table.verbatim{
+  background-color:#839ccd;
+  color:rgb(9,9,9);
+  text-align:left;
+  font-family:monospace;
+}
+.sectionHead {font-family:sans-serif;}
+.subsectionHead {font-family:sans-serif;}
+.subsubsectionHead {font-family:sans-serif; font-weight:bold;}
+body {
+  background-color:#edf8ff;
+background-color:white;
+}
+table.figure {
+  text-align:left;
+}
+div.float {width:100%;}
+table.float {width:100%;}
+div.figure {width:100%;}
+table.figure {width:100%;}
+/* css.sty */
