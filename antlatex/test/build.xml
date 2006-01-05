@@ -1,0 +1,43 @@
+<project name="test">
+	<taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
+		classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"/>
+	<taskdef name="latexT" classname="de.dokutransdata.antlatex.LaTeXTask"
+		classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"/>
+	
+	<target name="ltxfileset" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+			<fileset dir="." includes="*.ltx"/>
+		</latex>
+	</target>
+	
+	<target name="ltxsingle" depends="clean">
+		<latex latexfile="test01.ltx" verbose="on" pdftex="on" clean="on"
+			workingDir="${basedir}">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+	</target>
+	
+	<target name="ltxTsingle" depends="clean">
+		<latexT latexfile="test01.ltx" verbose="on" pdftex="on" workingDir="${basedir}">
+		</latexT>
+	</target>
+	
+	<target name="ltxTfileset" depends="clean">
+		<latexT verbose="on" pdftex="on" workingDir="${basedir}">
+			<fileset dir="." includes="*.ltx"/>
+		</latexT>
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset dir="." includes="*.pdf"/>
+			<fileset dir="." includes="*.log"/>
+			<fileset dir="." includes="*.idx"/>
+			<fileset dir="." includes="*.aux"/>
+		</delete>
+	</target>
+	
+</project>
