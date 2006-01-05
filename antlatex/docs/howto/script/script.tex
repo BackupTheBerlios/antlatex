@@ -37,7 +37,7 @@ Anwendung als eigenen Task zu definieren und auszuführen.
 \label{sec:gesamt:aufruf}
 
 
-Zuerst der Task mit:
+Zuerst ist der Task mit:
 \begin{verbatim}
   <taskdef name="latex"    classname="de.dokutransdata.antlatex.LaTeX"
     classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
@@ -60,10 +60,12 @@ zu definieren. Anschliessend kann der komplexe Task benutzt werden:
 Damit ist ein einfacher \LaTeX{}-Lauf definiert, dies hätte aber auch
 mit einem \code{exec}-Element erreicht werden können. 
 
-\minisec{Parameter zum \LaTeX{}-Task}
-\begin{supertabular}{lp{19.5em}p{10em}}
-\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
-\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\minisec{Attribute zum \LaTeX{}-Task}
+\noindent
+{
+%\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}%
+\tablehead{Attribut       & Beschreibung & Pflicht\\\hline}%
+\begin{supertabular}{lp{19.5em}p{10em}}%
 \code{latexfile} & Die \LaTeX{}-Datei, es werden Dateien mit
   der Endung \code{.tex} oder \code{.ltx} akzeptiert. & Ja \\
 \code{verbose} & Gibt bei \code{on} Informationen auf der
@@ -78,10 +80,25 @@ mit einem \code{exec}-Element erreicht werden können.
   notwendig ist. & Nein. \\
 \code{command} & Auszuführender Befehl & Nein. Default: latex\\
 \end{supertabular}
+}
 
 \noindent
 Der Standardwert für \code{reRunPattern} ist:\\
 \verb/(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term )/\\
+
+\minisec{Elemente zum \LaTeX{}-Task}
+{
+%\tablefirsthead{Element& Beschreibung & Pflicht\\\hline}%
+\tablehead{Element       & Beschreibung & Pflicht\\\hline}%
+\begin{supertabular}{lp{19.5em}p{10em}}%
+\code{fileset} & Fileset-Element & Nein, das Attribut \code{latexfile} kann für eine einzelne Datei benutzt.\\
+\code{deletetempfiles} & Fileset-Element zum Löschen von temporären Dateien & Nein\\ 
+\code{makeindex} & Makeindex-Element & Nein\\
+\code{bibtex}    & \BibTeX{}-Element & Nein\\
+\code{jxGlosstex} &\\
+\code{glosstex}   & \GlossTeX{}-Element & Nein\\
+\end{supertabular}
+}
 
 Um jetzt zum Beispiel einen \code{makeindex}-Lauf zu integrieren ist
 folgende Definition notwendig:
@@ -190,10 +207,11 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 </target>
 \end{verbatim}
 %$
-\minisec{Parameter zum MakeIndex{}-Task}
-\begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\minisec{Attribute zum MakeIndex{}-Task}
+{
+%\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
 \code{idxstyle} & Eigener Style für die Ausgabe der Indexseiten & Nein. Default: interner Style\\
 \multicolumn{2}{l}{\code{compressIntermediateBlanks}}&\\
                                   & Ignoriere Zwischenräume (Leerzeichen, Tabulatoren) & Nein. Default: false\\
@@ -211,6 +229,7 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: makeindex\\
 \end{supertabular}
+}
 
 Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{makeindex}!
 
@@ -229,10 +248,11 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
 </target>
 \end{verbatim}
 %
-\minisec{Parameter zum \BibTeX{}-Task}
-\begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\minisec{Attribute zum \BibTeX{}-Task}
+{
+%\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
 \code{workingDir} & Arbeitsverzeichnis & Nein. Default: basedir\\
 \code{terse} & Keine Informationen ausgeben & Nein. Default: false\\
 \multicolumn{2}{l}{\code{minCrossrefs}}\\
@@ -240,6 +260,7 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: bibtex\\
 \end{supertabular}
+}
 
 Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{bibtex}!
 
@@ -262,10 +283,11 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
 </target>
 \end{verbatim}
 %
-\minisec{Parameter zum \GlossTeX{}-Task}
-\begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\minisec{Attribute zum \GlossTeX{}-Task}
+{
+%\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
 \code{verbose} & Meldungen ausgeben & Nein. Default: off\\
 \multicolumn{2}{l}{\code{glossarDefinitionFiles}}\\
                & Glossardatenbanken & Ja.\\
@@ -274,6 +296,7 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: glosstex\\
 \end{supertabular}
+}
 
 Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{glosstex}!
 
@@ -295,10 +318,11 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \end{verbatim}
 %
 
-\minisec{Parameter zum jxGlossar{}-Task}
-\begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
+\minisec{Attribute zum jxGlossar{}-Task}
+{
+%\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
+\begin{supertabular}{p{5em}p{19.5em}p{10em}}
 \code{dataFile} & XML-Glossardatenbank & Ja.\\
 \code{auxFile}  & Datei der benutzten Referenzen aus dem \LaTeX{}-Lauf & Ja\\
 \code{verbose}  & Schreibt einige Informationen in die Standardausgabe. & Nein. Default: off\\
@@ -310,3 +334,4 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \code{language} & Welche Sprache der Glossardefinition soll berücksichtigt werden. & Nein. Default: de\\
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \end{supertabular}
+}
