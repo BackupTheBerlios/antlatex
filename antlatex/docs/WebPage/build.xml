@@ -6,8 +6,10 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 <project name="WebPage" default="all">
   <property name="antRoot" value="y:/Ant">
   </property>
-
-  <target name="all" depends="makeIndex, api">
+<target name="init">
+<buildnumber/>
+</target>
+  <target name="all" depends="init,makeIndex, api">
   </target>
   <target name="makeIndex">
     <exec executable="perl" output="index.html">
@@ -30,9 +32,16 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
   <target name="api">
 <!-- javadoc ist nicht im Pfad -->
-<!--
-    <ant dir="../" antfile="javadoc.xml">
+<!-- -->
+    <ant dir="../../" antfile="javadoc.xml">
     </ant>
--->
+<!-- -->
   </target>
+
+<target name="deploy">
+  <scp file="index.html" todir="jaloma@shell.berlios.de:/home/groups/antlatex/htdocs"
+passphrase="GibDeinenJobAuf."
+keyfile="${user.home}/.ssh/id_rsa"/>
+</target>
+
 </project>
