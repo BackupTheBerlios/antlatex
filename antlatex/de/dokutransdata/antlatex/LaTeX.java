@@ -5,6 +5,7 @@
 
 package de.dokutransdata.antlatex;
 
+//import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
+	
+	static final String VERSION = "0.0.5";
 	/**
 	 * BibTeX-Task
 	 */
@@ -62,6 +65,8 @@ public class LaTeX extends SimpleExternalTask {
 	private GlossTeXTask glosstex;
 
 	private GlossTeX jxGlosstex;
+
+	private List files = new ArrayList();
 
 	/**
 	 * Hauptdokument mit Erweiterung (tex|ltx)
@@ -153,6 +158,17 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	/**
+	 * Callback-Methode um eingeschachtelte &lt;fileset&gt;-Elemente einfügen zu
+	 * können.
+	 * 
+	 * @param f
+	 *            from build.xml
+	 */
+	public void add(FileSet f) {
+		files.add(f);
+	}
+
+	/**
 	 * Callback-Methode fuer Ant
 	 * 
 	 * @return BibTeX-Task
@@ -202,6 +218,28 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	public final void execute() throws BuildException {
+		if (files.size() > 0) {
+			// get the fileset with full qualified pathname!
+			for (int i = 0; i < files.size(); i++) {
+				FileSet fs = (FileSet) files.get(i);
+				String[] fnames = fs.toString().split(";");
+//				File localDir = fs.getDir(fs.getProject());
+				for (int k = 0; k < fnames.length; k++) {
+					if (fnames[k] == null) {
+						continue;
+					}
+//					String fname = new String(localDir + File.separator
+//							+ fnames[k]);
+					setLatexfile(fnames[k]);
+					run();
+				}
+			}
+		} else {
+			run();
+		}
+	}
+	
+	public void run() throws BuildException {
 		if (verbose) {
 			log("Running LaTeX now!");
 			dump();
