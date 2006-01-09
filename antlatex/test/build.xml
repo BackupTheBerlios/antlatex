@@ -12,6 +12,21 @@
 		</latex>
 	</target>
 	
+	<target name="ltxnofilesfound" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+			<fileset dir="." includes="*.lt"/>
+		</latex>
+	</target>
+
+	<target name="ltxnofile" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+	</target>
+	
 	<target name="ltxsingle" depends="clean">
 		<latex latexfile="test01.ltx" verbose="on" pdftex="on" clean="on"
 			workingDir="${basedir}">
@@ -30,10 +45,69 @@
 			<fileset dir="." includes="*.ltx"/>
 		</latexT>
 	</target>
-	
+
+<target name="init">
+<mkdir dir="output"/>
+<mkdir dir="tmpfiles"/>
+</target>
+
+<target name="ltxOutputDir" depends="init, clean">	
+		<latex latexfile="test01.ltx" verbose="on" pdftex="on" clean="on"
+			workingDir="${basedir}"
+			outputDir="output">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+</target>
+
+<target name="ltxAuxDir" depends="init, clean">	
+		<latex latexfile="test01.ltx" verbose="on" pdftex="on" clean="on"
+			workingDir="${basedir}"
+			auxDir="tmpfiles"
+			>
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+</target>
+
+<target name="ltxPath">
+		<latex latexfile="test01.ltx" verbose="off" pdftex="on" clean="on"
+		path="c:/Programme/MikTeX/texmf/miktex/bin"
+			workingDir="${basedir}"
+			>
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+</target>
+
+<target name="ltxpassThruLaTeXParameters">
+		<latex latexfile="test01.ltx" verbose="on" pdftex="off" clean="on"
+		passThruLaTeXParameters="-src-specials;-job-name=hallo"
+			workingDir="${basedir}"
+			>
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+		</latex>
+</target>
+
+<target name="ltxWithGlossar">
+		<latex latexfile="testgloss.tex" verbose="on" pdftex="off" clean="on"
+			>
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+      <jxGlosstex
+      dataFile="glossar.xml"
+      maxdepth="2"
+      language="de"
+      run="on"
+      />
+		</latex>
+</target>
+
 	<target name="clean">
 		<delete>
 			<fileset dir="." includes="*.pdf"/>
+			<fileset dir="." includes="*.dvi"/>
 			<fileset dir="." includes="*.log"/>
 			<fileset dir="." includes="*.idx"/>
 			<fileset dir="." includes="*.aux"/>
