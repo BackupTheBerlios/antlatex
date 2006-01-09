@@ -16,14 +16,14 @@ import org.apache.tools.ant.taskdefs.LogStreamHandler;
  * Base to execute external tasks.
  * 
  * @author jaloma
- *
+ * 
  */
 public class SimpleExternalTask extends Task {
 	class SilentStreamHandler implements ExecuteStreamHandler {
 
 		SilentStreamHandler() {
 		}
-
+		
 		public void setProcessErrorStream(InputStream inputstream) {
 		}
 
@@ -45,27 +45,35 @@ public class SimpleExternalTask extends Task {
 	protected boolean verbose = false;
 
 	protected String If = null;
+
 	protected boolean run = true;
-	
+
 	public void setRun(boolean property) {
 		run = property;
 	}
+
 	public boolean getRun() {
 		return run;
 	}
+
 	public void setIf(String property) {
 		If = property;
 	}
-	public String getIf( ){
+
+	public String getIf() {
 		return If;
 	}
+
 	protected String theCommand = null;
+
+	protected String thePath = null;
 
 	protected Task antTask;
 
 	public SimpleExternalTask() {
-		workingDir = null;		
+		workingDir = null;
 	}
+
 	public void setVerbose(boolean newValue) {
 		verbose = newValue;
 	}
@@ -82,17 +90,40 @@ public class SimpleExternalTask extends Task {
 		return theCommand;
 	}
 
+	public final void setPath(String newValue) {
+		thePath = newValue;
+	}
+
+	public final String getPath() {
+		return thePath;
+	}
+
 	protected final int invoke(final String cmd, final List args)
 			throws BuildException {
-		if (!run) {return -1; }
-		if (If != null && If.equals("off")) { return -1; }
-		String[] arguments = new String[1 + args.size()];
-
-		arguments[0] = cmd;
+		if (!run) {
+			return -1;
+		}
+		if (If != null && If.equals("off")) {
+			return -1;
+		}
 		if (antTask == null) {
 			antTask = this;
 		}
 
+		String[] arguments = new String[1 + args.size()];
+		String command = cmd;
+		//antTask.log("Path: "+thePath);
+		if (thePath != null && !thePath.equals("")) {
+			File f = new File(thePath,cmd);
+			try {
+				command = f.getCanonicalPath();
+			} catch (IOException ie) {
+				antTask.log(ie.getLocalizedMessage());
+				command = cmd;
+			}
+		}
+
+		arguments[0] = command;
 		try {
 			StringBuffer sb = new StringBuffer("Exec: " + arguments[0] + " ");
 			for (int i = 0; (i < args.size()); i++) {
@@ -107,7 +138,7 @@ public class SimpleExternalTask extends Task {
 			}
 
 			Execute exeCmd = null;
-			verbose = true;
+			//verbose = true;
 			if (verbose) {
 				exeCmd = new Execute(new LogStreamHandler(antTask, 2, 1), null);
 			} else {
@@ -117,6 +148,7 @@ public class SimpleExternalTask extends Task {
 			if (workingDir != null) {
 				exeCmd.setWorkingDirectory(workingDir);
 			}
+			
 			exeCmd.setCommandline(arguments);
 			exeCmd.setAntRun(antTask.getProject());
 
