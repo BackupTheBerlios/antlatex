@@ -1,4 +1,3 @@
-
 \section{Motivation}
 \label{sec:intro}
 
@@ -22,6 +21,7 @@ Deswegen musste ich eine eigene Lösung entwickeln:
         LaTeX-Lauf oder können als eigene Tasks definiert werden.
 \item PDFLaTeX oder LaTeX als Prozessor auswählbar
 \item \code{multibib} Bibliographien werden unterstützt.
+\item Die Erweiterung \code{figbib} für kommentierte Abbildungsverzeichnisse wird unterstüzt.
 \end{itemize}
 
 \section{Benutzung}
@@ -62,29 +62,46 @@ mit einem \code{exec}-Element erreicht werden können.
 
 \minisec{Attribute zum \LaTeX{}-Task}
 \noindent
+
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}%
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}%
 \begin{supertabular}{lp{19.5em}p{10em}}%
 \code{latexfile} & Die \LaTeX{}-Datei, es werden Dateien mit
-  der Endung \code{.tex} oder \code{.ltx} akzeptiert. & Ja \\
+  der Endung \code{.tex} oder \code{.ltx} akzeptiert. & Nein, kann durch das Element \code{fileset} gesetzt werden. \\
+\code{pdftex} & Mit \code{on} wird PDF\LaTeX{} aufgerufen. & Nein. Default: off\\
 \code{verbose} & Gibt bei \code{on} Informationen auf der
   Standardausgabe aus. & Nein. Default: off\\
 \code{clean} & Bei \code{on} werden die temporären Dateien nach
   dem \LaTeX{}-Lauf gelöscht, zusätzliche Filter können mit dem
   Element \code{deletetempfiles} ergänzt werden. & Nein. Default: off\\
-\code{pdftex} & Mit \code{on} wird PDF\LaTeX{} aufgerufen. & Nein. Default: off\\
-\code{workingDir} & Arbeitsverzeichnis setzen & Nein. Default: \code{basedir}\\
-\code{reRunPattern} & Pattern nach dem in der Log-Datei von
+\code{reRunPattern} & Pattern nach dem in der Protokolldatei von
   \LaTeX{} zu suchen ist, um zu entscheiden ob ein weiterer Durchlauf
   notwendig ist. & Nein. \\
+\code{workingDir} & Arbeitsverzeichnis setzen & Nein. Default: \code{basedir}\\
 \code{command} & Auszuführender Befehl & Nein. Default: latex\\
+\code{path} & Pfad zu \LaTeX{} & Nein. Default: leer\\
+\code{jobname} & Name der Ergebnissdatei & Nein.\\
+\code{outputDirectory} & Verzeichnis in dem die DVI/PDF-Datei gespeichert werden soll & Nein.\\
+\code{auxDirectory} & Verzeichnis für die temporären Dateien & Nein.\\
+\multicolumn{2}{l}{\code{passThruLaTeXParameters}}\\
+& Sonstige Parameter für \LaTeX{} mit einem Semikolon getrennt. & Nein.\\
+\code{multibib} & Schalter für die Verwendung des Package \emph{multibib} & Nein. Default: off\\
+\code{figbib} & Schalter für die Vewendung des Package \emph{figbib} & Nein. Default: off\\
 \end{supertabular}
 }
 
+Die Attribute \code{jobname}, \code{outputDirectory} und
+\code{auxDirectory} werden \textbf{nicht} von jeder \LaTeX{}-Version
+unterstützt!
+
 \noindent
-Der Standardwert für \code{reRunPattern} ist:\\
-\verb/(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term )/\\
+Der Standardwert für \code{reRunPattern} ist:%\\
+\begin{verbatim}
+(Rerun (LaTeX|to get cross-references right)|
+     Package glosstex Warning: Term |
+     There were undefined references)
+\end{verbatim}
 
 \minisec{Elemente zum \LaTeX{}-Task}
 {
@@ -92,7 +109,7 @@ Der Standardwert für \code{reRunPattern} ist:\\
 \tablehead{Element       & Beschreibung & Pflicht\\\hline}%
 \begin{supertabular}{lp{19.5em}p{10em}}%
 \code{fileset} & Fileset-Element & Nein, das Attribut \code{latexfile} kann für eine einzelne Datei benutzt.\\
-\code{deletetempfiles} & Fileset-Element zum Löschen von temporären Dateien & Nein\\ 
+\code{deletetempfiles} & Fileset-Element zum Löschen von temporären Dateien. Vorsicht: Überschreibt die internen Vorgaben! & Nein\\ 
 \code{makeindex} & Makeindex-Element & Nein\\
 \code{bibtex}    & \BibTeX{}-Element & Nein\\
 \code{jxGlosstex} &\\
@@ -207,7 +224,10 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 </target>
 \end{verbatim}
 %$
+
+\bigskip
 \minisec{Attribute zum MakeIndex{}-Task}
+
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
@@ -217,7 +237,7 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
                                   & Ignoriere Zwischenräume (Leerzeichen, Tabulatoren) & Nein. Default: false\\
 \multicolumn{2}{l}{\code{germanWordOrder}}\\
                                   & Deutsche Sortierung nach DIN 5007. Benötigt auch zusätzlich einen modifizierten Index-Style! & Nein. Default: false\\
-\code{letterOrder} & Buchstabensortierung & Nein. Default: Wortsortierung\\
+\code{letterOrder} & Buchstabensortierung & Nein. Default: Wort\-sortierung\\
 \multicolumn{2}{l}{\code{protocolFile}} \\
                                   & Ausgabe der Protokollinformationen in diese Datei & Nein. Default: $<$hauptdatei$>$.ilg\\
 \multicolumn{2}{l}{\code{startingPageNumber}}\\
@@ -228,11 +248,13 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 \code{workingDir} & Arbeitsverzeichnis & Nein. Default: basedir\\
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: makeindex\\
+\code{path} & Pfad zu makeindex & Nein. Default: leer\\
 \end{supertabular}
 }
 
 Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{makeindex}!
 
+\bigskip
 \subsubsection{\BibTeX{}}
 \begin{verbatim}
 <target name="BibTeX">
@@ -247,8 +269,9 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
   </makeindex>
 </target>
 \end{verbatim}
-%
+
 \minisec{Attribute zum \BibTeX{}-Task}
+
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
@@ -259,6 +282,7 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
              & Wieviele Referenzen müssen vorhanden sein, um einen Eintrag automatisch ins Verzeichnis aufzunehmen & Nein. Default: \BibTeX{}-Interner Wert\\
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: bibtex\\
+\code{path} & Pfad zu \BibTeX{} & Nein. Default: leer\\
 \end{supertabular}
 }
 
@@ -282,26 +306,32 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
  </glosstex>
 </target>
 \end{verbatim}
-%
+
+\bigskip
 \minisec{Attribute zum \GlossTeX{}-Task}
+
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
 \begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\code{verbose} & Meldungen ausgeben & Nein. Default: off\\
 \multicolumn{2}{l}{\code{glossarDefinitionFiles}}\\
                & Glossardatenbanken & Ja.\\
+\code{verbose} & Meldungen ausgeben & Nein. Default: off\\
 \multicolumn{2}{l}{\code{verboseLevel}} \\
                & Level der Meldungen & Nein. Default: 0\\
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: glosstex\\
+\code{path} & Pfad zu \GlossTeX{} & Nein. Default: leer\\
 \end{supertabular}
 }
 
+\medskip
 Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{glosstex}!
 
+\medskip
 Es muss natürlich \GlossTeX{} installiert sein ;-)
 
+\bigskip
 \subsubsection{jxGlossar}
 
 \begin{verbatim}
@@ -319,6 +349,7 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 %
 
 \minisec{Attribute zum jxGlossar{}-Task}
+
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
@@ -335,3 +366,4 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \end{supertabular}
 }
+

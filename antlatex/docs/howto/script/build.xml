@@ -32,7 +32,8 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
    <target
     name="doHTML"
-    ><!--depends="doLaTeX"-->
+    depends="doLaTeX"
+    ><!---->
       <ant
        target="doHTLaTeX"
        antfile="${antRoot}/latex.xml">
@@ -135,6 +136,6 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
    <target
     name="all"
-    depends="doPDFLaTeX, doHTML" />
+    depends="clean, doPDFLaTeX, doHTML" />
 </project>
 
