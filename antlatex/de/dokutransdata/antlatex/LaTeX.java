@@ -1,11 +1,7 @@
-// Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
-// Source File Name:   LaTeX.java
-
 package de.dokutransdata.antlatex;
 
-//import java.io.File;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +18,11 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
-	
-	static final String VERSION = "0.0.5";
+
+	static final String VERSION = "0.0.6";
+
+	static final String BUILD = "1";
+
 	/**
 	 * BibTeX-Task
 	 */
@@ -32,8 +31,12 @@ public class LaTeX extends SimpleExternalTask {
 	/**
 	 * Multi-BibTeX-Schalter
 	 */
-	private boolean multibib;
+	private boolean multibib = false;
 
+	/**
+	 * figbib-Schalter
+	 */
+	private boolean figbib = false;
 	/**
 	 * Schalter zum Aufraeumen.
 	 */
@@ -42,7 +45,7 @@ public class LaTeX extends SimpleExternalTask {
 	/**
 	 * Task zum Loeschen von Dateien.
 	 */
-	private Delete tempFiles;
+	private Delete tempFiles = null;
 
 	/**
 	 * Task fuer Makeindex
@@ -84,20 +87,39 @@ public class LaTeX extends SimpleExternalTask {
 	private String mainFile;
 
 	/**
+	 * Jobname
+	 */
+	private String jobname;
+
+	/**
+	 * Ausgabeverzeichnis
+	 */
+	private File outputDir;
+
+	/**
+	 * Verzeichnis der temporären Dateien
+	 */
+	private File auxDir;
+
+	/**
 	 * PDFLaTeX-Schalter
 	 */
 	private boolean pdftex;
 
-	private String reRunPattern = "(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term )";
-	
+	private String reRunPattern = "(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term |There were undefined references)";
+
+	private String passThruLaTeXParameters = null;
 	/**
 	 * Initialisierung (verbose = false, pdftex = false, clean = false)
 	 */
 	public LaTeX() {
 		super();
 		latexfile = null;
+		jobname = null;
 		logfile = null;
 		mainFile = null;
+		outputDir = null;
+		auxDir = null;
 		verbose = false;
 		pdftex = false;
 		clean = false;
@@ -121,7 +143,13 @@ public class LaTeX extends SimpleExternalTask {
 			return null;
 		}
 		FileSet fileset = new FileSet();
-		fileset.setDir(workingDir);
+		if (auxDir != null) {
+			fileset.setDir(auxDir);
+		} else if (outputDir != null) {
+			fileset.setDir(outputDir);
+		} else {
+			fileset.setDir(workingDir);
+		}
 		for (int i = 0; i < deletePatterns.length; i++) {
 			fileset.createInclude().setName(deletePatterns[i]);
 		}
@@ -141,6 +169,7 @@ public class LaTeX extends SimpleExternalTask {
 			log("Delete is created");
 		}
 		tempFiles = (Delete) this.getProject().createTask("Delete");
+		tempFiles.setVerbose(verbose);
 		return tempFiles;
 	}
 
@@ -194,6 +223,11 @@ public class LaTeX extends SimpleExternalTask {
 		return glosstex;
 	}
 
+	/**
+	 * Callback-Methode fuer Ant
+	 * 
+	 * @return jxGlossTeX-Task
+	 */
 	public Object createJxGlosstex() {
 		jxGlosstex = new GlossTeX();
 		if (verbose) {
@@ -202,12 +236,21 @@ public class LaTeX extends SimpleExternalTask {
 		return jxGlosstex;
 	}
 
+	/**
+	 * Ausgabe der initialisierten Attribute
+	 */
 	private void dump() {
+		log("ant_latex " + VERSION + " build " + BUILD);
 		log("latexfile    = " + latexfile);
+		log("logfile      = " + logfile);
+		log("jobname      = " + jobname);
 		log("mainFile     = " + mainFile);
 		log("workingdir   = " + workingDir);
+		log("outputdir    = " + outputDir);
+		log("auxdir       = " + auxDir);
 		log("verbose      = " + verbose);
 		log("multibib     = " + multibib);
+		log("figbib       = " + figbib);
 		log("pdftex       = " + pdftex);
 		log("clean        = " + clean);
 		log("tempFiles    = " + tempFiles);
@@ -215,31 +258,60 @@ public class LaTeX extends SimpleExternalTask {
 		log("makeindex    = " + makeindex);
 		log("glosstex     = " + glosstex);
 		log("jxglosstex   = " + jxGlosstex);
+		log("others       = " + passThruLaTeXParameters);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.apache.tools.ant.Task#execute()
+	 */
 	public final void execute() throws BuildException {
+		if (files.size() == 0 && (latexfile == null || latexfile.equals(""))) {
+			throw new BuildException("No files are given!");
+		}
+		if (tempFiles == null) {
+			tempFiles = createDefaultDelete();
+		}
 		if (files.size() > 0) {
 			// get the fileset with full qualified pathname!
 			for (int i = 0; i < files.size(); i++) {
 				FileSet fs = (FileSet) files.get(i);
 				String[] fnames = fs.toString().split(";");
-//				File localDir = fs.getDir(fs.getProject());
+				boolean done = false;
+				// File localDir = fs.getDir(fs.getProject());
 				for (int k = 0; k < fnames.length; k++) {
-					if (fnames[k] == null) {
+					if (fnames[k] == null || fnames[k].equals("")) {
 						continue;
 					}
-//					String fname = new String(localDir + File.separator
-//							+ fnames[k]);
+					// String fname = new String(localDir + File.separator
+					// + fnames[k]);
 					setLatexfile(fnames[k]);
-					run();
+					try {
+						run();
+						done = true;
+					} catch (IOException ie) {
+					}
+				}
+				if (!done && verbose) {
+					log("No files found!");
 				}
 			}
 		} else {
-			run();
+			try {
+				run();
+			} catch (IOException ie) {
+			}
 		}
 	}
-	
-	public void run() throws BuildException {
+
+	/**
+	 * Eigentliche Verarbeitung der TeX/LaTeX-Datei. Aufruf von LaTeX, BibTeX,
+	 * MakeIndex und GlossTeX (je nach Bedarf).
+	 * 
+	 * @throws BuildException
+	 */
+	public void run() throws BuildException, IOException {
 		if (verbose) {
 			log("Running LaTeX now!");
 			dump();
@@ -247,6 +319,9 @@ public class LaTeX extends SimpleExternalTask {
 		runLaTeX();
 		if (bibtex != null) {
 			runBibTeX();
+		}
+		if (figbib) {
+			runFigBib();
 		}
 		if (jxGlosstex != null) {
 			runJxGlossTeX();
@@ -278,35 +353,115 @@ public class LaTeX extends SimpleExternalTask {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.apache.tools.ant.Task#init()
+	 */
 	public void init() {
 		workingDir = this.getProject().getBaseDir();
-		tempFiles = createDefaultDelete();
+		// tempFiles = createDefaultDelete();
 	}
 
+	/**
+	 * Aufruf von BibTeX mit den 'BibTeX'-figbib-Dateien.
+	 * 
+	 * @return Erfolgsmeldung von BibTeX
+	 * @throws BuildException
+	 */
+	private final int runFigBib() throws BuildException {
+		BibTeXTask figBibtex = new BibTeXTask();
+		figBibtex.setVerbose(verbose);
+		figBibtex.antTask = this;
+		String mFile = mainFile+".figbib";
+		String figBibFile = mFile;
+		if (auxDir != null || outputDir != null) {
+			File f;
+			if (auxDir != null) {
+				f = new File(auxDir, figBibFile + ".aux");
+			} else {
+				f = new File(outputDir, figBibFile + ".aux");
+			}
+			try {
+				mFile = f.getCanonicalPath();
+				int idx = mFile.lastIndexOf(".aux");
+				mFile = mFile.substring(0, idx);
+			} catch (IOException ie) {
+				log(mFile + ie.getLocalizedMessage());
+				return 0;
+			}
+		}
+		figBibtex.setAuxFile(mFile);
+		return figBibtex.run();
+	}
+	
+	/**
+	 * Aufruf des BibTeX-Tasks, verbose-Option des Haupttasks wird uebernommen.
+	 * 
+	 * @return Wert <> 0 fuer Misserfolg
+	 * 
+	 * @throws BuildException
+	 */
 	private final int runBibTeX() throws BuildException {
 		bibtex.setVerbose(verbose);
 		bibtex.antTask = this;
 
 		if (multibib) {
 			FileSet fileset = new FileSet();
-			fileset.setDir(workingDir);
+			if (auxDir != null) {
+				fileset.setDir(auxDir);
+			} else if (outputDir != null) {
+				fileset.setDir(outputDir);
+			} else {
+				fileset.setDir(workingDir);
+			}
 			fileset.createInclude().setName("*.aux");
 
 			bibtex.add(fileset);
 			bibtex.execute();
 			return 0;
 		} else {
-			bibtex.setAuxFile(mainFile);
+			String mFile = mainFile;
+			if (auxDir != null || outputDir != null) {
+				File f;
+				if (auxDir != null) {
+					f = new File(auxDir, mainFile + ".aux");
+				} else {
+					f = new File(outputDir, mainFile + ".aux");
+				}
+				try {
+					mFile = f.getCanonicalPath();
+					int idx = mFile.lastIndexOf(".aux");
+					mFile = mFile.substring(0, idx);
+				} catch (IOException ie) {
+					log(mFile + ie.getLocalizedMessage());
+					return 0;
+				}
+			}
+			bibtex.setAuxFile(mFile);
 			return bibtex.run();
 		}
 	}
 
+	/**
+	 * Aufruf des GlossTeX-Task, verbose-Option des Haupttasks wird uebernommen.
+	 * 
+	 * @return Wert <> 0 fuer Misserfolg
+	 * 
+	 * @throws BuildException
+	 */
 	private final int runGlossTeX() throws BuildException {
 		// glosstex $(MAIN) $(GLOSSSOURCE) ;
 		// $(MAKEINDEX) $(MAIN).gxs -o
 		// $(MAIN).glx -t $(MAIN).gil -s $(GLXIST); fi
 
-		glosstex.setWorkingDir(workingDir);
+		if (auxDir != null) {
+			glosstex.setWorkingDir(auxDir);
+		} else if (outputDir != null) {
+			glosstex.setWorkingDir(outputDir);
+		} else {
+			glosstex.setWorkingDir(workingDir);
+		}
 		glosstex.setAuxFile(mainFile);
 		glosstex.setVerbose(verbose);
 		glosstex.antTask = this;
@@ -314,33 +469,89 @@ public class LaTeX extends SimpleExternalTask {
 		return glosstex.run();
 	}
 
+	/**
+	 * Aufruf des jxGlossTeX-Task, verbose-Option des Haupttasks wird
+	 * uebernommen.
+	 * 
+	 * @return 0 fuer Erfolg
+	 * @throws BuildException
+	 */
 	private final int runJxGlossTeX() throws BuildException {
-		jxGlosstex.setAuxFile(new java.io.File(mainFile + ".aux"));
+		File mFile = new File(mainFile + ".aux");
+		if (auxDir != null) {
+			mFile = new File(auxDir, mainFile + ".aux");
+		} else if (outputDir != null) {
+			mFile = new File(outputDir, mainFile + ".aux");
+		}
+		jxGlosstex.setAuxFile(mFile);
 		jxGlosstex.setVerbose(verbose);
+		//jxGlosstex.setQuiet(!verbose);
 		jxGlosstex.antTask = this;
-		
+
 		jxGlosstex.execute();
 		return 0;
 	}
 
+	/**
+	 * Sucht das Pattern in der Protokolldatei
+	 * 
+	 * @return 0 fuer gefunden, <>0 nicht gefunden.
+	 * 
+	 */
 	private int runGrep() {
-		// String myPattern = "(Rerun to get cross-references right)";
-		// String myPattern = "(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term )";
-		log("Check "+reRunPattern);
-		String args[] = { reRunPattern, logfile };
+		if (verbose) {
+			log("Check " + reRunPattern);
+		}
+		String lfile = logfile;
+		if (auxDir != null || outputDir != null) {
+			File f;
+			if (auxDir != null) {
+				f = new File(auxDir, logfile);
+			} else {
+				f = new File(outputDir, logfile);
+			}
+			try {
+				lfile = f.getCanonicalPath();
+			} catch (IOException ie) {
+				log(ie.getMessage());
+				return 0;
+			}
+		}
+		String args[] = { reRunPattern, lfile };
 		int res = 0;
 		try {
-			res = Grep1.doit(args);
+			res = Grep1.doit(args,verbose);
 		} catch (Exception e) {
 
 		}
 		return res;
 	}
 
-	private final int runLaTeX() throws BuildException {
+	/**
+	 * Aufruf des LaTeX-Task.
+	 * 
+	 * @return Wert <> 0 fuer Misserfolg
+	 * @throws BuildException
+	 */
+	private final int runLaTeX() throws BuildException, IOException {
 		LaTeXTask lp = new LaTeXTask();
 		lp.antTask = this;
 		lp.setLatexfile(latexfile);
+		if (jobname != null && !jobname.equals("")) {
+			lp.setJobname(jobname);
+		}
+		if (auxDir != null && !auxDir.equals("")) {
+			lp.setAuxDir(auxDir);
+		}
+		if (outputDir != null && !outputDir.equals("")) {
+			lp.setOutputdir(outputDir);
+		}
+		if (passThruLaTeXParameters != null && !passThruLaTeXParameters.equals("")) {
+			lp.setPassThruLaTeXParameters(passThruLaTeXParameters);
+		}
+		if (thePath != null && !thePath.equals("")) {
+			lp.setPath(thePath);
+		}
 		lp.setWorkingDir(workingDir);
 		lp.setPdftex(pdftex);
 		lp.setVerbose(verbose);
@@ -348,12 +559,30 @@ public class LaTeX extends SimpleExternalTask {
 		return lp.run();
 	}
 
-	private final int runMakeIndex() throws BuildException {
+	/**
+	 * Aufruf des MakeIndex-Task, verbose-Option wird vom Haupttask uebernommen.
+	 * 
+	 * @return Wert <> 0 fuer Misserfolg
+	 * @throws BuildException
+	 */
+	private final int runMakeIndex() throws BuildException, IOException {
 		List args = new ArrayList();
-		args.add(mainFile);
+		String mFile = mainFile;
+		if (auxDir != null || outputDir != null) {
+			File f;
+			if (auxDir != null) {
+				f = new File(auxDir, mainFile + ".aux");
+			} else {
+				f = new File(outputDir, mainFile + ".aux");
+			}
+			mFile = f.getCanonicalPath();
+			int idx = mFile.lastIndexOf(".aux");
+			mFile = mFile.substring(0, idx);
+		}
+		args.add(mFile);
 		makeindex.setIdxFiles(args);
 		makeindex.antTask = this;
-//		makeindex.setVerbose(verbose);
+		makeindex.setVerbose(verbose);
 
 		return makeindex.run();
 	}
@@ -366,7 +595,8 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	/**
-	 * @param reRunPattern The reRunPattern to set.
+	 * @param reRunPattern
+	 *            The reRunPattern to set.
 	 */
 	public final void setReRunPattern(String reRunPattern) {
 		this.reRunPattern = reRunPattern;
@@ -402,15 +632,36 @@ public class LaTeX extends SimpleExternalTask {
 	 */
 	public void setLatexfile(String s) throws BuildException {
 		latexfile = s;
-		int idx;
-		if ((idx = latexfile.lastIndexOf(".tex")) != -1) {
-			mainFile = latexfile.substring(0, idx);
-		} else if ((idx = latexfile.lastIndexOf(".ltx")) != -1) {
-			mainFile = latexfile.substring(0, idx);
+		if (jobname == null || jobname.equals("")) {
+			int idx;
+			File f = new File(latexfile);
+			mainFile = f.getName();
+			if ((idx = mainFile.lastIndexOf(".tex")) != -1) {
+				mainFile = mainFile.substring(0, idx);
+			} else if ((idx = mainFile.lastIndexOf(".ltx")) != -1) {
+				mainFile = mainFile.substring(0, idx);
+			} else {
+				throw new BuildException("Unknown LaTeX-Sourcefile: "
+						+ latexfile);
+			}
 		} else {
-			throw new BuildException("Unknown LaTeX-Sourcefile");
+			mainFile = jobname;
 		}
 		logfile = mainFile + ".log";
+	}
+
+	public void setJobname(String s) {
+		jobname = s;
+		mainFile = jobname;
+		logfile = mainFile + ".log";
+	}
+
+	public void setOutputDir(File s) {
+		outputDir = s;
+	}
+
+	public void setAuxDir(File s) {
+		auxDir = s;
 	}
 
 	/**
@@ -420,6 +671,34 @@ public class LaTeX extends SimpleExternalTask {
 	 */
 	public void setPdftex(boolean flag) {
 		pdftex = flag;
+	}
+
+	/**
+	 * @return Returns the passThruLaTeXParameters.
+	 */
+	public final String getPassThruLaTeXParameters() {
+		return passThruLaTeXParameters;
+	}
+
+	/**
+	 * @param passThruLaTeXParameters The passThruLaTeXParameters to set.
+	 */
+	public final void setPassThruLaTeXParameters(String passThruLaTeXParameters) {
+		this.passThruLaTeXParameters = passThruLaTeXParameters;
+	}
+
+	/**
+	 * @return Returns the figbib.
+	 */
+	public final boolean isFigbib() {
+		return figbib;
+	}
+
+	/**
+	 * @param figbib The figbib to set.
+	 */
+	public final void setFigbib(boolean figbib) {
+		this.figbib = figbib;
 	}
 
 }
