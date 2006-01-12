@@ -74,7 +74,7 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class LaTeXTask extends SimpleExternalTask {
 
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
 
 	private String latexfile;
 

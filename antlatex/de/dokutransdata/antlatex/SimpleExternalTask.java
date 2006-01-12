@@ -93,7 +93,7 @@ public class SimpleExternalTask extends Task {
 		}
 	}
 
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
 	protected File workingDir;
 
 	protected boolean verbose = false;

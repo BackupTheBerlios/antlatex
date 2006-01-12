@@ -3,6 +3,7 @@
 	<name>ant_latex</name>
 	<comment></comment>
 	<projects>
+		<project>Glossar</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

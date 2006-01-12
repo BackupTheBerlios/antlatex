@@ -67,7 +67,7 @@ import org.apache.tools.ant.types.FileSet;
  *
  */
 public class GlossTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
 
 	private String auxFile;
 

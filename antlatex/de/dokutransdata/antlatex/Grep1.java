@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Ian F. Darwin, http://www.darwinsys.com/, 1996-2002.
  * All rights reserved. Software written by Ian F. Darwin and others.
- * $Id: Grep1.java,v 1.3 2006/01/12 12:15:25 jaloma Exp $
+ * $Id: Grep1.java,v 1.4 2006/01/12 12:36:46 jaloma Exp $
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -43,7 +43,7 @@ import java.io.*;
  * text files.
  */
 public class Grep1 {
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
 	/** The pattern we're looking for */
 	protected Pattern pattern;
 

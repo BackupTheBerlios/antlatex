@@ -136,6 +136,41 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
    <target
     name="all"
-    depends="clean, doPDFLaTeX, doHTML" />
+    depends="clean, doPDFLaTeX, doHTML, changes" />
+
+<target name="changes">
+<exec executable="htlatex">
+<arg value="changes.ltx"/>
+<arg value='"local,0,png"'/>
+</exec>
+<exec executable="html2txt">
+<arg value="-w"/>
+<arg value="changes.html"/>
+<arg value="../../../CHANGES"/>
+</exec>
+      <delete
+       file="changes.4ct" />
+
+      <delete
+       file="changes.4tc" />
+
+      <delete
+       file="changes.idv" />
+
+      <delete
+       file="changes.lg" />
+
+      <delete
+       file="changes.xref" />
+      <delete
+       file="changes.log" />
+      <delete
+       file="changes.aux" />
+      <delete
+       file="changes.tmp" />
+      <delete
+       file="changes.dvi" />
+</target>
+
 </project>
 

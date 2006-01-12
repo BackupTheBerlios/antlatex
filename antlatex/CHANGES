@@ -1,0 +1,80 @@
+ 
+--
+
+ 
+
+ 1 Entwicklungsgeschichte
+-------------------------
+
+  
+
+ 
+ 
+* 0.0.6_2 (2006-01-12) 
+          
+*         path-Attribut für den Pfad zu (PDF)LATEX darf nicht
+        mit getCanonicalPath() behandelt werden, weil unter
+        Unix einige Programme ihre Funktionalität über den Programmnamen
+        erhalten und dementsprechend verlinkt sind. (Gefunden
+        von Alphonse Bendt)
+         
+* 0.0.6 (2006-01-09) 
+          
+*         path-Attribut für den Pfad zu (PDF)LATEX ergänzt und
+        damit die Semantik von command geändert. (Gefunden von
+        Alphonse Bendt) 
+*         Die Argumente output-directory, aux-directory, job-name
+        für LATEX umgesetzt und die Subaufrufe von BibTEX, makeindex
+        und GlossTEX angepasst. Die restlichen Argumente können
+        jetzt mit passThruLaTeXParameters getrennt mit Semikolons
+        an LATEX weitergegeben werden. 
+*         Mit dem Attribut figbib wird das Package figbib im 
+        LATEX-Lauf berücksichtigt. 
+*         Keine LATEX-Datei gefunden bzw. angegeben führt zu einer
+        Fehlermeldung wenn verbose auf on geschaltet ist.
+         
+* 0.0.5_2 (2006-01-06) 
+          
+*         replace-Aufruf auf Java 1.4 geändert. (Gefunden von
+        Alphonse Bendt) 
+*         Keine LATEX-Datei gefunden bzw. angegeben führt zu einer
+        vernünftigen Fehlermeldung.
+         
+* 0.0.5 (2005-12-29) 
+          
+*         Bei den Tasks LaTeX und LaTeXTask konnte nur eine Datei
+        angegeben werden, jetzt kann auch das Element <fileset>
+        benutzt werden. (Gefunden von Alphonse Bendt)
+         
+* 0.0.4 (2005-11-26) 
+          
+*         Es gab zwar die Möglichkeit mit <fileset> einen Filter
+        für <makeindex> zu setzen, doch dieses Element wurde innerhalb
+        eines <latex> Tasks nicht ausgewertet. (Gefunden von Thomas
+        Reuter) 
+*         Das XML-basierte jxGlossar wurde mit eingebunden. 
+*         Das Element <delete> wurde ersetzt durch <deletetempfile>
+         
+* 0.0.3 (2005-09-23) 
+          
+*         Das Attribut if stimmte nicht mit der normalen Semantik
+        von Ant überein, deswegen wurde jetzt das Attribut 
+        run zum Ein/Ausschalten des Tasks eingeführt.
+         
+* 0.0.2 (2005-09-07) 
+          
+*         Beim Task LaTeX die Elemente makeindex, bibtex und glosstex
+        zugelassen um die komplexeren Attribute durchreichen
+        zukönnen. 
+*         Mit dem if-Attribut können jetzt die Tasks ein- bzw.
+        ausgeschaltet werden.
+         
+* 0.0.1 (2005-09-02) 
+          
+*         Erste Veröffentlichung
+         
+
+---------------------------------------------------------------------------
+Generated from changes.html 
+by *** HTML2TXT ('HTML to text')  Version 1.31 (NT), 2.Aug.97 (c)dg9ep *** 
+---------------------------------------------------------------------------

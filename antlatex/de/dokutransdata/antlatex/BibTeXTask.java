@@ -68,7 +68,7 @@ import org.apache.tools.ant.types.FileSet;
  * @author jaloma
  */
 public class BibTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
 	private String auxFile;
 
 	private String bibtexPath = "bibtex";

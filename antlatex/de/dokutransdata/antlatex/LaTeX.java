@@ -71,11 +71,11 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
 
 	static final String VERSION = "0.0.6";
 
-	static final String BUILD = "1";
+	static final String BUILD = "2";
 
 	/**
 	 * BibTeX-Task

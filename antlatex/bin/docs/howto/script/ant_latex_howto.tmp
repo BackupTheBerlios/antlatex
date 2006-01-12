@@ -1,4 +1,4 @@
-/* ant_latex_howto.css from ant_latex_howto.tex (TeX4ht, 2005-11-27 19:32:00)
+/* ant_latex_howto.css from ant_latex_howto.tex (TeX4ht, 2006-01-12 12:42:00)
 */
 
 table.abstract {
@@ -45,8 +45,7 @@ color:white;
 text-decoration:none;
 font-family:sans-serif;
 }
-span.sectionToc {color:black; font-weight:bold; font-family:sans-serif;
-margin-right:2ex;}
+span.sectionToc {color:black; font-weight:bold; font-family:sans-serif; margin-right:2ex;}
 span.subsectionToc {color:black; font-weight:bold; font-family:sans-serif;}
 span.subsubsectionToc {color:black; font-weight:bold; font-family:sans-serif;}
 table.verbatim{

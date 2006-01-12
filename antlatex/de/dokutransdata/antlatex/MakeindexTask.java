@@ -70,7 +70,7 @@ import org.apache.tools.ant.types.FileSet;
  * 
  */
 public class MakeindexTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $id: $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
 
 	private List files = new ArrayList();
 

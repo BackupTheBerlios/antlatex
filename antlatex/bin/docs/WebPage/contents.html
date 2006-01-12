@@ -1,5 +1,5 @@
 <!--
- $Id: contents.html,v 1.1 2005/11/30 09:20:58 jaloma Exp $
+ $Id: contents.html,v 1.2 2006/01/12 12:36:46 jaloma Exp $
 -->
 
 <!-- {{{ Haupttext -->
@@ -25,10 +25,45 @@ Deswegen musste ich eine eigene Lösung entwickeln:
 	LaTeX-Lauf oder können als eigene Tasks definiert werden.</li>
 <li>PDFLaTeX oder LaTeX als Prozessor auswählbar</li>
 <li><code>multibib</code> Bibliographien werden unterstützt.</li>
+<li>Mit <code>figbib</code> wird das entsprechende Package für kommentierte Abbildungsverzeichnisse unterstützt.</li>
 </ul>
 
 <h2><a id="entwicklung" name="entwicklung" title="Entwicklung">Entwicklungsgeschichte</a></h2>
 <dl>
+<dt><strong>[0.0.6_2 (2006-01-12)]</strong> </dt>
+<dd><ul>
+          <li><code>path</code>-Attribut                       für                       den                       Pfad
+          zu (PDF)LaTeX darf nicht mit getCanonicalPath() behandelt werden, weil
+          unter Unix einige Programme ihre Funktionalität über den Programmnamen
+          erhalten und dementsprechend verlinkt sind. (Gefunden von Alphonse Bendt)</li></ul>
+	<br />
+     </dd>
+	<dt><strong>[0.0.6 (2006-01-09)]</strong></dt>
+	<dd>
+	<ul>
+		<li><code>path</code>-Attribut f&uuml;r den Pfad zu (PDF)LaTeX erg&auml;nzt und damit die Semantik von <code>command</code> ge&auml;ndert.</li>
+<li>Die Argumente <code>output-directory, aux-directory, job-name</code> f&uuml;r LaTeX umgesetzt und die Subaufrufe von BibTeX, makeindex und GlossTeX angepasst. Die restlichen Argumente k&ouml;nnen jetzt mit <code>passThruLaTeXParameters</code> getrennt mit Semikolons an LaTeX weitergegeben werden.</li>
+		<li>Mit dem Attribut <code>figbib</code> wird das Package <code>figbib</code> im LaTeX-Lauf ber&uuml;cksichtigt.</li>
+	</ul>
+	<br />
+	</dd>
+
+	<dt><strong>[0.0.5_2 (2006-01-06)]</strong></dt>
+	<dd>
+	<ul>
+		<li>replace-Aufruf auf Java 1.4 ge&auml;ndert.</li>
+		<li>Keine LaTeX-Datei gefunden bzw. angegeben f&uuml;hrt zu einer vern&uuml;nftigen Fehlermeldung</li>
+	</ul>
+	<br />
+	</dd>
+
+	<dt><strong>[0.0.5 (2005-12-29)]</strong></dt>
+	<dd>
+	<ul>
+		<li>Bei den Tasks <code>LaTeX</code> und <code>LaTeXTask</code> konnte nur eine Datei angegeben werden, jetzt kann auch das Element &lt;fileset&gt; benutzt werden. (Gefunden von Alphonse Bendt)</li>
+	</ul>
+	<br />
+	</dd>
 	<dt><strong>[0.0.4 (2005-11-26)]</strong></dt>
 	<dd>
 	<ul>
@@ -36,12 +71,14 @@ Deswegen musste ich eine eigene Lösung entwickeln:
 <li>Das XML-basierte <strong>jxGlossar</strong> wurde mit eingebunden.</li>
 <li>Das Element &lt;delete&gt; wurde ersetzt durch &lt;deletetempfile&gt;</li>
 		</ul>
+	<br />
 		</dd>
 	<dt><strong>[0.0.3 (2005-09-23)]</strong></dt>
 	<dd>
 	<ul>
 		<li>Das Attribut <code>if</code> stimmte nicht mit der normalen Semantik von Ant überein, deswegen wurde jetzt das Attribut <code>run</code> zum Ein/Ausschalten des Tasks eingef&uuml;hrt.</li>
 		</ul>
+	<br />
 		</dd>
 	<dt><strong>[0.0.2 (2005-09-07)]</strong></dt>
 	<dd>
@@ -108,7 +145,10 @@ war.
 </address>
 
 <h2><a id="download" title="Download" name="download">Download</a></h2>
-<a href="http://www.longdistcalc.de/service/download.php?fileTag=ant_latex">Ant_LaTeX</a> (jar-Archiv)<br />
+<ul>
+<li><a href="http://developer.berlios.de/project/showfiles.php?group_id=5429&amp;release_id=8559">BerliOS</a></li>
+<li><a href="http://www.longdistcalc.de/service/download.php?fileTag=ant_latex">Mirror</a></li>
+</ul>
 <img src="http://www.longdistcalc.de/service/icon.php?tag=ant_latex" alt="" />
 
 <!-- }}} Haupttext -->

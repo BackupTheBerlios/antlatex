@@ -9,6 +9,7 @@
 \:CrossWord{)QQQ2-6-3}{2}{2}%
 \:CrossWord{)QQQ2-8-4}{2}{2}%
 \:CrossWord{)QQQ2-9-9}{2}{2}%
+\:CrossWord{)QQQ2-10-10}{2}{2}%
 \:CrossWord{)Btex4ht-p2(L }{ant_latex_howto.html}{1}%
 \:CrossWord{)Qant_latex_howto3.html}{1}{1}%
 \:CrossWord{)F3F-}{ant_latex_howto3.html}{1}%
@@ -42,35 +43,45 @@
 \:CrossWord{cutfile 3(L }{ant_latex_howtosu1.html}{3}%
 \:CrossWord{ant_latex_howtosu1.html(L }{ant_latex_howtosu1.html}{3}%
 \:CrossWord{)Qx6-30002.1}{6}{3}%
-\:CrossWord{)M3x3}{;}{5}%
-\:CrossWord{)Bfn1(L }{ant_latex_howtosu1.html}{8}%
-\:CrossWord{)Qant_latex_howto7.html}{6}{8}%
-\:CrossWord{)F7F-}{ant_latex_howto7.html}{8}%
-\:CrossWord{fn1(L }{ant_latex_howto7.html}{8}%
-\:CrossWord{)Qx7-3001f1}{7}{8}%
-\:CrossWord{)Qtailant_latex_howtosu1.html}{6}{10}%
-\:CrossWord{)Bant_latex_howtosu2.html(L }{ant_latex_howtose2.html}{10}%
-\:CrossWord{)F8F-}{ant_latex_howtosu2.html}{10}%
-\:CrossWord{fileidcut 8}{4}{10}%
-\:CrossWord{cutfile 4(L }{ant_latex_howtosu2.html}{10}%
-\:CrossWord{ant_latex_howtosu2.html(L }{ant_latex_howtosu2.html}{10}%
-\:CrossWord{)N 6(L }{ant_latex_howtosu2.html}{10}%
-\:CrossWord{)Qx8-40002.2}{8}{10}%
-\:CrossWord{)Qx8-50002.2.1}{8}{10}%
-\:CrossWord{)M5x5}{3.1;3.1<;5.1;5.1<;8.1;8.1<;10.1;10.1<;12.1;12.1<;;}{12}%
-\:CrossWord{)Qx8-60002.2.2}{8}{12}%
-\:CrossWord{)M7x6}{4.1;4.1<;;}{13}%
-\:CrossWord{)Qx8-70002.2.3}{8}{13}%
-\:CrossWord{)M9x7}{3.1;3.1<;5.1;5.1<;;}{14}%
-\:CrossWord{)Qx8-80002.2.4}{8}{14}%
-\:CrossWord{)M11x8}{;}{15}%
-\:CrossWord{)Qtailant_latex_howtosu2.html}{8}{17}%
-\:CrossWord{)Qtailant_latex_howtose2.html}{5}{18}%
-\:CrossWord{)Bant_latex_howtose3.html(L }{ant_latex_howto3.html}{18}%
-\:CrossWord{)F9F-}{ant_latex_howtose3.html}{18}%
-\:CrossWord{fileidcut 9}{5}{18}%
-\:CrossWord{cutfile 5(L }{ant_latex_howtose3.html}{18}%
-\:CrossWord{ant_latex_howtose3.html(L }{ant_latex_howtose3.html}{18}%
-\:CrossWord{)N 5(L }{ant_latex_howtose3.html}{18}%
-\:CrossWord{)Qx9-9000A}{9}{18}%
-\:CrossWord{)Qtailant_latex_howtose3.html}{9}{25}%
+\:CrossWord{)M3x3}{17.1;17.1<;;}{6}%
+\:CrossWord{)M5x3}{;}{7}%
+\:CrossWord{fn1x0}{}{9}%
+\:CrossWord{)Qx6-3001f1}{6}{9}%
+\:CrossWord{)Bant_latex_howto7.html(L }{ant_latex_howtosu1.html}{9}%
+\:CrossWord{)F7F-}{ant_latex_howto7.html}{9}%
+\:CrossWord{ant_latex_howto7.html(L }{ant_latex_howto7.html}{9}%
+\:CrossWord{)Qfn1x0}{7}{9}%
+\:CrossWord{)Qtailant_latex_howtosu1.html}{6}{11}%
+\:CrossWord{)Bant_latex_howtosu2.html(L }{ant_latex_howtose2.html}{11}%
+\:CrossWord{)F8F-}{ant_latex_howtosu2.html}{11}%
+\:CrossWord{fileidcut 8}{4}{11}%
+\:CrossWord{cutfile 4(L }{ant_latex_howtosu2.html}{11}%
+\:CrossWord{ant_latex_howtosu2.html(L }{ant_latex_howtosu2.html}{11}%
+\:CrossWord{)N 6(L }{ant_latex_howtosu2.html}{11}%
+\:CrossWord{)Qx8-40002.2}{8}{11}%
+\:CrossWord{)Qx8-50002.2.1}{8}{11}%
+\:CrossWord{)M7x5}{7.1;7.1<;9.1;9.1<;12.1;12.1<;14.1;14.1<;16.1;16.1<;;}{13}%
+\:CrossWord{)Qx8-60002.2.2}{8}{13}%
+\:CrossWord{)M9x6}{8.1;8.1<;;}{14}%
+\:CrossWord{)Qx8-70002.2.3}{8}{14}%
+\:CrossWord{)M11x7}{6.1;6.1<;9.1;9.1<;;}{15}%
+\:CrossWord{)Qx8-80002.2.4}{8}{16}%
+\:CrossWord{)M13x8}{;}{17}%
+\:CrossWord{)Qtailant_latex_howtosu2.html}{8}{20}%
+\:CrossWord{)Qtailant_latex_howtose2.html}{5}{21}%
+\:CrossWord{)Bant_latex_howtose3.html(L }{ant_latex_howto3.html}{21}%
+\:CrossWord{)F9F-}{ant_latex_howtose3.html}{21}%
+\:CrossWord{fileidcut 9}{5}{21}%
+\:CrossWord{cutfile 5(L }{ant_latex_howtose3.html}{21}%
+\:CrossWord{ant_latex_howtose3.html(L }{ant_latex_howtose3.html}{21}%
+\:CrossWord{)N 5(L }{ant_latex_howtose3.html}{21}%
+\:CrossWord{)Qx9-9000A}{9}{21}%
+\:CrossWord{)Qtailant_latex_howtose3.html}{9}{23}%
+\:CrossWord{)Bant_latex_howtose4.html(L }{ant_latex_howto3.html}{23}%
+\:CrossWord{)F10F-}{ant_latex_howtose4.html}{23}%
+\:CrossWord{fileidcut 10}{6}{23}%
+\:CrossWord{cutfile 6(L }{ant_latex_howtose4.html}{23}%
+\:CrossWord{ant_latex_howtose4.html(L }{ant_latex_howtose4.html}{23}%
+\:CrossWord{)N 9(L }{ant_latex_howtose4.html}{23}%
+\:CrossWord{)Qx10-10000B}{10}{23}%
+\:CrossWord{)Qtailant_latex_howtose4.html}{10}{31}%

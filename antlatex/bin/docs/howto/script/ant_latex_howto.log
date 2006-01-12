@@ -1,30 +1,28 @@
-This is e-TeXk, Version 3.141592-2.1 (Web2c 7.5.2) (format=latex 2004.10.18)  27 NOV 2005 19:32
+This is e-TeX, Version 3.141592-2.2 (MiKTeX 2.4) (preloaded format=latex 2006.1.7)  12 JAN 2006 12:42
 entering extended mode
- %&-line parsing enabled.
- (c:/Programme/TeXLive/texmf/web2c/cp8bit.tcx)
-**\makeatletter\def\HCode{\futurelet\HCode\HChar}\def\HChar{\ifx"\HCode\def\HCo
-de"##1"{\Link##1}\expandafter\HCode\else\expandafter\Link\fi}\def\Link#1.a.b.c.
-{\g@addto@macro\@documentclasshook{\RequirePackage[#1,html]{tex4ht}}\let\HCode\
-documentstyle\def\documentstyle{\let\documentstyle\HCode\expandafter\def\csname
- tex4ht\endcsname{#1,html}\def\HCode####1{\documentstyle[tex4ht,}\@ifnextchar[{
-\HCode}{\documentstyle[tex4ht]}}}\makeatother\HCode local,frames,4,png,html.a.b
-.c.\input ant_latex_howto.ltx
-(./ant_latex_howto.ltx
-(c:/Programme/TeXLive/texmf/tex/latex/koma-script/scrartcl.cls
-Document Class: scrartcl 2003/04/22 v2.9o LaTeX2e KOMA document class
-(c:/Programme/TeXLive/texmf/tex/latex/koma-script/scrlfile.sty
-Package: scrlfile 2003/04/22 v2.9o LaTeX2e KOMA package
+**\makeatletter\def\HCode{\futurelet\HCode\HChar}\def\HChar{\ifx\HCode\def\HCod
+e##1{\Link##1}\expandafter\HCode\else\expandafter\Link\fi}\def\Link#1.a.b.c.{\g
+@addto@macro\@documentclasshook{\RequirePackage[#1,html]{tex4ht}}\let\HCode\doc
+umentstyle\def\documentstyle{\let\documentstyle\HCode\expandafter\def\csname te
+x4ht\endcsname{#1,html}\def\HCode####1{\documentstyle[tex4ht,}\@ifnextchar[{\HC
+ode}{\documentstyle[tex4ht]}}}\makeatother\HCode local,frames,4,png.a.b.c.\inpu
+t ant_latex_howto.ltx
+(ant_latex_howto.ltx
+(C:\Programme\MikTeX\texmf\tex\latex\koma-script\scrartcl.cls
+Document Class: scrartcl 2004/01/07 v2.9p LaTeX2e KOMA document class
+(C:\Programme\MikTeX\texmf\tex\latex\koma-script\scrlfile.sty
+Package: scrlfile 2004/01/07 v2.9p LaTeX2e KOMA package
 
-Package scrlfile, 2003/04/22 v2.9o LaTeX2e KOMA package
+Package scrlfile, 2004/01/07 v2.9p LaTeX2e KOMA package
                   Copyright (C) Markus Kohm
 
-) (c:/Programme/TeXLive/texmf/tex/latex/base/size12.clo
-File: size12.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+) (C:\Programme\MikTeX\texmf\tex\latex\base\size12.clo
+File: size12.clo 2004/02/16 v1.4f Standard LaTeX file (size option)
 )
-(c:/Programme/TeXLive/texmf/tex/latex/koma-script/typearea.sty
-Package: typearea 2003/04/22 v2.9o LaTeX2e KOMA package
+(C:\Programme\MikTeX\texmf\tex\latex\koma-script\typearea.sty
+Package: typearea 2004/01/07 v2.9p LaTeX2e KOMA package
 
-Package typearea, 2003/04/22 v2.9o LaTeX2e KOMA package
+Package typearea, 2004/01/07 v2.9p LaTeX2e KOMA package
                   Copyright (C) Frank Neukam, 1992-1994
                   Copyright (C) Markus Kohm, 1994-2002
 
@@ -63,25 +61,29 @@ Package typearea Info: These are the values describing the layout:
 \belowcaptionskip=\skip46
 \c@pti@nb@sid@b@x=\box26
 \bibindent=\dimen102
-) (c:/Programme/TeXLive/texmf/tex/generic/tex4ht/tex4ht.sty
-version 2003-05-21-09:13
+) (C:\Programme\MikTeX\texmf\tex\generic\tex4ht\tex4ht.sty
+version 2004-10-23-17:52
 Package: tex4ht 
+--------------------------------------
 --- Note --- for _ at preamble, use the command line option `early_'
+--------------------------------------
+--------------------------------------
 --- Note --- for ^ at preamble, use the command line option `early^'
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/usepackage.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\usepackage.4ht
+version 2004-11-04-14:29
 )
-(c:/Programme/TeXLive/texmf/tex/latex/base/inputenc.sty
-Package: inputenc 2001/07/10 v0.99a Input encoding file 
+(C:\Programme\MikTeX\texmf\tex\latex\base\inputenc.sty
+Package: inputenc 2004/02/05 v1.0d Input encoding file
 
-(c:/Programme/TeXLive/texmf/tex/latex/base/latin1.def
-File: latin1.def 2001/07/10 v0.99a Input encoding file 
+(C:\Programme\MikTeX\texmf\tex\latex\base\latin1.def
+File: latin1.def 2004/02/05 v1.0d Input encoding file
 ))
-(c:/Programme/TeXLive/texmf/tex/latex/geometry/geometry.sty
+(C:\Programme\MikTeX\texmf\tex\latex\geometry\geometry.sty
 Package: geometry 2002/07/08 v3.2 Page Geometry
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/keyval.sty
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks14
 )
@@ -94,8 +96,8 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \Gm@even@mp=\dimen106
 \Gm@dimlist=\toks15
 
-(c:/Programme/TeXLive/texmf/tex/latex/geometry/geometry.cfg))
-(c:/Programme/TeXLive/texmf/tex/latex/float/float.sty
+(C:\Programme\MikTeX\texmf\tex\latex\geometry\geometry.cfg))
+(C:\Programme\MikTeX\texmf\tex\latex\float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count91
 \float@exts=\toks16
@@ -103,53 +105,53 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks17
 \@floatcapt=\box28
 )
-(c:/Programme/TeXLive/texmf/tex/latex/base/makeidx.sty
+(C:\Programme\MikTeX\texmf\tex\latex\base\makeidx.sty
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
 )
-(c:/Programme/TeXLive/texmf/tex/latex/german/german.sty v2.5e 1998-07-08
+(C:\Programme\MikTeX\texmf\tex\latex\german\german.sty v2.5e 1998-07-08
 Package: german 1998/07/08 v2.5e Support for writing german texts (br)
 \grmnU@D=\dimen107
-german -- \language number for Austrian undefined, default 4 used.
+german -- \language number for Austrian undefined, default 3 used.
 )
-(c:/Programme/TeXLive/texmf/tex/latex/tools/array.sty
-Package: array 1998/05/13 v2.3m Tabular extension package (FMi)
+(C:\Programme\MikTeX\texmf\tex\latex\tools\array.sty
+Package: array 2003/12/17 v2.4a Tabular extension package (FMi)
 \col@sep=\dimen108
 \extrarowheight=\dimen109
 \NC@list=\toks18
 \extratabsurround=\skip47
 \backup@length=\skip48
 )
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/graphicx.sty
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/graphics.sty
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\graphics.sty
 Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/trig.sty
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(c:/Programme/TeXLive/texmf/tex/latex/texlive/graphics.cfg
-File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+(C:\Programme\MikTeX\texmf\tex\latex\00miktex\graphics.cfg
+File: graphics.cfg 2003/03/12 v1.1 MiKTeX 'graphics' configuration
 )
 Package graphics Info: Driver file: dvips.def on input line 80.
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/dvips.def
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\dvips.def
 File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen110
 \Gin@req@width=\dimen111
 )
-(c:/Programme/TeXLive/texmf/tex/latex/germbib/bibgerm.sty
+(C:\Programme\MikTeX\texmf\tex\latex\germbib\bibgerm.sty
 Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 
 ** Macros for german `BibTeX'ing added to Style Option `german' 20 Apr 1993 **
 ** idea and languages `german' and `USenglish' implemented by M. Wallmeier **
 ** Modified for LaTeX 2e and german.sty 2.5b by A. Scherer 1 Nov 1995 **
 ** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
-(c:/Programme/TeXLive/texmf/tex/generic/misc/texnames.sty
+(C:\Programme\MikTeX\texmf\tex\generic\misc\texnames.sty
 This is texnames.sty, Version 1.09 <16 March 1993>
-) (c:/Programme/TeXLive/texmf/tex/latex/supertabular/supertabular.sty
-Package: supertabular 2002/07/19 v4.1e the supertabular environment
+) (C:\Programme\MikTeX\texmf\tex\latex\supertabular\supertabular.sty
+Package: supertabular 2004/02/20 v4.1e the supertabular environment
 \c@tracingst=\count92
 \ST@wd=\dimen112
 \ST@rightskip=\skip49
@@ -167,75 +169,75 @@ Package: supertabular 2002/07/19 v4.1e the supertabular environment
 \ST@dimen=\dimen122
 \ST@pbox=\box29
 )
-(c:/Programme/TeXLive/texmf/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2003/09/15 v6.74i Hypertext links for LaTeX
+(C:\Programme\MikTeX\texmf\tex\latex\hyperref\hyperref.sty
+Package: hyperref 2003/11/30 v6.74m Hypertext links for LaTeX
 \@linkdim=\dimen123
 \Hy@linkcounter=\count93
 \Hy@pagecounter=\count94
 
-(c:/Programme/TeXLive/texmf/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2003/09/15 v6.74i Hyperref: PDFDocEncoding definition (HO)
+(C:\Programme\MikTeX\texmf\tex\latex\hyperref\pd1enc.def
+File: pd1enc.def 2003/11/30 v6.74m Hyperref: PDFDocEncoding definition (HO)
 )
-(c:/Programme/TeXLive/texmf/tex/latex/texlive/hyperref.cfg
-File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+(C:\Programme\MikTeX\texmf\tex\latex\00miktex\hyperref.cfg
+File: hyperref.cfg 2003/03/08 v1.0 MiKTeX 'hyperref' configuration
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 1829.
-Package hyperref Info: Option `bookmarks' set `true' on input line 1829.
+Package hyperref Info: Option `colorlinks' set `true' on input line 1830.
+Package hyperref Info: Option `bookmarks' set `true' on input line 1830.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `subscript' on input line 1829.
+(hyperref)                removing `subscript' on input line 1830.
 
-Package hyperref Info: Hyper figures OFF on input line 1879.
-Package hyperref Info: Link nesting OFF on input line 1884.
-Package hyperref Info: Hyper index ON on input line 1887.
-Package hyperref Info: Plain pages ON on input line 1892.
-Package hyperref Info: Backreferencing OFF on input line 1899.
+Package hyperref Info: Hyper figures OFF on input line 1880.
+Package hyperref Info: Link nesting OFF on input line 1885.
+Package hyperref Info: Hyper index ON on input line 1888.
+Package hyperref Info: Plain pages ON on input line 1893.
+Package hyperref Info: Backreferencing OFF on input line 1900.
 Implicit mode ON; LaTeX internals redefined
-Package hyperref Info: Bookmarks ON on input line 2003.
-(c:/Programme/TeXLive/texmf-local/tex/latex/html/url.sty
+Package hyperref Info: Bookmarks ON on input line 2004.
+(C:\localtexmf\tex\latex\html\url.sty
 Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
  names
 )
-LaTeX Info: Redefining \url on input line 2142.
+LaTeX Info: Redefining \url on input line 2143.
 \Fld@menulength=\count95
 \Field@Width=\dimen124
 \Fld@charsize=\dimen125
 \Choice@toks=\toks19
 \Field@toks=\toks20
-Package hyperref Info: Hyper figures OFF on input line 2617.
-Package hyperref Info: Link nesting OFF on input line 2622.
-Package hyperref Info: Hyper index ON on input line 2625.
-Package hyperref Info: backreferencing OFF on input line 2632.
-Package hyperref Info: Link coloring ON on input line 2635.
+Package hyperref Info: Hyper figures OFF on input line 2618.
+Package hyperref Info: Link nesting OFF on input line 2623.
+Package hyperref Info: Hyper index ON on input line 2626.
+Package hyperref Info: backreferencing OFF on input line 2633.
+Package hyperref Info: Link coloring ON on input line 2636.
 
 Hyperref stopped early
 )
 *hyperref using driver htex4ht*
-(c:/Programme/TeXLive/texmf/tex/latex/hyperref/htex4ht.def
-File: htex4ht.def 2003/09/15 v6.74i Hyperref driver for TeX4ht
+(C:\Programme\MikTeX\texmf\tex\latex\hyperref\htex4ht.def
+File: htex4ht.def 2003/11/30 v6.74m Hyperref driver for TeX4ht
 
 hyperref tex4ht: tex4ht already loaded
-) (c:/Programme/TeXLive/texmf-local/tex/latex/html/verbatimfiles.sty
+) (C:\localtexmf\tex\latex\html\verbatimfiles.sty
 \c@lineno=\count96
 )
-(c:/Programme/TeXLive/texmf/tex/latex/koma-script/scrtime.sty
+(C:\Programme\MikTeX\texmf\tex\latex\koma-script\scrtime.sty
 Package: scrtime 2002/02/02 v1.1m LaTeX2e KOMA package
 )
-(c:/Programme/TeXLive/texmf/tex/latex/koma-script/scrpage.sty
+(C:\Programme\MikTeX\texmf\tex\latex\koma-script\scrpage.sty
 Package: scrpage 2001/06/22 v1.3c KOMA package
 
 *************************************
 * Local config file scrpage.cfg used
 *************************************
-(c:/Programme/TeXLive/texmf-local/tex/latex/mataDoc/scrpage.cfg))
-(c:/Programme/TeXLive/texmf-local/tex/latex/mataDoc/giaAPI.sty
+(C:\localtexmf\tex\latex\mataDoc\scrpage.cfg))
+(C:\localtexmf\tex\latex\mataDoc\giaAPI.sty
 Package: giaAPI 2002/07/17 v1.1b (C) 2002, Juergen A.Lamers, DokuTransData Aach
 en
 
 Package: `giaAPI' v1.1b <2002/07/17>
          (C) 2002, Juergen A.Lamers, DokuTransData Aachen
-(c:/Programme/TeXLive/texmf/tex/latex/tools/calc.sty
+(C:\Programme\MikTeX\texmf\tex\latex\tools\calc.sty
 Package: calc 1998/07/07 v4.1b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count97
 \calc@Bcount=\count98
@@ -247,14 +249,74 @@ LaTeX Info: Redefining \setlength on input line 59.
 LaTeX Info: Redefining \addtolength on input line 60.
 \calc@denominator=\count99
 )
-(c:/Programme/TeXLive/texmf/tex/latex/base/textcomp.sty
-Package: textcomp 2001/06/05 v1.94 Standard LaTeX package
+(C:\Programme\MikTeX\texmf\tex\latex\base\textcomp.sty
+Package: textcomp 2004/02/22 v1.99f Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 71.
 
-(c:/Programme/TeXLive/texmf/tex/latex/base/ts1enc.def
+(C:\Programme\MikTeX\texmf\tex\latex\base\ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
-))
-(c:/Programme/TeXLive/texmf/tex/latex/listings/listings.sty
-Package: listings 2003/06/21 1.1 (Carsten Heinz)
+)
+LaTeX Info: Redefining \oldstylenums on input line 266.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 281.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 282.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 283.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 284.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 285.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 286.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 287.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 288.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 289.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 290.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 291.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 292.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 293.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 294.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 295.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 296.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 297.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 298.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 299.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 300.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 301.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 302.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 303.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 304.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 305.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 306.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 307.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 308.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 309.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 310.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 311.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 312.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 313.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 314.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 315.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 316.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 317.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 318.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 319.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 320.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 321.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 322.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 323.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 324.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 325.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 326.
+)
+(C:\Programme\MikTeX\texmf\tex\latex\listings\listings.sty
 \lst@mode=\count100
 \lst@gtempboxa=\box30
 \lst@token=\toks21
@@ -269,331 +331,450 @@ Package: listings 2003/06/21 1.1 (Carsten Heinz)
 \c@lstlisting=\count106
 \lst@maxwidth=\dimen131
 
-(c:/Programme/TeXLive/texmf/tex/latex/listings/lstpatch.sty
-File: lstpatch.sty 2003/08/13 1.1c (Carsten Heinz)
+(C:\Programme\MikTeX\texmf\tex\latex\listings\lstpatch.sty
+File: lstpatch.sty 2004/09/07 1.3a (Carsten Heinz)
 )
-(c:/Programme/TeXLive/texmf/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2003/06/21 1.1 (Carsten Heinz)
+(C:\Programme\MikTeX\texmf\tex\latex\listings\lstmisc.sty
+File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
 \c@lstnumber=\count107
 \lst@skipnumbers=\count108
 \lst@framebox=\box31
 )
-(c:/Programme/TeXLive/texmf/tex/latex/listings/listings.cfg
-File: listings.cfg 2003/08/13 1.1a listings configuration
+(C:\Programme\MikTeX\texmf\tex\latex\listings\listings.cfg
+File: listings.cfg 2004/09/05 1.3 listings configuration
 ))
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/color.sty
+Package: listings 2004/09/07 1.3a (Carsten Heinz)
+
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\color.sty
 Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
 
-(c:/Programme/TeXLive/texmf/tex/latex/texlive/color.cfg
-File: color.cfg 2001/08/31 v1.1 color configuration of teTeX/TeXLive
+(C:\Programme\MikTeX\texmf\tex\latex\00miktex\color.cfg
+File: color.cfg 2003/03/08 v1.0 MiKTeX 'color' configuration
 )
 Package color Info: Driver file: dvips.def on input line 125.
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/dvipsnam.def
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\dvipsnam.def
 File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 ))
-(c:/Programme/TeXLive/texmf/tex/latex/listings/lstlang1.sty
-File: lstlang1 2003/08/13 1.1a listings language file
+(C:\Programme\MikTeX\texmf\tex\latex\listings\lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-(c:/Programme/TeXLive/texmf/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2003/06/21 1.1 (Carsten Heinz)
+(C:\Programme\MikTeX\texmf\tex\latex\listings\lstmisc.sty
+File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
 )
-(c:/Programme/TeXLive/texmf/tex/latex/misc209/psboxit.sty
+(C:\Programme\MikTeX\texmf\tex\latex\misc209\psboxit.sty
 \gray@box=\box32
 \gray@space=\dimen132
 )
 \@indexfile=\write3
-\openout3 = `ant_latex_howto.idx'.
-
 
 Writing index file ant_latex_howto.idx
 \c@source=\count109
 \tmplength=\skip54
-) (c:/Programme/TeXLive/texmf-local/tex/latex/mataDoc/giaGlossar.sty
+) (C:\localtexmf\tex\latex\mataDoc\giaGlossar.sty
 Package: giaGlossar 2002/08/02 v1.0b (C) 2002, Juergen A.Lamers, DokuTransData 
 Aachen
-
-Package: `giaGlossar' v1.0b <2002/08/02>
-         (C) 2002, Juergen A.Lamers, DokuTransData Aachen
-) (./local.cfg (c:/Programme/TeXLive/texmf/tex/generic/tex4ht/tex4ht.4ht
-version 2003-01-15-17:48
+) (local.cfg
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\tex4ht.4ht
+version 2004-10-12-14:48
+--------------------------------------
 --- Note --- for additional information, use the command line option `info'
+--------------------------------------
 
 ::::::::::::::::::::::::::::::::::::::::::
  TeX4ht info is available in the log file 
 ::::::::::::::::::::::::::::::::::::::::::
-) (c:/Programme/TeXLive/texmf/tex/generic/tex4ht/tex4ht.sty
-version 2003-05-21-09:13
+) (C:\Programme\MikTeX\texmf\tex\generic\tex4ht\tex4ht.sty
+version 2004-10-23-17:52
 
 --- needs --- tex4ht ant_latex_howto ---
 \tmp:cnt=\count110
-\openout15 = `ant_latex_howto.tmp'.
-
-(./ant_latex_howto.tmp)
+(ant_latex_howto.tmp)
 \tmp:toks=\toks22
 \tmp:dim=\skip55
- (./ant_latex_howto.xref)
+--------------------------------------
+--- Note --- for XML code, use the command line option `xml' or `xhtml'
+--------------------------------------
+ (ant_latex_howto.xref)
 \:refout=\write4
-\openout4 = `ant_latex_howto.xref'.
 
-
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
---- \Configure{PROLOG}{VERSION,DOCTYPE,*XML-STYLESHEET} ---
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
 --- Note --- to remove the DOCTYPE declaration use the command line option `no-
 DOCTYPE'
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 )
+--------------------------------------
 --- Note --- for marking of the base font, use the command line option `fonts+'
 
+--------------------------------------
+--------------------------------------
 --- Note --- for non active _, use the command line option `no_'
+--------------------------------------
+--------------------------------------
 --- Note --- for _ of catcode 13, use the command line option `_13'
---- Note --- for non actine ^, use the command line option `no^'
+--------------------------------------
+--------------------------------------
+--- Note --- for non active ^, use the command line option `no^'
+--------------------------------------
+--------------------------------------
 --- Note --- for ^ of catcode 13, use the command line option `^13'
+--------------------------------------
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
 --- Note --- for alternative charset, use the command line option `charset=...'
 
+--------------------------------------
+--------------------------------------
 --- Note --- for jpg bitmaps, use the `jpg' command line option
+--------------------------------------
+--------------------------------------
+--- Note --- for gif bitmaps, use the `gif' command line option
+--------------------------------------
+--------------------------------------
+--- Note --- for file extension name xht, use the command line option `xht'
+--------------------------------------
 TeX4ht package options: frames,4,png,html
+--------------------------------------
+--- Note --- for inline CSS code, use the command line option `css-in'
+--------------------------------------
+--------------------------------------
 --- Note --- for pop ups on mouse over, use the command line option `mouseover'
 
+--------------------------------------
+--------------------------------------
 --- Note --- for addressing images in a subdirectory, use the command line opti
 on `imgdir:.../'
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 )
 \:tokwrite=\toks23
 \:tokpage=\toks24
+--------------------------------------
 --- Note --- for back links to toc, use the command line option `sections+'
+--------------------------------------
+--------------------------------------
 --- Note --- for linear crosslinks of pages, use the command line option `next'
 
-\openout15 = `ant_latex_howto.4ct'.
-
+--------------------------------------
 \:tocout=\write5
-\openout5 = `ant_latex_howto.4tc'.
 
-
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/latex.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\latex.4ht
+version 2004-11-04-14:29
+--------------------------------------
 --- Note --- for links into captions, instead of float heads, use the command l
 ine option `refcaption'
+--------------------------------------
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
---- Note --- for stricter html code, use the command line option `html+'
---- Note --- for inline footnotes use command line option `fn-in'
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
+--- Note --- for enumerated list elements li's without value attributes, use th
+e command line option `li-'
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial tabular, use the command line option `pic-tabular'
+--------------------------------------
+--------------------------------------
 --- Note --- for bitmap fbox'es, use the command line option `pic-fbox'
+--------------------------------------
+--------------------------------------
 --- Note --- for bitmap framebox'es, use the command line option `pic-framebox'
 
+--------------------------------------
+--------------------------------------
+--- Note --- for inline footnotes use command line option `fn-in'
+--------------------------------------
+--------------------------------------
+--- Note --- for a JavaHelp output format, use the command line option `javahel
+p'
+--------------------------------------
+--------------------------------------
 --- Note --- for tracing of latex font commands, use the command line option `f
 onts'
+--------------------------------------
+--------------------------------------
+--- Note --- for width specifications of tabular p entries, use the `p-width' c
+ommand line option or a configuration similar to \Configure{HColWidth}{\HCode{ 
+style="width:\HColWidth"}}
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
+--------------------------------------
+--- Note --- for pictorial eqnarray, use the command line option `pic-eqnarray'
+
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
+--------------------------------------
 --- Note --- for pictorial $...$ environments, use the command line option `pic
 -m' (not recommended!!)
+--------------------------------------
+--------------------------------------
 --- Note --- for pictorial $...$ and $$...$$ environments with latex alt, use t
 he command line option `pic-m+' (not safe!!)
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/fontmath.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\fontmath.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/scrartcl.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\scrartcl.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/article.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\article.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
 --- Note --- for tocs without * entries, use command line option `notoc*'
+--------------------------------------
+--------------------------------------
 --- Note --- for tocs without * entries, use command line option `notoc*'
+--------------------------------------
+--------------------------------------
 --- Note --- for tocs without * entries, use command line option `notoc*'
+--------------------------------------
+--------------------------------------
 --- Note --- to eliminate mini tables of contents, use the command line option 
 `nominitoc'
+--------------------------------------
+--------------------------------------
 --- Note --- to eliminate mini tables of contents, use the command line option 
 `nominitoc'
+--------------------------------------
+--------------------------------------
+--- Note --- for i-columns index, use the command line option `index=i' (e.g., 
+index=2)
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/inputenc.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\inputenc.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/latin1.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\latin1.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/float.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\float.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/makeidx.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\makeidx.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/german.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\german.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/array.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\array.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/graphics.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\graphicx.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+)
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
+))
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\graphics.4ht
+version 2004-11-04-14:29
+
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
 --- Note --- if included graphics are of degraded quality, try the command line
- option `graphics-'
+ options `graphics-num' or `graphics-'. The `num' should provide the density of
+ pixels in the bitmaps (e.g., 110). 
+--------------------------------------
+--------------------------------------
+--- Note --- for key dimensions try the option `Gin-dim'; for key dimensions wh
+en bounding box is unavailable try `Gin-dim+'; neither is recommended
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/supertabular.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\dvips.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/hyperref.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\supertabular.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/url.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\hyperref.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+l.317 --- TeX4ht warning --- \href of hyperref.sty introduces the prefix `file:
+' to prefix-free references. The command \hyperlinkfileprefix{...} may be used 
+for changing the prefix (probably \hyperlinkfileprefix{}). ---
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/verbatimfiles.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\url.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/listings.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\verbatimfiles.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+)
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
+))
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\listings.4ht
+version 2004-11-04-14:29
+
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
+--------------------------------------
 --- Note --- to ensure proper alignments use fixed size fonts (see listings.dtx
 )
+--------------------------------------
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/color.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\color.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/dvipsnam.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\dvipsnam.4ht
+version 2004-11-04-14:29
 
-(c:/Programme/TeXLive/texmf/tex/latex/graphics/dvipsnam.def)
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\latex\graphics\dvipsnam.def)
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/th4.4ht
-version 2003-06-12-23:54
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\th4.4ht
+version 2004-11-04-14:29
+--------------------------------------
 --- Note --- for javascript support, use the command line option `javascript'
+--------------------------------------
+--------------------------------------
 --- Note --- for java support, use the command line option `java'
+--------------------------------------
+--------------------------------------
 --- Note --- for image maps support, use the command line option `image-maps'
+--------------------------------------
+--------------------------------------
 --- Note --- for frames support, use the command line option `frames-' or `fram
 es'
+--------------------------------------
 
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4.4ht
+version 2004-11-04-13:16
 )
-(c:/Programme/TeXLive/texmf/tex/generic/tex4ht/html4-math.4ht
-version 2003-06-04-21:57
+(C:\Programme\MikTeX\texmf\tex\generic\tex4ht\html4-math.4ht
+version 2004-11-04-13:16
 ))
-(./ant_latex_howto.aux (./appendix.aux))
-\openout1 = `ant_latex_howto.aux'.
-
+(ant_latex_howto.aux (appendix.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 2.
@@ -611,7 +792,7 @@ LaTeX Font Info:    ... okay on input line 2.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 2.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 2.
 
-(c:/Programme/TeXLive/texmf/tex/latex/base/ts1cmr.fd
+(C:\Programme\MikTeX\texmf\tex\latex\base\ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 2.
@@ -667,7 +848,7 @@ LaTeX Info: Redefining \pageref on input line 2.
 
 ]
 --- file ant_latex_howto2.html ---
- (./ant_latex_howto.4ct) [2]
+ (ant_latex_howto.4ct) [2]
 --- file ant_latex_howto3.html ---
 ) [1
 
@@ -676,65 +857,70 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <17.28> on input line 130.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 130.
- (./disclaimer.tex (./abstract.tex))
-(./script.tex
+ (disclaimer.tex (abstract.tex))
+(script.tex
 --- file ant_latex_howtose1.html ---
  [1
 
 ] [2]
 --- file ant_latex_howtose2.html ---
- (./ant_latex_howto.4ct)
+ (ant_latex_howto.4ct)
 --- file ant_latex_howtosu1.html ---
  [3
 
 ] [4]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 64.
+(Font)              <8> on input line 69.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 64.
- [5] [6] [7]
+(Font)              <6> on input line 69.
+ [5] [6] [7] [8]
 --- file ant_latex_howto7.html ---
- [8
-
-] [9]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 185.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 185.
+ [9] [10]
 --- file ant_latex_howtosu2.html ---
 
-[10
+l.200 --- TeX4ht warning --- \Link{tailant_latex_howtosu2.html}? ---
+[11
 
-] [11] [12]
+] [12] [13]
 
 LaTeX Font Warning: Font shape `OT1/cmss/bx/sc' undefined
-(Font)              using `OT1/cmss/bx/n' instead on input line 232.
+(Font)              using `OT1/cmss/bx/n' instead on input line 273.
 
-[13] [14]) [15]
-\openout2 = `appendix.aux'.
+[14] [15] [16]) [17] [18] (appendix.tex [19
 
- (./appendix.tex [16
+] [20
 
-] [17
+] (entwicklungsgeschichte.tex
+--- file ant_latex_howtose3.html ---
+
+[21
+
+]) [22]
+--- file ant_latex_howtose4.html ---
+ (beispiele/build.xml [23
+
+]) (beispiele/build.properties [24])
+(beispiele/latex.xml [25] [26] [27] [28] [29])) [30] [31
+
+] [32
 
 ]
---- file ant_latex_howtose3.html ---
- (./beispiele/build.xml [18
-
-])
-(./beispiele/build.properties [19]) (./beispiele/latex.xml [20] [21] [22]
-[23])) [24] [25
-
-] [26
-
-] (./ant_latex_howto.aux (./appendix.aux))
+(ant_latex_howto.aux (appendix.aux))
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 9007 strings out of 95619
- 121618 string characters out of 1192068
- 264028 words of memory out of 1712211
- 11748 multiletter control sequences out of 10000+50000
- 9973 words of font info for 37 fonts, out of 1000000 for 2000
- 103 hyphenation exceptions out of 1000
- 42i,10n,74p,757b,551s stack positions out of 5000i,500n,6000p,200000b,40000s
+ 9933 strings out of 95901
+ 123845 string characters out of 1194854
+ 289505 words of memory out of 1284585
+ 12270 multiletter control sequences out of 60000
+ 10320 words of font info for 38 fonts, out of 1000000 for 2000
+ 14 hyphenation exceptions out of 4999
+ 42i,11n,74p,749b,627s stack positions out of 5000i,500n,10000p,200000b,32768s
 
-Output written on ant_latex_howto.dvi (30 pages, 120928 bytes).
+Output written on ant_latex_howto.dvi (36 pages, 150216 bytes).

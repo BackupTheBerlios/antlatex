@@ -2,14 +2,14 @@
     <echo message="Please run: $ ant -v -projecthelp"/>
 </target>
 
-<property name="version" value="0.0.4"/>
+<property name="version" value="0.0.6"/>
 
 <target name="dist" description="Fuer die Distribution aufbereiten">
   <copy file="C:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar" tofile="dist/ant_latex_${version}.jar">
   </copy>
 </target>
 
-  <target name="createHTMLScript">
+  <target name="copyHTMLScript">
     <move todir="dist/manual">
     <fileset dir="docs/howto/script" includes="*.html"/>
     <fileset dir="docs/howto/script" includes="*.css"/>
@@ -21,19 +21,23 @@
     </copy>
   </target>
 
-<target name="createIndexPage">
+<target name="copyIndexPage">
 <copy todir="dist">
 <fileset dir="docs/WebPage/" includes="index.html"/>
 </copy>
 </target>
 
-<target name="createApiPage">
+<target name="copyApiPage">
 <copy todir="dist/api">
 <fileset dir="docs/WebPage/api"/>
 </copy>
 </target>
 
-<target name="distAll" depends="dist, createHTMLScript, createIndexPage, createApiPage">
+<target name="distAll" depends="dist, copyHTMLScript, copyIndexPage, copyApiPage">
 <move file="docs/howto/script/ant_latex_howto.pdf" tofile="dist/ant_latex_howto.pdf"/>
+<copy tofile="dist/AUTHORS" file="AUTHORS"/>
+<copy tofile="dist/LICENSE" file="LICENSE"/>
+<copy tofile="dist/CREDITS" file="CREDITS"/>
+<copy tofile="dist/CHANGES" file="CHANGES"/>
 </target>
 
