@@ -57,6 +57,7 @@
 package de.dokutransdata.antlatex;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,10 +66,12 @@ import org.apache.tools.ant.types.FileSet;
 
 /**
  * Task for BibTeX
+ * 
  * @author jaloma
  */
 public class BibTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.4 $";
+
 	private String auxFile;
 
 	private String bibtexPath = "bibtex";
@@ -77,7 +80,33 @@ public class BibTeXTask extends SimpleExternalTask {
 
 	private int minCrossrefs = -1;
 
-	private boolean terse=false;
+	private boolean terse = false;
+
+	private boolean inLoop = false;
+	
+	public String toString() {
+		String txt = "";
+		txt += "BibTeX";
+		txt += " auxFile: "+auxFile;
+		txt += " minCrossrefs: "+minCrossrefs;
+		txt += " terse: "+terse;
+		txt += " inLoop: "+inLoop;
+		txt += " files: "+files;
+		return txt;
+	}
+	/**
+	 * @return Returns the inLoop.
+	 */
+	public final boolean isInLoop() {
+		return this.inLoop;
+	}
+
+	/**
+	 * @param inLoop The inLoop to set.
+	 */
+	public final void setInLoop(boolean inLoop) {
+		this.inLoop = inLoop;
+	}
 
 	/**
 	 * Callback-Methode um eingeschachtelte &lt;fileset&gt;-Elemente einfügen zu
@@ -90,6 +119,9 @@ public class BibTeXTask extends SimpleExternalTask {
 		files.add(f);
 	}
 
+	public List getFiles() {
+		return files;
+	}
 	public final void execute() throws BuildException {
 		// get the fileset with full qualified pathname!
 		for (int i = 0; i < files.size(); i++) {
@@ -101,7 +133,17 @@ public class BibTeXTask extends SimpleExternalTask {
 					continue;
 				}
 				String fname = new String(localDir + File.separator + fnames[k]);
-				auxFile = fname;
+				File f = new File(fname);
+				String mFile = fname;
+				try {
+					mFile = f.getCanonicalPath();
+					int idx = mFile.lastIndexOf(".aux");
+					mFile = mFile.substring(0, idx);
+				} catch (IOException e) {
+					// TODO: handle exception
+					System.err.println(e.getLocalizedMessage());
+				}
+				auxFile = mFile;
 				run();
 			}
 		}

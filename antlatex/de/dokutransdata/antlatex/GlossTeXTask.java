@@ -67,7 +67,7 @@ import org.apache.tools.ant.types.FileSet;
  *
  */
 public class GlossTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
 
 	private String auxFile;
 
@@ -197,4 +197,12 @@ public class GlossTeXTask extends SimpleExternalTask {
 		verboseLevel = newValue;
 	}
 
+	public String toString() {
+		String txt = "";
+		txt += "GlossTeX";
+		txt += " auxFile: "+auxFile;
+		txt += " verbose Level: "+verboseLevel;
+		txt += " files: "+files;
+		return txt;
+	}
 }

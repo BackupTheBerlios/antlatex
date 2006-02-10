@@ -70,7 +70,7 @@ import org.apache.tools.ant.types.FileSet;
  * 
  */
 public class MakeindexTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.3 $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
 
 	private List files = new ArrayList();
 
@@ -122,6 +122,22 @@ public class MakeindexTask extends SimpleExternalTask {
 	public void setPageRangeFormation(boolean flag) {
 		pageRangeFormation = flag;
 	}
+	
+	private boolean inLoop = true;
+
+	/**
+	 * @return Returns the inLoop.
+	 */
+	public final boolean isInLoop() {
+		return this.inLoop;
+	}
+
+	/**
+	 * @param inLoop The inLoop to set.
+	 */
+	public final void setInLoop(boolean inLoop) {
+		this.inLoop = inLoop;
+	}
 
 	/**
 	 * 
@@ -135,6 +151,13 @@ public class MakeindexTask extends SimpleExternalTask {
 	public MakeindexTask() {
 		outFile = null;
 		protocolFile = null;
+	}
+
+	/**
+	 * @return Returns the files.
+	 */
+	public final List getFiles() {
+		return this.files;
 	}
 
 	/**
@@ -287,5 +310,18 @@ public class MakeindexTask extends SimpleExternalTask {
 	 */
 	public void setProtocolFile(String newValue) {
 		protocolFile = newValue;
+	}
+	
+	public String toString() {
+		String txt = "";
+		txt += "makeindex";
+		txt += " compress blanks: "+compressIntermediateBlanks;
+		txt += " starting Page: "+ startingPageNumber;
+		txt += " page Range: "+pageRangeFormation;
+		txt += " letter Order: "+letterOrder;
+		txt += " german: "+germanWordOrder;
+		txt += " inLoop: "+inLoop;
+		txt += " files: "+files;
+		return txt;
 	}
 }

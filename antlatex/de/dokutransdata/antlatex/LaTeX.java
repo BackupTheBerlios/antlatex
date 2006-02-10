@@ -56,6 +56,7 @@ package de.dokutransdata.antlatex;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tools.ant.BuildException;
@@ -71,11 +72,11 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.6 $";
 
-	static final String VERSION = "0.0.6";
+	static final String VERSION = "0.0.7";
 
-	static final String BUILD = "2";
+	static final String BUILD = "1";
 
 	/**
 	 * BibTeX-Task
@@ -91,6 +92,12 @@ public class LaTeX extends SimpleExternalTask {
 	 * figbib-Schalter
 	 */
 	private boolean figbib = false;
+
+	/**
+	 * gloss-Schalter (Glossar mit Hilfe von BibTeX)
+	 */
+	private boolean glossbib = false;
+
 	/**
 	 * Schalter zum Aufraeumen.
 	 */
@@ -124,6 +131,23 @@ public class LaTeX extends SimpleExternalTask {
 	private GlossTeX jxGlosstex;
 
 	private List files = new ArrayList();
+
+	private List bibtexs = new ArrayList();
+
+	public BibTeXTask createBibtex() {
+		BibTeXTask msg = new BibTeXTask();
+		bibtexs.add(msg);
+		return msg;
+	}
+	
+	private List makeindexs = new ArrayList();
+	
+	public MakeindexTask createMakeindex() {
+		MakeindexTask msg = new MakeindexTask();
+		makeindexs.add(msg);
+		return msg;
+	}
+	
 
 	/**
 	 * Hauptdokument mit Erweiterung (tex|ltx)
@@ -160,9 +184,10 @@ public class LaTeX extends SimpleExternalTask {
 	 */
 	private boolean pdftex;
 
-	private String reRunPattern = "(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term |There were undefined references)";
+	private String reRunPattern = "(Rerun (LaTeX|to get cross-references right)|Package glosstex Warning: Term |There were undefined references|Package natbib Warning: Citation\\(s\\) may have changed)";
 
 	private String passThruLaTeXParameters = null;
+
 	/**
 	 * Initialisierung (verbose = false, pdftex = false, clean = false)
 	 */
@@ -184,6 +209,11 @@ public class LaTeX extends SimpleExternalTask {
 		jxGlosstex = null;
 		tempFiles = null;
 
+		figbib = false;
+		glossbib = false;
+		multibib = false;
+
+		bibtexs = new ArrayList();
 	}
 
 	private Delete createDefaultDelete() {
@@ -232,13 +262,13 @@ public class LaTeX extends SimpleExternalTask {
 	 * 
 	 * @return Makeindex-Task
 	 */
-	public Object createMakeindex() {
-		makeindex = new MakeindexTask();
-		if (verbose) {
-			log("Index is created " + makeindex);
-		}
-		return makeindex;
-	}
+//	public Object createMakeindex() {
+//		makeindex = new MakeindexTask();
+//		if (verbose) {
+//			log("Index is created " + makeindex);
+//		}
+//		return makeindex;
+//	}
 
 	/**
 	 * Callback-Methode um eingeschachtelte &lt;fileset&gt;-Elemente einfügen zu
@@ -256,14 +286,13 @@ public class LaTeX extends SimpleExternalTask {
 	 * 
 	 * @return BibTeX-Task
 	 */
-	public Object createBibtex() {
-		bibtex = new BibTeXTask();
-		if (verbose) {
-			log("BibTex is created " + bibtex);
-		}
-		return bibtex;
-	}
-
+	// public Object createBibtex() {
+	// bibtex = new BibTeXTask();
+	// if (verbose) {
+	// log("BibTex is created " + bibtex);
+	// }
+	// return bibtex;
+	// }
 	/**
 	 * Callback-Methode fuer Ant
 	 * 
@@ -305,11 +334,14 @@ public class LaTeX extends SimpleExternalTask {
 		log("verbose      = " + verbose);
 		log("multibib     = " + multibib);
 		log("figbib       = " + figbib);
+		log("glossbib     = " + glossbib);
 		log("pdftex       = " + pdftex);
 		log("clean        = " + clean);
 		log("tempFiles    = " + tempFiles);
 		log("bibtex       = " + bibtex);
+		log("bibtexs      = " + bibtexs);
 		log("makeindex    = " + makeindex);
+		log("makeindexs   = " + makeindexs);
 		log("glosstex     = " + glosstex);
 		log("jxglosstex   = " + jxGlosstex);
 		log("others       = " + passThruLaTeXParameters);
@@ -371,11 +403,52 @@ public class LaTeX extends SimpleExternalTask {
 			dump();
 		}
 		runLaTeX();
-		if (bibtex != null) {
-			runBibTeX();
+		/* Sammeln bzw. ausfuehren von BibTeX-Tasks */ 
+		List inLoopBibTeX = new ArrayList();
+		for (Iterator it = bibtexs.iterator(); it.hasNext();) { // 4
+			BibTeXTask bibTask = (BibTeXTask) it.next();
+			/* Der BibTeX-Aufruf muss in der Schleife aufgerufen werden, da evtl. Seitenreferenzen benutzt werden. */
+			if (bibTask.isInLoop()) {
+				inLoopBibTeX.add(bibTask);
+				continue;
+			}
+			/* Ist kein Fileset-Element vorhanden wird der normale BibTeX-Aufruf benutzt. */
+			if (bibTask.getFiles().isEmpty()) {
+				bibtex = bibTask;
+				runBibTeX();
+				bibtex = null;
+			} else {
+				bibTask.execute();
+			}
 		}
+		
+		/* Sammeln bzw. ausfuehren von Makeindex-Tasks */ 
+		List inLoopMakeindex = new ArrayList();
+		for (Iterator it = makeindexs.iterator(); it.hasNext();) { // 4
+			MakeindexTask makeindexTask = (MakeindexTask) it.next();
+			/* Der Makeindex-Aufruf muss in der Schleife aufgerufen werden, da evtl. Seitenreferenzen benutzt werden. */
+			if (makeindexTask.isInLoop()) {
+				inLoopMakeindex.add(makeindexTask);
+				continue;
+			}
+			/* Ist kein Fileset-Element vorhanden wird der normale Makindex-Aufruf benutzt. */
+			if (makeindexTask.getFiles().isEmpty()) {
+				makeindex = makeindexTask;
+				runMakeIndex();
+				makeindex = null;
+			} else {
+				makeindexTask.execute();
+			}
+		}
+
+//		if (bibtex != null) {
+//			runBibTeX();
+//		}
 		if (figbib) {
 			runFigBib();
+		}
+		if (glossbib) {
+			runGlossBib();
 		}
 		if (jxGlosstex != null) {
 			runJxGlossTeX();
@@ -386,9 +459,30 @@ public class LaTeX extends SimpleExternalTask {
 			if (glosstex != null) {
 				runGlossTeX();
 			}
-			if (makeindex != null) {
-				runMakeIndex();
+//			if (makeindex != null) {
+//				runMakeIndex();
+//			}
+			for (Iterator it = inLoopBibTeX.iterator(); it.hasNext();) {
+				BibTeXTask bibTask = (BibTeXTask) it.next();
+				if (bibTask.getFiles().isEmpty()) {
+					bibtex = bibTask;
+					runBibTeX();
+				} else {
+					bibTask.execute();
+				}
 			}
+			for (Iterator it = inLoopMakeindex.iterator(); it.hasNext();) { // 4
+				MakeindexTask makeindexTask = (MakeindexTask) it.next();
+				/* Ist kein Fileset-Element vorhanden wird der normale Makindex-Aufruf benutzt. */
+				if (makeindexTask.getFiles().isEmpty()) {
+					makeindex = makeindexTask;
+					runMakeIndex();
+					makeindex = null;
+				} else {
+					makeindexTask.execute();
+				}
+			}
+			
 			runLaTeX();
 			if (verbose) {
 				log("Check references!");
@@ -419,7 +513,7 @@ public class LaTeX extends SimpleExternalTask {
 
 	/**
 	 * Aufruf von BibTeX mit den 'BibTeX'-figbib-Dateien.
-	 * 
+	 * @deprecated
 	 * @return Erfolgsmeldung von BibTeX
 	 * @throws BuildException
 	 */
@@ -427,7 +521,7 @@ public class LaTeX extends SimpleExternalTask {
 		BibTeXTask figBibtex = new BibTeXTask();
 		figBibtex.setVerbose(verbose);
 		figBibtex.antTask = this;
-		String mFile = mainFile+".figbib";
+		String mFile = mainFile + ".figbib";
 		String figBibFile = mFile;
 		if (auxDir != null || outputDir != null) {
 			File f;
@@ -448,7 +542,39 @@ public class LaTeX extends SimpleExternalTask {
 		figBibtex.setAuxFile(mFile);
 		return figBibtex.run();
 	}
-	
+
+	/**
+	 * Aufruf von BibTeX mit den 'BibTeX'-gloss-Dateien.
+	 * @deprecated
+	 * @return Erfolgsmeldung von BibTeX
+	 * @throws BuildException
+	 */
+	private final int runGlossBib() throws BuildException {
+		BibTeXTask glossBibtex = new BibTeXTask();
+		glossBibtex.setVerbose(verbose);
+		glossBibtex.antTask = this;
+		String mFile = mainFile + ".gls";
+		String figBibFile = mFile;
+		if (auxDir != null || outputDir != null) {
+			File f;
+			if (auxDir != null) {
+				f = new File(auxDir, figBibFile + ".aux");
+			} else {
+				f = new File(outputDir, figBibFile + ".aux");
+			}
+			try {
+				mFile = f.getCanonicalPath();
+				int idx = mFile.lastIndexOf(".aux");
+				mFile = mFile.substring(0, idx);
+			} catch (IOException ie) {
+				log(mFile + ie.getLocalizedMessage());
+				return 0;
+			}
+		}
+		glossBibtex.setAuxFile(mFile);
+		return glossBibtex.run();
+	}
+
 	/**
 	 * Aufruf des BibTeX-Tasks, verbose-Option des Haupttasks wird uebernommen.
 	 * 
@@ -536,10 +662,13 @@ public class LaTeX extends SimpleExternalTask {
 			mFile = new File(auxDir, mainFile + ".aux");
 		} else if (outputDir != null) {
 			mFile = new File(outputDir, mainFile + ".aux");
+		} else if (workingDir != null) {
+			mFile = new File(workingDir, mainFile + ".aux");
+			jxGlosstex.setWorkingDir(workingDir);
 		}
 		jxGlosstex.setAuxFile(mFile);
 		jxGlosstex.setVerbose(verbose);
-		//jxGlosstex.setQuiet(!verbose);
+		// jxGlosstex.setQuiet(!verbose);
 		jxGlosstex.antTask = this;
 
 		jxGlosstex.execute();
@@ -552,7 +681,7 @@ public class LaTeX extends SimpleExternalTask {
 	 * @return 0 fuer gefunden, <>0 nicht gefunden.
 	 * 
 	 */
-	private int runGrep() {
+	private final int runGrep() {
 		if (verbose) {
 			log("Check " + reRunPattern);
 		}
@@ -574,7 +703,7 @@ public class LaTeX extends SimpleExternalTask {
 		String args[] = { reRunPattern, lfile };
 		int res = 0;
 		try {
-			res = Grep1.doit(args,verbose);
+			res = Grep1.doit(args, verbose);
 		} catch (Exception e) {
 
 		}
@@ -600,7 +729,8 @@ public class LaTeX extends SimpleExternalTask {
 		if (outputDir != null && !outputDir.equals("")) {
 			lp.setOutputdir(outputDir);
 		}
-		if (passThruLaTeXParameters != null && !passThruLaTeXParameters.equals("")) {
+		if (passThruLaTeXParameters != null
+				&& !passThruLaTeXParameters.equals("")) {
 			lp.setPassThruLaTeXParameters(passThruLaTeXParameters);
 		}
 		if (thePath != null && !thePath.equals("")) {
@@ -735,7 +865,8 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	/**
-	 * @param passThruLaTeXParameters The passThruLaTeXParameters to set.
+	 * @param passThruLaTeXParameters
+	 *            The passThruLaTeXParameters to set.
 	 */
 	public final void setPassThruLaTeXParameters(String passThruLaTeXParameters) {
 		this.passThruLaTeXParameters = passThruLaTeXParameters;
@@ -749,10 +880,26 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	/**
-	 * @param figbib The figbib to set.
+	 * @param figbib
+	 *            The figbib to set.
 	 */
 	public final void setFigbib(boolean figbib) {
 		this.figbib = figbib;
+	}
+
+	/**
+	 * @return Returns the glossbib.
+	 */
+	public final boolean isGlossbib() {
+		return glossbib;
+	}
+
+	/**
+	 * @param glossbib
+	 *            The glossbib to set.
+	 */
+	public final void setGlossbib(boolean glossbib) {
+		this.glossbib = glossbib;
 	}
 
 }
