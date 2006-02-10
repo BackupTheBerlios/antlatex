@@ -14,12 +14,13 @@ liststotoc,  % Verzeichnisse (Abbildungen/Tabellen) im Inhaltsverzeichnis auffüh
 twoside,     % Zweiseitiger Druck
 pointlessnumbers, % Kapitelnummern ohne abschliessenden Punkt
 %openright,   % Kapitel öffnen immer auf der rechten Seite, wenn auf Report umgeschaltet wird 
-%titlepage,   % Eigenständige Titelseite (spez. für Artikel einschalten)
-%abstracton,  % Zusammenfassung ist ein betitelter Abschnitt
+titlepage,   % Eigenständige Titelseite (spez. für Artikel einschalten)
+abstracton,  % Zusammenfassung ist ein betitelter Abschnitt
 german]{scrartcl}%{scrreprt}% Wenn auf Report umgeschaltet wird, muss
                  %evtl. von Section auf Chapter umgeschaltet werden!
 \usepackage[latin1]{inputenc}
-\usepackage[left=20mm]{geometry}
+\usepackage[left=20mm,bottom=40mm
+]{geometry}
 \usepackage{float,makeidx,german,array,graphicx,bibgerm,texnames}
 % float = Figures/Tables koennen mit [H] genau an dieser Stelle positioniert
 % werden.

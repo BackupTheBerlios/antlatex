@@ -1,7 +1,7 @@
 \section{Motivation}
 \label{sec:intro}
 
-Ich erstelle halt meine Dokumentation in erster Linie mit \LaTeX{} und
+Ich erstelle meine Dokumentation in erster Linie mit \LaTeX{} und
 der Wechsel zu Ant sollte natürlich so leicht wie möglich gemacht
 werden \ldots Also ging es daran ein Tool zu suchen, dass \LaTeX{} in
 Ant einbindet. Es wurde auch eines gefunden: \code{anttex\_1.0}, nur
@@ -14,14 +14,14 @@ achten, dies gilt insbesondere bei \GlossTeX{} zubeachten!.
 Deswegen musste ich eine eigene Lösung entwickeln:
 
 \begin{itemize}
-\item Lässt optional BibTeX laufen
+\item Lässt optional \BibTeX{} laufen
 \item Lässt optional MakeIndex laufen
 \item Lässt optional (jx)\GlossTeX{} laufen
 \item Die drei vorgenannten Prozesse sind einmal integriert in einem
-        LaTeX-Lauf oder können als eigene Tasks definiert werden.
-\item PDFLaTeX oder LaTeX als Prozessor auswählbar
+        \LaTeX-Lauf oder können als eigene Tasks definiert werden.
+\item PDF\LaTeX{} oder \LaTeX{} als Prozessor auswählbar
 \item \code{multibib} Bibliographien werden unterstützt.
-\item Die Erweiterung \code{figbib} für kommentierte Abbildungsverzeichnisse wird unterstüzt.
+\item Erweiterungen wie \code{figbib} oder \code{gloss} werden unterstüzt.
 \end{itemize}
 
 \section{Benutzung}
@@ -62,7 +62,6 @@ mit einem \code{exec}-Element erreicht werden können.
 
 \minisec{Attribute zum \LaTeX{}-Task}
 \noindent
-
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}%
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}%
@@ -87,7 +86,7 @@ mit einem \code{exec}-Element erreicht werden können.
 \multicolumn{2}{l}{\code{passThruLaTeXParameters}}\\
 & Sonstige Parameter für \LaTeX{} mit einem Semikolon getrennt. & Nein.\\
 \code{multibib} & Schalter für die Verwendung des Package \emph{multibib} & Nein. Default: off\\
-\code{figbib} & Schalter für die Vewendung des Package \emph{figbib} & Nein. Default: off\\
+%\code{figbib} & Schalter für die Vewendung des Package \emph{figbib} & Nein. Default: off. Veraltet!\\
 \end{supertabular}
 }
 
@@ -110,8 +109,8 @@ Der Standardwert für \code{reRunPattern} ist:%\\
 \begin{supertabular}{lp{19.5em}p{10em}}%
 \code{fileset} & Fileset-Element & Nein, das Attribut \code{latexfile} kann für eine einzelne Datei benutzt.\\
 \code{deletetempfiles} & Fileset-Element zum Löschen von temporären Dateien. Vorsicht: Überschreibt die internen Vorgaben! & Nein\\ 
-\code{makeindex} & Makeindex-Element & Nein\\
-\code{bibtex}    & \BibTeX{}-Element & Nein\\
+\code{makeindex} & Makeindex-Element & Nein. Multiple\\
+\code{bibtex}    & \BibTeX{}-Element & Nein. Multiple\\
 \code{jxGlosstex} &\\
 \code{glosstex}   & \GlossTeX{}-Element & Nein\\
 \end{supertabular}
@@ -164,6 +163,16 @@ eingebunden werden. Ein komplettes Beispiel finden Sie im Anhang.
         run="on"
         workingDir="${basedir}"
         />
+      <bibtex 
+        terse="${ltx2.bib.terse}" 
+        minCrossrefs="${ltx2.bib.minCrossrefs}"
+        run="on"
+        workingDir="${basedir}"
+        inloop="off"
+        >
+        <fileset dir="." includes="*.figbib.aux"/>
+      </bibtex>
+
 
       <glosstex
         glossarDefinitionFiles="${ltx2.gloss.databases}"
@@ -183,6 +192,13 @@ der Sub-Prozess aufgerufen werden soll. Bei den Sub-Prozessen werden
 die benötigten Input-Dateien durch den Hauptprozess gesetzt. Ausnahme
 bildet nur \code{makeindex}, wo ein gesetztes \code{fileset}-Element
 Vorrang bekommt\footnote{Dieser Hinweis stammt von Thomas Reuter}. 
+
+Mit dem mehrfach vorkommenenden Element \code{bibtex} und dem darin
+enthaltenen \code{fileset}-Element können unterschiedliche
+Styles wie \code{figbib}\footnote{Bilddatenbank mittels \BibTeX{}}
+oder \code{gloss}\footnote{Glossar mittels \BibTeX-Datenbanken}
+angebunden werden.
+
 
 Zu \code{glosstex} gibt es eine Alternative die auf einfache XML-Dateien
 basiert und folgenden Aufruf im \code{latex}-Element akzeptiert:
@@ -205,6 +221,11 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 \subsubsection{Makeindex}
 
 \begin{verbatim}
+  <taskdef name="makeindex"    classname="de.dokutransdata.antlatex.MakeindexTask"
+    classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
+\end{verbatim}
+
+\begin{verbatim}
 <target name="MakeIndex">
   <makeindex 
         compressIntermediateBlanks="${ltx2.idx.compressIntermediateBlanks}"
@@ -223,9 +244,9 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
   </makeindex>
 </target>
 \end{verbatim}
-%$
+%$$
 
-\bigskip
+%\bigskip
 \minisec{Attribute zum MakeIndex{}-Task}
 
 {
@@ -254,8 +275,14 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 
 Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{makeindex}!
 
-\bigskip
+%\bigskip
 \subsubsection{\BibTeX{}}
+
+\begin{verbatim}
+  <taskdef name="bibtex"    classname="de.dokutransdata.antlatex.BibTeXTask"
+    classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
+\end{verbatim}
+
 \begin{verbatim}
 <target name="BibTeX">
   <bibtex
@@ -266,7 +293,7 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
     <fileset dir="${basedir}">
       <include name="*.aux"/>
     </fileset>
-  </makeindex>
+  </bibtex>
 </target>
 \end{verbatim}
 
@@ -283,12 +310,19 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
 \code{run} & Ausführen innerhalb des \LaTeX{}-Tasks & Nein. Default: on\\
 \code{command} & Auszuführender Befehl & Nein. Default: bibtex\\
 \code{path} & Pfad zu \BibTeX{} & Nein. Default: leer\\
+\code{inloop} & Schalter ob \BibTeX{} in der ReRun-Schleife von \LaTeX{} aufgerufen werden soll & Nein. Default: off\\
 \end{supertabular}
 }
 
 Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{bibtex}!
 
 \subsubsection{GlossTeX}
+
+
+\begin{verbatim}
+  <taskdef name="glosstex"    classname="de.dokutransdata.antlatex.GlossTeXTask"
+    classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
+\end{verbatim}
 
 \begin{verbatim}
 <target name="GlossTeX">
@@ -307,7 +341,7 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
 </target>
 \end{verbatim}
 
-\bigskip
+%\bigskip
 \minisec{Attribute zum \GlossTeX{}-Task}
 
 {
@@ -325,14 +359,20 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
 \end{supertabular}
 }
 
-\medskip
+%\medskip
 Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \code{glosstex}!
 
-\medskip
+%\medskip
 Es muss natürlich \GlossTeX{} installiert sein ;-)
 
-\bigskip
+%\bigskip
 \subsubsection{jxGlossar}
+
+\begin{verbatim}
+  <taskdef name="jxGlossar"
+    classname="de.dokutransdata.glossar.tools.antasks.GlossTeX"
+    classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
+\end{verbatim}
 
 \begin{verbatim}
 <target name="jxGlossar">
@@ -348,6 +388,7 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \end{verbatim}
 %
 
+%\newpage
 \minisec{Attribute zum jxGlossar{}-Task}
 
 {
@@ -367,3 +408,8 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \end{supertabular}
 }
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant_latex_howto.ltx"
+%%% End: 
