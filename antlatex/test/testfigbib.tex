@@ -1,0 +1,37 @@
+\documentclass[german]{article}
+\usepackage[
+center, % Bilder grundsaetzlich zentrieren 
+]{figbib}
+\usepackage{ngerman,
+float}
+\usepackage[latin1]{inputenc}
+\title{\FigBib\ Sample File}
+\author{Jürgen A.\,Lamers}
+
+\begin{document}
+\maketitle
+
+\section*{The Text}
+
+% Der einfachste Weg um Bilder einzubinden.
+\fbEpsfig{abhaengigkeit2}{3cm}{H}
+
+In the second paragraph, nothing happens.
+
+% Etwas komplexer, siehe dazu Originaldoku (sofern, das als Dokumentation bezeichnen kann...)
+\begin{fbFloat}[H]
+  \fbEps{abhaengigkeit}{\textwidth}
+\end{fbFloat}
+
+Wie in Abbildung \fbref{abhaengigkeit} gezeigt gibt es Wunder...
+
+
+%\section{Abbildungen}
+\appendix
+\label{sec:abb}
+
+\fbTheFigs % Keine Ahnung aber wichtig!
+
+\fbList{figbib} % bilder = Name der BibTeX-Datei die die Definitionen enthaelt
+
+\end{document}

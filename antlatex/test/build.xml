@@ -1,8 +1,9 @@
 <project name="test">
+<property name="path2antLaTeX" value="c:/Programme/Apache Software Foundation/apache-ant/lib"/>
 	<taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX"
-		classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"/>
+		classpath="${path2antLaTeX}/ant_latex.jar"/>
 	<taskdef name="latexT" classname="de.dokutransdata.antlatex.LaTeXTask"
-		classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"/>
+		classpath="${path2antLaTeX}/ant_latex.jar"/>
 	
 	<target name="ltxfileset" depends="clean">
 		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}">
@@ -91,17 +92,66 @@
 </target>
 
 <target name="ltxWithGlossar">
-		<latex latexfile="testgloss.tex" verbose="on" pdftex="off" clean="on"
+		<latex latexfile="testjxglossar.tex" verbose="on" pdftex="off" clean="on"
 			>
 			<makeindex run="on" workingDir="${basedir}"/>
 			<bibtex run="on" workingDir="${basedir}"/>
       <jxGlosstex
-      dataFile="glossar.xml"
       maxdepth="2"
       language="de"
       run="on"
       />
 		</latex>
+</target>
+
+<target name="ltxWithGlossBib">
+<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="on">
+<bibtex verbose="on">
+<fileset dir="." includes="*.gls.aux"/>
+</bibtex>
+</latex>
+</target>
+
+
+<target name="ltxWithGlossBibOutputDir">
+<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output">
+<bibtex verbose="on">
+<fileset dir="output" includes="*.gls.aux"/>
+</bibtex>
+</latex>
+</target>
+
+
+<target name="ltxWithFigBib">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on">
+<bibtex verbose="on">
+<fileset dir="." includes="*.figbib.aux"/>
+</bibtex>
+</latex>
+</target>
+
+<target name="ltxWithFigBibOutputDirAuxDir">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output" auxDir="tmpfiles">
+<bibtex verbose="on">
+<fileset dir="output" includes="*.figbib.aux"/>
+</bibtex>
+</latex>
+</target>
+
+<target name="ltxWithFigBibOutputDir">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="off" outputDir="output">
+<bibtex verbose="on">
+<fileset dir="output" includes="*.figbib.aux"/>
+</bibtex>
+</latex>
+</target>
+
+<target name="ltxWithFigBibOutputDirAuxDir">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="off" outputDir="output" auxDir="tmpfiles">
+<bibtex verbose="on">
+<fileset dir="tmpfiles" includes="*.figbib.aux"/>
+</bibtex>
+</latex>
 </target>
 
 	<target name="clean">
