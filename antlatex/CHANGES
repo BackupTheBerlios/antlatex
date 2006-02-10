@@ -10,6 +10,13 @@
 
  
  
+* 0.0.7 (2006-02-09) 
+          
+*         Es können jetzt mehrere BibTEX-Aufrufe im LATEX-Task
+        eingetragen werden, mit dem Schalter inloop kann gesteuert
+        werden, ob BibTEX in der LATEX-Schleife aufgerufen werden
+        soll.
+         
 * 0.0.6_2 (2006-01-12) 
           
 *         path-Attribut für den Pfad zu (PDF)LATEX darf nicht
