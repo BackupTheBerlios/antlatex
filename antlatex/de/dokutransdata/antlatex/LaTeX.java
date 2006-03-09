@@ -72,7 +72,7 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
-	public static final String RCS_ID = "Version @(#) $Revision: 1.6 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.7 $";
 
 	static final String VERSION = "0.0.7";
 
@@ -583,6 +583,8 @@ public class LaTeX extends SimpleExternalTask {
 	 * @throws BuildException
 	 */
 	private final int runBibTeX() throws BuildException {
+		if (bibtex == null) { return 0; }
+		if (!bibtex.getRun()) { return 0; }
 		bibtex.setVerbose(verbose);
 		bibtex.antTask = this;
 
@@ -634,6 +636,7 @@ public class LaTeX extends SimpleExternalTask {
 		// glosstex $(MAIN) $(GLOSSSOURCE) ;
 		// $(MAKEINDEX) $(MAIN).gxs -o
 		// $(MAIN).glx -t $(MAIN).gil -s $(GLXIST); fi
+		if (!glosstex.getRun()) { return 0; }
 
 		if (auxDir != null) {
 			glosstex.setWorkingDir(auxDir);
@@ -750,6 +753,8 @@ public class LaTeX extends SimpleExternalTask {
 	 * @throws BuildException
 	 */
 	private final int runMakeIndex() throws BuildException, IOException {
+		if (makeindex == null) { return 0; }
+		if (!makeindex.getRun()) { return 0; }
 		List args = new ArrayList();
 		String mFile = mainFile;
 		if (auxDir != null || outputDir != null) {
