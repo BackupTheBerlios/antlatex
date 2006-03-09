@@ -74,7 +74,7 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class LaTeXTask extends SimpleExternalTask {
 
-	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.6 $";
 
 	private String latexfile;
 
@@ -162,20 +162,20 @@ public class LaTeXTask extends SimpleExternalTask {
 		if (jobname != null && !jobname.equals("")) {
 			args.add("-job-name=" + jobname);
 		}
-		if (outputDir != null) {
+		if (outputDir != null && !outputDir.equals("")) {
 			String oDir = outputDir.getCanonicalPath();
 			oDir = oDir.replace('\\', '/');
 			args.add("-output-directory=" + oDir);
 		}
 
-		if (auxDir != null) {
+		if (auxDir != null && !auxDir.equals("")) {
 			String oDir = auxDir.getCanonicalPath();
 			oDir = oDir.replace('\\', '/');
 			args.add("-aux-directory=" + oDir);
 		}
 		args.add("-interaction=nonstopmode");
 
-		if (passThruLaTeXParameters != null) {
+		if (passThruLaTeXParameters != null && !passThruLaTeXParameters.equals("")) {
 			String[] passThru = passThruLaTeXParameters.split(";");
 			for (int i = 0; i < passThru.length; i++) {
 				String newArg = passThru[i];
