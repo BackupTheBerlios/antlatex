@@ -70,7 +70,7 @@ import org.apache.tools.ant.types.FileSet;
  * 
  */
 public class MakeindexTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
 
 	private List files = new ArrayList();
 
@@ -107,7 +107,10 @@ public class MakeindexTask extends SimpleExternalTask {
 	/**
 	 * @param newValue Kann ein integer, 'any', 'even', 'odd' sein.
 	 */
-	public void setStartingPageNumber(String newValue) {
+	public void setStartingPageNumber(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		if (newValue.equals("any") || newValue.equals("odd")
 				|| newValue.equals("even") || newValue.equals("")) {
 			startingPageNumber = newValue;
@@ -194,6 +197,7 @@ public class MakeindexTask extends SimpleExternalTask {
 	}
 
 	public final void execute() throws BuildException {
+		if (!this.run) { return;}
 		run();
 	}
 
@@ -288,7 +292,10 @@ public class MakeindexTask extends SimpleExternalTask {
 	 * @param newValue
 	 *            Name der Styledatei
 	 */
-	public void setIdxStyle(String newValue) {
+	public void setIdxStyle(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		idxStyle = newValue;
 	}
 
@@ -298,7 +305,10 @@ public class MakeindexTask extends SimpleExternalTask {
 	 * @param newValue
 	 *            Name der Ausgabedatei
 	 */
-	public void setOutFile(String newValue) {
+	public void setOutFile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		outFile = newValue;
 	}
 
@@ -308,7 +318,10 @@ public class MakeindexTask extends SimpleExternalTask {
 	 * @param newValue
 	 *            Name der Datei
 	 */
-	public void setProtocolFile(String newValue) {
+	public void setProtocolFile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		protocolFile = newValue;
 	}
 	
