@@ -74,7 +74,12 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class LaTeXTask extends SimpleExternalTask {
 
-	public static final String RCS_ID="Version @(#) $Revision: 1.6 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.7 $";
+
+	/**
+	 * Gibt an ob es sich um eine MikTeX-Installation handelt.
+	 */
+	private boolean isMikTeX = false;
 
 	private String latexfile;
 
@@ -90,7 +95,15 @@ public class LaTeXTask extends SimpleExternalTask {
 
 	private String passThruLaTeXParameters = null;
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.apache.tools.ant.Task#execute()
+	 */
 	public final void execute() throws BuildException {
+		if (!this.run) {
+			return;
+		}
 		if (files.size() == 0 && (latexfile == null || latexfile.equals(""))) {
 			throw new BuildException("No files are given!");
 		}
@@ -143,7 +156,18 @@ public class LaTeXTask extends SimpleExternalTask {
 		return pdftex;
 	}
 
+	/**
+	 * Erstellt das Kommando (hier LaTeX(.exe)) und stellt die Argumente
+	 * zusammen.
+	 * 
+	 * @return Rückgabewert von invoke()
+	 * @throws BuildException
+	 * @throws IOException
+	 */
 	public final int run() throws BuildException, IOException {
+		if (!this.run) {
+			return 0;
+		}
 		List args = new ArrayList();
 		if (theCommand == null || theCommand.equals("")) {
 			if (pdftex) {
@@ -159,23 +183,24 @@ public class LaTeXTask extends SimpleExternalTask {
 		}
 		String command = theCommand;
 		latexfile = latexfile.replace('\\', '/');
-		if (jobname != null && !jobname.equals("")) {
+		if (jobname != null && isMikTeX && !jobname.equals("")) {
 			args.add("-job-name=" + jobname);
 		}
-		if (outputDir != null && !outputDir.equals("")) {
+		if (outputDir != null && isMikTeX && !outputDir.equals("")) {
 			String oDir = outputDir.getCanonicalPath();
 			oDir = oDir.replace('\\', '/');
 			args.add("-output-directory=" + oDir);
 		}
 
-		if (auxDir != null && !auxDir.equals("")) {
+		if (auxDir != null && isMikTeX && !auxDir.equals("")) {
 			String oDir = auxDir.getCanonicalPath();
 			oDir = oDir.replace('\\', '/');
 			args.add("-aux-directory=" + oDir);
 		}
 		args.add("-interaction=nonstopmode");
 
-		if (passThruLaTeXParameters != null && !passThruLaTeXParameters.equals("")) {
+		if (passThruLaTeXParameters != null
+				&& !passThruLaTeXParameters.equals("")) {
 			String[] passThru = passThruLaTeXParameters.split(";");
 			for (int i = 0; i < passThru.length; i++) {
 				String newArg = passThru[i];
@@ -197,22 +222,63 @@ public class LaTeXTask extends SimpleExternalTask {
 		return invoke(command, args);
 	}
 
-	public void setLatexfile(String newValue) {
+	/**
+	 * @param newValue
+	 *            Den Namen der LaTeX-Datei
+	 * @throws BuildException
+	 *             Wenn eine nicht ausgewertete Variable ${} als Dateiname
+	 *             übergeben wird.
+	 */
+	public void setLatexfile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable " + newValue + " is not set!");
+		}
 		latexfile = newValue;
 	}
 
-	public void setJobname(String newValue) {
+	/**
+	 * @param newValue
+	 *            Den Namen der Ausgabe-Datei (aka jobname)
+	 * @throws BuildException
+	 *             Wenn eine nicht ausgewertete Variable ${} als Dateiname
+	 *             übergeben wird.
+	 */
+	public void setJobname(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable " + newValue + " is not set!");
+		}
 		jobname = newValue;
 	}
 
-	public void setOutputdir(String newValue) {
+	/**
+	 * @param newValue
+	 *            Name des Ausgabe-Verzeichnisses. Darin müssen nicht unbedingt
+	 *            auch die temporären Dateien liegen. Bei der DVI-Ausgabe und
+	 *            Bildern, sollten die Pfade zu einander passen, ansonsten sind
+	 *            in der DVI-Datei keine Bilder zu sehen!
+	 * @throws BuildException
+	 *             Wenn eine nicht ausgewertete Variable ${} als Dateiname
+	 *             übergeben wird.
+	 */
+	public void setOutputdir(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable " + newValue + " is not set!");
+		}
 		outputDir = new File(newValue);
 	}
 
+	/**
+	 * @param newValue Name des Ausgabe-Verzeichnisses.
+	 * @see setOutputdir
+	 */
 	public void setOutputdir(File newValue) {
 		outputDir = newValue;
 	}
 
+	/**
+	 * Schaltet die Generierung von PDF ein bzw. aus.
+	 * @param newValue
+	 */
 	public void setPdftex(boolean newValue) {
 		pdftex = newValue;
 	}
@@ -243,7 +309,27 @@ public class LaTeXTask extends SimpleExternalTask {
 	 * @param passThruLaTeXParameters
 	 *            The passThruLaTeXParameters to set.
 	 */
-	public final void setPassThruLaTeXParameters(String passThruLaTeXParameters) {
+	public final void setPassThruLaTeXParameters(String passThruLaTeXParameters)
+			throws BuildException {
+		if (passThruLaTeXParameters.startsWith("${")) {
+			throw new BuildException("Variable " + passThruLaTeXParameters
+					+ " is not set!");
+		}
 		this.passThruLaTeXParameters = passThruLaTeXParameters;
+	}
+
+	/**
+	 * @return Returns the isMikTeX.
+	 */
+	public final boolean isMikTeX() {
+		return this.isMikTeX;
+	}
+
+	/**
+	 * @param isMikTeX
+	 *            The isMikTeX to set.
+	 */
+	public final void setMikTeX(boolean isMikTeX) {
+		this.isMikTeX = isMikTeX;
 	}
 }
