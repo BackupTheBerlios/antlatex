@@ -67,7 +67,7 @@ import org.apache.tools.ant.types.FileSet;
  *
  */
 public class GlossTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
+	public static final String RCS_ID="Version @(#) $Revision: 1.5 $";
 
 	private String auxFile;
 
@@ -107,12 +107,16 @@ public class GlossTeXTask extends SimpleExternalTask {
 		return makeindex;
 	}
 
-	public void addGlossarDefinitionFile(String newValue) {
+	public void addGlossarDefinitionFile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		glossarDefinitionFiles.add(newValue);
 	}
 
 	public final void execute() throws BuildException {
         // get the fileset with full qualified pathname!
+		if (!this.run) { return; }
         for (int i=0; i<files.size();i++ ) {
         	FileSet fs = (FileSet)files.get(i);
         	String[] fnames = fs.toString().split(";");
@@ -122,7 +126,7 @@ public class GlossTeXTask extends SimpleExternalTask {
         				File.separator+
         				fnames[k]);
         		int idx;
-        		System.err.println(fname);
+        		//System.err.println(fname);
         		String mainFile;
         		if ((idx = fname.lastIndexOf(".aux")) != -1) {
         			mainFile = fname.substring(0, idx);
@@ -151,6 +155,7 @@ public class GlossTeXTask extends SimpleExternalTask {
 //	GlossTeX comes with ABSOLUTELY NO WARRANTY. (C)opyright 1996, 97 Volkan Yavuz
 //	Usage: glosstex aux gdf0 [gdf1 ...] [-v[0-5]]
 	public final int run() throws BuildException {
+		if (!this.run) { return 0; }
 		if (makeindex == null) {
 			throw new BuildException("Makeindex is not defined, can not run glosstex");
 		}
@@ -178,7 +183,10 @@ public class GlossTeXTask extends SimpleExternalTask {
 		return makeindex.run();
 	}
 
-	public void setAuxFile(String newValue) {
+	public void setAuxFile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable "+newValue+" is not set!");
+		}
 		auxFile = newValue;
 	}
 
@@ -186,7 +194,10 @@ public class GlossTeXTask extends SimpleExternalTask {
 		glossarDefinitionFiles = newValues;
 	}
 
-	public void setGlossarDefinitionFiles(String newValues) {
+	public void setGlossarDefinitionFiles(String newValues) throws BuildException {
+		if (newValues.startsWith("${")) {
+			throw new BuildException("Variable "+newValues+" is not set!");
+		}
 		String[] dataFiles = newValues.split(" ");
 		for (int i =0; i<dataFiles.length; i++) {
 			this.addGlossarDefinitionFile(dataFiles[i]);
