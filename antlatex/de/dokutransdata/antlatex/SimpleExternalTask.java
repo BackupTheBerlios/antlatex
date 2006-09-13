@@ -71,12 +71,31 @@ import org.apache.tools.ant.taskdefs.LogStreamHandler;
  * @author jaloma
  * 
  */
+/**
+ * @author jaloma
+ *
+ */
+/**
+ * @author jaloma
+ *
+ */
+/**
+ * @author jaloma
+ *
+ */
 public class SimpleExternalTask extends Task {
+
+	/**
+	 * Stream-Handler der keinerlei Ausgaben tätigt!
+	 * 
+	 * @author jaloma
+	 * 
+	 */
 	class SilentStreamHandler implements ExecuteStreamHandler {
 
 		SilentStreamHandler() {
 		}
-		
+
 		public void setProcessErrorStream(InputStream inputstream) {
 		}
 
@@ -93,13 +112,31 @@ public class SimpleExternalTask extends Task {
 		}
 	}
 
-	public static final String RCS_ID="Version @(#) $Revision: 1.4 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.5 $";
+
+	/**
+	 * Arbeitsverzeichnis für den Task, wird normalerweise mit baseDir
+	 * gleichgesetzt.
+	 * 
+	 * @see baseDir
+	 */
 	protected File workingDir;
 
+	/**
+	 * Soll an den externen Task durchgereicht werden, damit dieser etwas
+	 * erzählt.
+	 */
 	protected boolean verbose = false;
 
+	/**
+	 * @deprecated
+	 */
 	protected String If = null;
 
+	/**
+	 * Schalter der bei geschachtelten Tasks regeln soll, ob der Task ausgeführt
+	 * wird oder nicht. Normalerweise wird der Task ausgeführt.
+	 */
 	protected boolean run = true;
 
 	public void setRun(boolean property) {
@@ -111,6 +148,9 @@ public class SimpleExternalTask extends Task {
 	}
 
 	public void setIf(String property) {
+		if (property.startsWith("${")) {
+			throw new BuildException("Variable " + property + " is not set");
+		}
 		If = property;
 	}
 
@@ -118,14 +158,24 @@ public class SimpleExternalTask extends Task {
 		return If;
 	}
 
+	/**
+	 * Kommando des auszuführenden Befehls (evtl. inklusive Pfad).
+	 */
 	protected String theCommand = null;
 
+	/**
+	 * Nur der Pfad zu einem bekannten Befehlt, wie z.B. LaTeX.
+	 */
 	protected String thePath = null;
 
+	/**
+	 * Ant-Umgebung zum Task.
+	 */
 	protected Task antTask;
 
 	public SimpleExternalTask() {
 		workingDir = null;
+		verbose = false;
 	}
 
 	public void setVerbose(boolean newValue) {
@@ -136,7 +186,10 @@ public class SimpleExternalTask extends Task {
 		workingDir = newValue;
 	}
 
-	public final void setCommand(String newValue) {
+	public final void setCommand(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable " + newValue + " is not set");
+		}
 		theCommand = newValue;
 	}
 
@@ -152,6 +205,12 @@ public class SimpleExternalTask extends Task {
 		return thePath;
 	}
 
+	/**
+	 * @param cmd Das Kommando, dass zur Ausführung kommen soll, evtl. wird der Pfad ergänzt.
+	 * @param args Argumente für das Kommando
+	 * @return Bei Misserfolg wird eine -1 zurückgegeben, ansonsten der Rückgabewert des aufgerufenen Programmes.
+	 * @throws BuildException Wenn das Kommando nicht ausgeführt werden kann.
+	 */
 	protected final int invoke(final String cmd, final List args)
 			throws BuildException {
 		if (!run) {
@@ -166,16 +225,12 @@ public class SimpleExternalTask extends Task {
 
 		String[] arguments = new String[1 + args.size()];
 		String command = cmd;
-		//antTask.log("Path: "+thePath);
+		// antTask.log("Path: "+thePath);
 		if (thePath != null && !thePath.equals("")) {
-			File f = new File(thePath,cmd);
-// chg :jal:20060112 getCanonicalPath versaut unter Linux den Link/Name-Mechanismus bei LaTeX
-//			try {
-				command = f.getAbsolutePath();
-//			} catch (IOException ie) {
-//				antTask.log(ie.getLocalizedMessage());
-//				command = cmd;
-//			}
+			File f = new File(thePath, cmd);
+			// chg :jal:20060112 getCanonicalPath versaut unter Linux den
+			// Link/Name-Mechanismus bei LaTeX
+			command = f.getAbsolutePath();
 		}
 
 		arguments[0] = command;
@@ -193,7 +248,7 @@ public class SimpleExternalTask extends Task {
 			}
 
 			Execute exeCmd = null;
-			//verbose = true;
+			// verbose = true;
 			if (verbose) {
 				exeCmd = new Execute(new LogStreamHandler(antTask, 2, 1), null);
 			} else {
@@ -203,7 +258,7 @@ public class SimpleExternalTask extends Task {
 			if (workingDir != null) {
 				exeCmd.setWorkingDirectory(workingDir);
 			}
-			
+
 			exeCmd.setCommandline(arguments);
 			exeCmd.setAntRun(antTask.getProject());
 
