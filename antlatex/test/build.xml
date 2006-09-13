@@ -4,12 +4,37 @@
 		classpath="${path2antLaTeX}/ant_latex.jar"/>
 	<taskdef name="latexT" classname="de.dokutransdata.antlatex.LaTeXTask"
 		classpath="${path2antLaTeX}/ant_latex.jar"/>
+	<taskdef name="bibtexT" classname="de.dokutransdata.antlatex.BibTeXTask"
+		classpath="${path2antLaTeX}/ant_latex.jar"/>
 	
 	<target name="ltxfileset" depends="clean">
 		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}">
 			<makeindex run="on" workingDir="${basedir}"/>
 			<bibtex run="on" workingDir="${basedir}"/>
 			<fileset dir="." includes="*.ltx"/>
+		</latex>
+	</target>
+	<target name="ltxfileextension" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}" fileExtensions=".ltt;.lt1">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+			<fileset dir="." includes="*.ltt"/>
+		</latex>
+	</target>
+	<target name="ltxfileextension_2" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}" fileExtensions=".ltt;.lt1">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+			<fileset dir="." includes="*.ltt"/>
+			<fileset dir="." includes="*.lt1"/>
+		</latex>
+	</target>
+	
+	<target name="ltxfileextension_3" depends="clean">
+		<latex verbose="on" pdftex="on" clean="on" workingDir="${basedir}" fileExtensions=".ltt;.lt1">
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+			<fileset dir="." includes="*.lt2"/>
 		</latex>
 	</target>
 	
@@ -71,7 +96,7 @@
 		</latex>
 </target>
 
-<target name="ltxPath">
+<target name="ltxPath" depends="init, clean">
 		<latex latexfile="test01.ltx" verbose="off" pdftex="on" clean="on"
 		path="c:/Programme/MikTeX/texmf/miktex/bin"
 			workingDir="${basedir}"
@@ -81,7 +106,7 @@
 		</latex>
 </target>
 
-<target name="ltxpassThruLaTeXParameters">
+<target name="ltxpassThruLaTeXParameters" depends="init, clean">
 		<latex latexfile="test01.ltx" verbose="on" pdftex="off" clean="on"
 		passThruLaTeXParameters="-src-specials;-job-name=hallo"
 			workingDir="${basedir}"
@@ -91,7 +116,7 @@
 		</latex>
 </target>
 
-<target name="ltxWithGlossar">
+<target name="ltxWithGlossar" depends="init, clean">
 		<latex latexfile="testjxglossar.tex" verbose="on" pdftex="off" clean="on"
 			>
 			<makeindex run="on" workingDir="${basedir}"/>
@@ -104,17 +129,40 @@
 		</latex>
 </target>
 
-<target name="ltxWithGlossBib">
-<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="on">
+<target name="ltxWithGlossarAuxs" depends="init, clean">
+		<latex latexfile="testjxglossar.tex" verbose="on" pdftex="off" clean="off"
+			>
+			<makeindex run="on" workingDir="${basedir}"/>
+			<bibtex run="on" workingDir="${basedir}"/>
+      <jxGlosstex
+      maxdepth="2"
+      language="de"
+      run="on"
+      >
+      <auxFiles dir="." includes="*.aux">
+      </auxFiles>
+      </jxGlosstex>
+		</latex>
+</target>
+
+<target name="ltxWithGlossBib" depends="init, clean">
+<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="off">
 <bibtex verbose="on">
 <fileset dir="." includes="*.gls.aux"/>
+<!--auxfiles dir="." includes="*.gls.aux"/-->
 </bibtex>
 </latex>
 </target>
 
+<target name="bibTeXAux">
+<bibtexT verbose="on">
+<!--fileset dir="." includes="*.gls.aux"/-->
+<auxfiles dir="." includes="*.gls.aux"/>
+</bibtexT>
+</target>
 
-<target name="ltxWithGlossBibOutputDir">
-<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output">
+<target name="ltxWithGlossBibOutputDirMikTeXOn" depends="init, clean">
+<latex latexfile="testglossbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output" miktex="on">
 <bibtex verbose="on">
 <fileset dir="output" includes="*.gls.aux"/>
 </bibtex>
@@ -122,7 +170,7 @@
 </target>
 
 
-<target name="ltxWithFigBib">
+<target name="ltxWithFigBib" depends="init, clean">
 <latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on">
 <bibtex verbose="on">
 <fileset dir="." includes="*.figbib.aux"/>
@@ -130,15 +178,31 @@
 </latex>
 </target>
 
-<target name="ltxWithFigBibOutputDirAuxDir">
-<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output" auxDir="tmpfiles">
+<target name="ltxWithFigBibOutputDirAuxDirMikTeXOn" depends="init, clean">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output" auxDir="tmpfiles" miktex="on">
 <bibtex verbose="on">
 <fileset dir="output" includes="*.figbib.aux"/>
 </bibtex>
 </latex>
 </target>
 
-<target name="ltxWithFigBibOutputDir">
+<target name="ltxWithFigBibOutputDirAuxDirMikTeXOff" depends="init, clean">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="on" outputDir="output" auxDir="tmpfiles" miktex="off">
+<bibtex verbose="on">
+<fileset dir="output" includes="*.figbib.aux"/>
+</bibtex>
+</latex>
+</target>
+
+<target name="ltxWithFigBibOutputDirAuxDirCleanOffMikTeXOn" depends="init, clean">
+<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="off" outputDir="output" auxDir="tmpfiles" miktex="on">
+<bibtex verbose="on">
+<fileset dir="tmpfiles" includes="*.figbib.aux"/>
+</bibtex>
+</latex>
+</target>
+
+<target name="ltxWithFigBibOutputDir" depends="init, clean">
 <latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="off" outputDir="output">
 <bibtex verbose="on">
 <fileset dir="output" includes="*.figbib.aux"/>
@@ -146,21 +210,15 @@
 </latex>
 </target>
 
-<target name="ltxWithFigBibOutputDirAuxDir">
-<latex latexfile="testfigbib.tex" verbose="on" pdftex="off" clean="off" outputDir="output" auxDir="tmpfiles">
-<bibtex verbose="on">
-<fileset dir="tmpfiles" includes="*.figbib.aux"/>
-</bibtex>
-</latex>
-</target>
-
-	<target name="clean">
+	<target name="clean" depends="init">
 		<delete>
 			<fileset dir="." includes="*.pdf"/>
 			<fileset dir="." includes="*.dvi"/>
 			<fileset dir="." includes="*.log"/>
 			<fileset dir="." includes="*.idx"/>
 			<fileset dir="." includes="*.aux"/>
+			<fileset dir="./tmpfiles" includes="*.*"/>
+			<fileset dir="./output" includes="*.*"/>
 		</delete>
 	</target>
 	
