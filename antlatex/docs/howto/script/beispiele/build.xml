@@ -7,39 +7,39 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
  name="ant_howto"
  basedir="."
  default="doLaTeX">
-   <property
+  <property
     name="buildProperties"
     value="./build.properties" />
 
-   <property
+  <property
     file="${buildProperties}" />
 
-   <target
+  <target
     name="doLaTeX">
-      <ant
+    <ant
        target="ltx2"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+    </ant>
+  </target>
 
-   <target
+  <target
     name="doHTML"
     depends="doLaTeX">
-      <ant
+    <ant
        target="doHTLaTeX"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+    </ant>
+  </target>
 
-   <target
+  <target
     name="doPDFLaTeX">
-      <ant
+    <ant
        target="pdfLaTeX"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+    </ant>
+  </target>
 
-   <target
+  <target
     name="all"
     depends="doPDFLaTeX, doHTML" />
 </project>

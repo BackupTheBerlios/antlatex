@@ -2,13 +2,11 @@
 <!DOCTYPE project SYSTEM "y:/Ant/dtd/ant.dtd">
 <project
  name="do_latex">
-   <taskdef
-    name="latex"
+   <taskdef    name="latex"
     classname="de.dokutransdata.antlatex.LaTeX"
     classpath="c:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar" />
 
-   <target
-    name="ltx2full">
+   <target    name="ltx2full">
       <latex
        latexfile="${ltx2.file}"
        verbose="off"
@@ -49,8 +47,7 @@
       </latex>
    </target>
 
-   <target
-    name="ltx2">
+   <target    name="ltx2">
       <latex
        latexfile="${ltx2.file}"
        verbose="on"
@@ -67,15 +64,13 @@
           workingDir="${basedir}" />
 
          <jxGlosstex
-          dataFile="${ltx2.gloss.databases.xml}"
           maxdepth="${ltx2.gloss.maxdepth}"
           language="${ltx2.gloss.language}"
           run="${ltx2.doGLOSSTEX}" />
       </latex>
    </target>
 
-   <target
-    name="pdfLaTeX">
+   <target    name="pdfLaTeX">
       <latex
        latexfile="${ltx2.file}"
        verbose="off"
@@ -92,16 +87,13 @@
           minCrossrefs="${ltx2.bib.minCrossrefs}" />
 
          <jxGlosstex
-          dataFile="${ltx2.gloss.databases.xml}"
           maxdepth="${ltx2.gloss.maxdepth}"
           language="${ltx2.gloss.language}" />
       </latex>
    </target>
 
-   <target
-    name="doGlossar">
+   <target    name="doGlossar">
       <glossar
-       dataFile="${ltx2.gloss.databases.xml}"
        auxFile="${ltx2.auxfile}"
        verbose="off"
        quiet="on"
@@ -109,8 +101,7 @@
        language="${ltx2.gloss.language}" />
    </target>
 
-   <target
-    name="doGlossTeX">
+   <target    name="doGlossTeX">
       <glosstex
        glossarDefinitionFiles="${ltx2.gloss.databases}"
        run="${ltx2.doGLOSSTEX}"
@@ -128,8 +119,7 @@
       </glosstex>
    </target>
 
-   <target
-    name="MakeIndex">
+   <target    name="MakeIndex">
       <makeindex
        run="${ltx2.doMAKEINDEX}"
        workingDir="${basedir}">
@@ -141,8 +131,7 @@
       </makeindex>
    </target>
 
-   <target
-    name="doHTLaTeX">
+   <target    name="doHTLaTeX">
       <exec
        executable="htlatex">
          <arg
@@ -159,8 +148,7 @@
       </exec>
    </target>
 
-   <target
-    name="chkTeX">
+   <target    name="chkTeX">
       <exec
        executable="chktex">
          <arg
