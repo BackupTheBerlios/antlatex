@@ -6,6 +6,36 @@
 %   \begin{itemize}
 %   \item 
 %   \end{itemize}
+\item[0.0.9 (2006-11-20)]\ \\[-2em]
+   \begin{itemize}
+   \item Dokumentation wegen \code{auxDir}, \code{outputDir} und \verb|\include{EinVerzeichnis/Datei}| überarbeitet.
+   \item Offizielle Version
+   \end{itemize}
+\item[0.0.8\_2 (2006-09-09)]\ \\[-2em]
+   \begin{itemize}
+   \item Neu: \code{fileExtensions} ergänzt, damit können jetzt
+     beliebige Dateiendungen für \LaTeX-Dateien benutzt werden. Vom
+     normalen Schema sollte dennoch nicht abgewichen werden.
+   \item Fix: \code{command} wurde nicht mehr durchgereicht.
+   \item Fix: Bei den Zeichenkettenparametern wurde die Variablenauswertung nicht berücksichtigt
+   \item Fix: Parameter \code{outputDir} und \code{auxDir} waren falsch beschrieben.
+   \end{itemize}
+\item[0.0.8\_1 (2006-04-09)]\ \\[-2em]
+   \begin{itemize}
+   \item Neu: Verarbeitet jetzt auch \code{*.dtx} und \code{*.ins}-Dateien
+     und lässt sich somit in die Installationsroutine für
+     \LaTeX-Distributionen einbauen!
+   \end{itemize}
+\item[0.0.8 (2006-04-01)]\ \\[-2em]
+   \begin{itemize}
+   \item Internes Release
+   \end{itemize}
+\item[0.0.7\_2 (2006-03-10)]\ \\[-2em]
+   \begin{itemize}
+   \item Fehlerbereinigung. Durch die Änderung der \BibTeX{}- bzw.
+     MakeIndex-Aufrufe waren die entsprechenden Attribute nicht
+     unbedingt gesetzt.
+   \end{itemize}
 \item[0.0.7 (2006-02-09)]\ \\[-2em]
   \begin{itemize}
   \item Es können jetzt mehrere \BibTeX{}-Aufrufe im \LaTeX-Task
@@ -84,3 +114,8 @@
 
 \end{description}
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant_latex_howto.ltx"
+%%% End: 

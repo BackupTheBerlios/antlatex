@@ -21,7 +21,7 @@ Deswegen musste ich eine eigene Lösung entwickeln:
         \LaTeX-Lauf oder können als eigene Tasks definiert werden.
 \item PDF\LaTeX{} oder \LaTeX{} als Prozessor auswählbar
 \item \code{multibib} Bibliographien werden unterstützt.
-\item Erweiterungen wie \code{figbib} oder \code{gloss} werden unterstüzt.
+\item Erweiterungen wie \code{figbib}\footnote{Bilddatenbank mittels \BibTeX{}} oder \code{gloss}\footnote{Glossar mittels \BibTeX-Datenbanken} werden unterstüzt.
 \end{itemize}
 
 \section{Benutzung}
@@ -65,9 +65,9 @@ mit einem \code{exec}-Element erreicht werden können.
 {
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}%
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}%
-\begin{supertabular}{lp{19.5em}p{10em}}%
+\begin{supertabular}{lp{19.5em}p{08em}}%
 \code{latexfile} & Die \LaTeX{}-Datei, es werden Dateien mit
-  der Endung \code{.tex} oder \code{.ltx} akzeptiert. & Nein, kann durch das Element \code{fileset} gesetzt werden. \\
+  der Endung \code{.tex}, \code{.ltx}, \code{.dtx} oder  \code{.ins} akzeptiert. & Nein, kann durch das Element \code{fileset} gesetzt werden. \\
 \code{pdftex} & Mit \code{on} wird PDF\LaTeX{} aufgerufen. & Nein. Default: off\\
 \code{verbose} & Gibt bei \code{on} Informationen auf der
   Standardausgabe aus. & Nein. Default: off\\
@@ -80,27 +80,57 @@ mit einem \code{exec}-Element erreicht werden können.
 \code{workingDir} & Arbeitsverzeichnis setzen & Nein. Default: \code{basedir}\\
 \code{command} & Auszuführender Befehl & Nein. Default: latex\\
 \code{path} & Pfad zu \LaTeX{} & Nein. Default: leer\\
-\code{jobname} & Name der Ergebnissdatei & Nein.\\
-\code{outputDirectory} & Verzeichnis in dem die DVI/PDF-Datei gespeichert werden soll & Nein.\\
-\code{auxDirectory} & Verzeichnis für die temporären Dateien & Nein.\\
+\code{jobname} & Name der Ergebnissdatei, nur bei Mik\TeX einsetzbar (s.\,u.) & Nein.\\
+\code{outputDir} & Verzeichnis in dem die DVI/PDF-Datei gespeichert werden soll, nur bei Mik\TeX einsetzbar (s.\,u.) & Nein.\\
+\code{auxDir} & Verzeichnis für die temporären Dateien, nur bei Mik\TeX einsetzbar (s.\,u.) & Nein.\\
 \multicolumn{2}{l}{\code{passThruLaTeXParameters}}\\
 & Sonstige Parameter für \LaTeX{} mit einem Semikolon getrennt. & Nein.\\
 \code{multibib} & Schalter für die Verwendung des Package \emph{multibib} & Nein. Default: off\\
 %\code{figbib} & Schalter für die Vewendung des Package \emph{figbib} & Nein. Default: off. Veraltet!\\
+\code{MikTeX} & Schalter für die Verwendung von MikTeX und Einsatz der Optionen \code{outputDir}, \code{auxDir} und \code{jobname} & Nein. Default: off\\
+%\multicolumn{2}{l}{
+\code{fileExtensions}%}\\
+& Dateierweiterungen für gültige
+\LaTeX-Dateien in der Form \code{.tex;.dtx}. Standardmässig werden
+Dateien mit der Endung \code{.ltx}, \code{.tex}, \code{.dtx} sowie
+\code{.ins} akzeptiert. Dieser Mechanismus kann mit der Option
+\code{jobname} umgangen werden. & Nein. Standard: .tex;.ltx;.dtx;.ins \\
 \end{supertabular}
 }
 
-Die Attribute \code{jobname}, \code{outputDirectory} und
-\code{auxDirectory} werden \textbf{nicht} von jeder \LaTeX{}-Version
-unterstützt!
 
 \noindent
 Der Standardwert für \code{reRunPattern} ist:%\\
 \begin{verbatim}
 (Rerun (LaTeX|to get cross-references right)|
      Package glosstex Warning: Term |
-     There were undefined references)
+     There were undefined references|
+     Package natbib Warning: Citation\\(s\\) may have changed)
 \end{verbatim}
+
+\subsubsection{auxDir und outputDir}
+
+Die Attribute \code{jobname}, \code{outputDir} und
+\code{auxDir} werden \textbf{nicht} von jeder \LaTeX{}-Version
+unterstützt, deshalb ist der Schalter \code{miktex}\footnote{Dieser Hinweis stammt von Dániel Pasztuhov}
+bei Bedarf umzusetzen.
+
+Die Verwendung von \code{outputDir} und \code{auxDir} kann bei der
+Verwendung einer dokumenteninternen Verzeichnisstruktur zu Problemen führen,
+insbesondere wenn \code{include} verwendet wird\footnote{Dieser Hinweis stammt von Jan Hinzmann}.
+
+\begin{itemize}
+\item Wenn ein \verb|\include{Verzeichnis/Datei}| und \code{outputDir}
+  verwendet wird, muss im \code{outputDir} das Verzeichnis
+  \code{Verzeichnis} existieren!
+\item Die \code{*.aux} im \code{outputDir} und dokumentinterner
+  Verzeichnisstruktur werden nicht gelöscht.
+\end{itemize}
+
+Diese Probleme lassen sich mit einem Pre-Target zur Erstellung der
+Unterverzeichnisse und einem Post-Target zum Löschen der temporären
+Dateien lösen.
+
 
 \minisec{Elemente zum \LaTeX{}-Task}
 {
@@ -194,9 +224,9 @@ bildet nur \code{makeindex}, wo ein gesetztes \code{fileset}-Element
 Vorrang bekommt\footnote{Dieser Hinweis stammt von Thomas Reuter}. 
 
 Mit dem mehrfach vorkommenenden Element \code{bibtex} und dem darin
-enthaltenen \code{fileset}-Element können unterschiedliche
-Styles wie \code{figbib}\footnote{Bilddatenbank mittels \BibTeX{}}
-oder \code{gloss}\footnote{Glossar mittels \BibTeX-Datenbanken}
+enthaltenen \code{file""set}-Element können unterschiedliche
+Styles wie \code{figbib}
+oder \code{gloss}
 angebunden werden.
 
 
@@ -205,7 +235,6 @@ basiert und folgenden Aufruf im \code{latex}-Element akzeptiert:
 
 \begin{verbatim}
   <jxGlosstex
-      dataFile="${ltx2.gloss.databases.xml}"
       maxdepth="${ltx2.gloss.maxdepth}"
       language="${ltx2.gloss.language}"
       run="${ltx2.doGLOSSTEX}"
@@ -220,8 +249,10 @@ Die Tasks können ebenfalls einzeln aufgerufen werden.
 
 \subsubsection{Makeindex}
 
+\noindent
 \begin{verbatim}
-  <taskdef name="makeindex"    classname="de.dokutransdata.antlatex.MakeindexTask"
+<taskdef name="makeindex"
+    classname="de.dokutransdata.antlatex.MakeindexTask"
     classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
 \end{verbatim}
 
@@ -279,7 +310,8 @@ Das Resultat des \code{fileset}-Elements führt nur zu einem Aufruf von \code{mak
 \subsubsection{\BibTeX{}}
 
 \begin{verbatim}
-  <taskdef name="bibtex"    classname="de.dokutransdata.antlatex.BibTeXTask"
+<taskdef name="bibtex"
+    classname="de.dokutransdata.antlatex.BibTeXTask"
     classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
 \end{verbatim}
 
@@ -320,7 +352,8 @@ Das Resultat des \code{fileset}-Elements führt zu einem mehrfachen Aufruf von \c
 
 
 \begin{verbatim}
-  <taskdef name="glosstex"    classname="de.dokutransdata.antlatex.GlossTeXTask"
+<taskdef name="glosstex"
+    classname="de.dokutransdata.antlatex.GlossTeXTask"
     classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
 \end{verbatim}
 
@@ -369,7 +402,7 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \subsubsection{jxGlossar}
 
 \begin{verbatim}
-  <taskdef name="jxGlossar"
+<taskdef name="jxGlossar"
     classname="de.dokutransdata.glossar.tools.antasks.GlossTeX"
     classpath="c:/Programme/Apache Software Foundation/ant/lib/ant_latex.jar"/>
 \end{verbatim}
@@ -377,7 +410,6 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \begin{verbatim}
 <target name="jxGlossar">
   <glossar
-    dataFile="${ltx2.gloss.databases.xml}"
     auxFile="${ltx2.auxfile}"
     verbose="off"
     quiet="on"
@@ -395,8 +427,8 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 %\tablefirsthead{Attribut       & Beschreibung & Pflicht\\\hline}
 \tablehead{Attribut       & Beschreibung & Pflicht\\\hline}
 \begin{supertabular}{p{5em}p{19.5em}p{10em}}
-\code{dataFile} & XML-Glossardatenbank & Ja.\\
 \code{auxFile}  & Datei der benutzten Referenzen aus dem \LaTeX{}-Lauf & Ja\\
+\code{dataFile} & XML-Glossardatenbank & Nein.\\
 \code{verbose}  & Schreibt einige Informationen in die Standardausgabe. & Nein. Default: off\\
 \code{quiet}    & Schreibt keine Informationen in die Standardausgabe. & Nein. Default: off\\
 \code{maxdepth} & Wieviel Durchläufe sind erlaubt um Crossreferenzen
