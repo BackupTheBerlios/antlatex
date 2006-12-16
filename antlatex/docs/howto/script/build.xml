@@ -7,170 +7,176 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
  name="ant_howto"
  basedir="."
  default="doLaTeX">
-   <property
+	<property
     name="buildProperties"
     value="./build.properties" />
 
-   <property
+	<property
     file="${buildProperties}" />
 
-   <target
+	<target
     name="doLaTeX">
-      <ant
+		<ant
        target="ltx2"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+		</ant>
+	</target>
 
-   <target
+	<target
     name="doChkTeX">
-      <ant
+		<ant
        target="chkTeX"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+		</ant>
+	</target>
 
-   <target
+	<target
     name="doHTML"
     depends="doLaTeX"
-    ><!---->
-      <ant
+    >
+		<!---->
+		<ant
        target="doHTLaTeX"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+		</ant>
+	</target>
 
-   <target
+	<target
     name="doPDFLaTeX">
-      <ant
+		<ant
        target="pdfLaTeX"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+		</ant>
+	</target>
 
-   <target
+	<target
     name="doMakeIndex">
-      <ant
+		<ant
        target="MakeIndex"
        antfile="${antRoot}/latex.xml">
-      </ant>
-   </target>
+		</ant>
+	</target>
 
-   <target
+	<target
     name="clean">
-      <delete>
-         <fileset
+		<delete>
+			<fileset
           dir="."
           includes="*.html" />
-      </delete>
+		</delete>
+		<delete>
+			<fileset
+          dir="."
+          includes="*.aux" />
+		</delete>
 
-      <delete
+		<delete
        file="_region_.tex" />
 
-      <delete
+		<delete
        file="${main.filename}.4ct" />
 
-      <delete
+		<delete
        file="${main.filename}.4tc" />
 
-      <delete
+		<delete
        file="${main.filename}.idv" />
 
-      <delete
+		<delete
        file="${main.filename}.lg" />
 
-      <delete
+		<delete
        file="${main.filename}.xref" />
 
-      <delete
+		<delete
        file="${main.filename}.css" />
 
-      <delete
+		<delete
        file="${main.filename}.aux" />
 
-      <delete
+		<delete
        file="${main.filename}.bbl" />
 
-      <delete
+		<delete
        file="${main.filename}.blg" />
 
-      <delete
+		<delete
        file="${main.filename}.idx" />
 
-      <delete
+		<delete
        file="${main.filename}.ilg" />
 
-      <delete
+		<delete
        file="${main.filename}.ind" />
 
-      <delete
+		<delete
        file="${main.filename}.lof" />
 
-      <delete
+		<delete
        file="${main.filename}.log" />
 
-      <delete
+		<delete
        file="${main.filename}.los" />
 
-      <delete
+		<delete
        file="${main.filename}.out" />
 
-      <delete
+		<delete
        file="${main.filename}.tmp" />
 
-      <delete
+		<delete
        file="${main.filename}.toc" />
 
-      <delete
+		<delete
        file="${main.filename}.xal" />
 
-      <delete
+		<delete
        file="${main.filename}.xgl" />
 
-      <delete
+		<delete
        file="${main.filename}.pdf" />
 
-      <delete
+		<delete
        file="${main.filename}.dvi" />
-   </target>
+	</target>
 
-   <target
+	<target
     name="all"
     depends="clean, doPDFLaTeX, doHTML, changes" />
 
-<target name="changes">
-<exec executable="htlatex">
-<arg value="changes.ltx"/>
-<arg value='"local,0,png"'/>
-</exec>
-<exec executable="html2txt">
-<arg value="-w"/>
-<arg value="changes.html"/>
-<arg value="../../../CHANGES"/>
-</exec>
-      <delete
+	<target name="changes">
+		<exec executable="htlatex">
+			<arg value="changes.ltx"/>
+			<arg value='"local,0,png"'/>
+		</exec>
+		<exec executable="html2txt">
+			<arg value="-w"/>
+			<arg value="changes.html"/>
+			<arg value="../../../CHANGES"/>
+		</exec>
+		<delete
        file="changes.4ct" />
 
-      <delete
+		<delete
        file="changes.4tc" />
 
-      <delete
+		<delete
        file="changes.idv" />
 
-      <delete
+		<delete
        file="changes.lg" />
 
-      <delete
+		<delete
        file="changes.xref" />
-      <delete
+		<delete
        file="changes.log" />
-      <delete
+		<delete
        file="changes.aux" />
-      <delete
+		<delete
        file="changes.tmp" />
-      <delete
+		<delete
        file="changes.dvi" />
-</target>
+	</target>
 
 </project>
 
