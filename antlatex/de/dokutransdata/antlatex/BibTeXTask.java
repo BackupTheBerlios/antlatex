@@ -70,30 +70,49 @@ import org.apache.tools.ant.types.FileSet;
  * @author jaloma
  */
 public class BibTeXTask extends SimpleExternalTask {
-	public static final String RCS_ID = "Version @(#) $Revision: 1.4 $";
+	
+	public static final String RCS_ID = "Version @(#) $Revision: 1.5 $";
 
 	private String auxFile;
-
+	private AuxFiles auxFiles;
+	public void addAuxFiles (AuxFiles fSet) {
+		auxFiles = fSet;
+		//System.out.println(fSet);
+	}
+	public AuxFiles getAuxFiles() {
+		return auxFiles;
+	}
 	private String bibtexPath = "bibtex";
 
-	private List files = new ArrayList();
+	private ArrayList files = new ArrayList();
 
 	private int minCrossrefs = -1;
 
 	private boolean terse = false;
 
 	private boolean inLoop = false;
+
+//	BibTeXTask() {
+//		super();
+//	}
+	public void init() {
+		super.init();
+		auxFiles = new AuxFiles();
+		auxFiles.setDir(this.workingDir);
+	}
 	
 	public String toString() {
 		String txt = "";
 		txt += "BibTeX";
-		txt += " auxFile: "+auxFile;
-		txt += " minCrossrefs: "+minCrossrefs;
-		txt += " terse: "+terse;
-		txt += " inLoop: "+inLoop;
-		txt += " files: "+files;
+		txt += " auxFile: " + auxFile;
+		txt += " minCrossrefs: " + minCrossrefs;
+		txt += " terse: " + terse;
+		txt += " inLoop: " + inLoop;
+		txt += " files: " + files;
+		txt += " auxFiles: " + auxFiles;
 		return txt;
 	}
+
 	/**
 	 * @return Returns the inLoop.
 	 */
@@ -102,7 +121,8 @@ public class BibTeXTask extends SimpleExternalTask {
 	}
 
 	/**
-	 * @param inLoop The inLoop to set.
+	 * @param inLoop
+	 *            The inLoop to set.
 	 */
 	public final void setInLoop(boolean inLoop) {
 		this.inLoop = inLoop;
@@ -119,11 +139,21 @@ public class BibTeXTask extends SimpleExternalTask {
 		files.add(f);
 	}
 
+	public void add(AuxFiles f) {
+		auxFiles = f;
+	}
 	public List getFiles() {
 		return files;
 	}
+
 	public final void execute() throws BuildException {
 		// get the fileset with full qualified pathname!
+		if (!this.run) {
+			return;
+		}
+		if (files.isEmpty()) {
+			files.add(auxFiles);
+		}
 		for (int i = 0; i < files.size(); i++) {
 			FileSet fs = (FileSet) files.get(i);
 			String[] fnames = fs.toString().split(";");
@@ -137,11 +167,14 @@ public class BibTeXTask extends SimpleExternalTask {
 				String mFile = fname;
 				try {
 					mFile = f.getCanonicalPath();
-					int idx = mFile.lastIndexOf(".aux");
-					mFile = mFile.substring(0, idx);
 				} catch (IOException e) {
-					// TODO: handle exception
-					System.err.println(e.getLocalizedMessage());
+					continue;
+				}
+				int idx;
+				if ((idx = fname.lastIndexOf(".aux")) != -1) {
+					mFile = fname.substring(0, idx);
+				} else {
+					continue;
 				}
 				auxFile = mFile;
 				run();
@@ -161,16 +194,24 @@ public class BibTeXTask extends SimpleExternalTask {
 		return terse;
 	}
 
-	// Usage: bibtex [OPTION]... AUXFILE[.aux]
-	// Write bibliography for entries in AUXFILE to AUXFILE.bbl.
-	//
-	// -min-crossrefs=NUMBER include item after NUMBER cross-refs; default 2
-	// -terse do not print progress reports
-	// -help display this help and exit
-	// -version output version information and exit
-	//
-	// Email bug reports to tex-k@mail.tug.org.
+	/**
+	 * Usage: bibtex [OPTION]... AUXFILE[.aux] Write bibliography for entries in
+	 * AUXFILE to AUXFILE.bbl.
+	 * 
+	 * -min-crossrefs=NUMBER include item after NUMBER cross-refs; default 2
+	 * -terse do not print progress reports
+	 * -help display this help and exit
+	 * -version output version information and exit
+	 * 
+	 * Email bug reports to tex-k@mail.tug.org.
+	 * 
+	 * @return Rückgabewert des Aufrufs von BibTeX
+	 * @throws BuildException
+	 */
 	public final int run() throws BuildException {
+		if (!this.run) {
+			return 0;
+		}
 		List args = new ArrayList();
 
 		if (this.minCrossrefs > -1) {
@@ -187,7 +228,10 @@ public class BibTeXTask extends SimpleExternalTask {
 		return invoke(theCommand, args);
 	}
 
-	public void setAuxFile(String newValue) {
+	public void setAuxFile(String newValue) throws BuildException {
+		if (newValue.startsWith("${")) {
+			throw new BuildException("Variable " + newValue + " is not set!");
+		}
 		auxFile = newValue;
 	}
 
