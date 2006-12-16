@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="javadoc">
-<target name="javadoc">
-<javadoc access="protected" author="false" classpath="C:\Programme\Apache Software Foundation\apache-ant\lib\ant.jar;X:\Glossar\build\jxGlossar.jar" destdir="docs/WebPage/api" doctitle="ant_latex -- LaTeX-Task for Ant" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="C:\Projekte\antlatex\docs\WebPage\api_contents.html" packagenames="de.dokutransdata.antlatex" source="1.4" sourcepath="." splitindex="true" use="true" version="true">
-<link href="file:/C:/Programme/Apache Software Foundation/apache-ant/docs/manual/api/"/>
-</javadoc>
-</target>
+	<target name="javadoc">
+		<javadoc access="protected" author="false" classpath="C:\Programme\Apache Software Foundation\apache-ant\lib\ant.jar;X:\Glossar\build\jxGlossar.jar" destdir="docs/WebPage/api" doctitle="ant_latex -- LaTeX-Task for Ant" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="C:\Projekte\antlatex\docs\WebPage\api_contents.html" packagenames="de.dokutransdata.antlatex" source="1.4" sourcepath="." splitindex="true" use="true" version="true">
+			<link href="file:/C:/Programme/Apache Software Foundation/apache-ant/docs/manual/api/" />
+		</javadoc>
+	</target>
 </project>

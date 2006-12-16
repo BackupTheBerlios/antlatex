@@ -1,44 +1,48 @@
 <target name="help">
-    <echo message="Please run: $ ant -v -projecthelp"/>
+	<echo message="Please run: $ ant -v -projecthelp" />
 </target>
 
-<property name="version" value="0.0.7"/>
-<property name="distDir" value="dist"/>
+<property name="version" value="0.0.9" />
+<property name="distDir" value="dist" />
 
 <target name="dist" description="Fuer die Distribution aufbereiten">
-  <copy file="C:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar" tofile="${distDir}/ant_latex_${version}.jar">
-  </copy>
+	<copy
+		file="C:/Programme/Apache Software Foundation/apache-ant/lib/ant_latex.jar"
+		tofile="${distDir}/ant_latex_${version}.jar">
+	</copy>
 </target>
 
-  <target name="copyHTMLScript">
-    <move todir="${distDir}/manual">
-    <fileset dir="docs/howto/script" includes="*.html"/>
-    <fileset dir="docs/howto/script" includes="*.css"/>
-    <fileset dir="docs/howto/script" includes="*.png"/>
-    <fileset dir="docs/howto/script" includes="*.gif"/>
-    </move>
-    <copy todir="${distDir}/manual/beispiele">
-    <fileset dir="docs/howto/script/beispiele" />
-    </copy>
-  </target>
+<target name="copyHTMLScript">
+	<move todir="${distDir}/manual">
+		<fileset dir="docs/howto/script" includes="*.html" />
+		<fileset dir="docs/howto/script" includes="*.css" />
+		<fileset dir="docs/howto/script" includes="*.png" />
+		<fileset dir="docs/howto/script" includes="*.gif" />
+	</move>
+	<copy todir="${distDir}/manual/beispiele">
+		<fileset dir="docs/howto/script/beispiele" />
+	</copy>
+</target>
 
 <target name="copyIndexPage">
-<copy todir="dist">
-<fileset dir="docs/WebPage/" includes="index.html"/>
-</copy>
+	<copy todir="dist">
+		<fileset dir="docs/WebPage/" includes="index.html" />
+	</copy>
 </target>
 
 <target name="copyApiPage">
-<copy todir="${distDir}/api">
-<fileset dir="docs/WebPage/api"/>
-</copy>
+	<copy todir="${distDir}/api">
+		<fileset dir="docs/WebPage/api" />
+	</copy>
 </target>
 
-<target name="distAll" depends="dist, copyHTMLScript, copyIndexPage, copyApiPage">
-<move file="docs/howto/script/ant_latex_howto.pdf" tofile="${distDir}/ant_latex_howto.pdf"/>
-<copy tofile="${distDir}/AUTHORS" file="AUTHORS"/>
-<copy tofile="${distDir}/LICENSE" file="LICENSE"/>
-<copy tofile="${distDir}/CREDITS" file="CREDITS"/>
-<copy tofile="${distDir}/CHANGES" file="CHANGES"/>
+<target name="distAll"
+	depends="dist, copyHTMLScript, copyIndexPage, copyApiPage">
+	<move file="docs/howto/script/ant_latex_howto.pdf"
+		tofile="${distDir}/ant_latex_howto.pdf" />
+	<copy tofile="${distDir}/AUTHORS" file="AUTHORS" />
+	<copy tofile="${distDir}/LICENSE" file="LICENSE" />
+	<copy tofile="${distDir}/CREDITS" file="CREDITS" />
+	<copy tofile="${distDir}/CHANGES" file="CHANGES" />
 </target>
 
