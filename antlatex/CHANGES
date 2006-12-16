@@ -10,6 +10,39 @@
 
  
  
+* 0.0.9 (2006-11-20) 
+          
+*         Dokumentation wegen auxDir, outputDir und \include{EinVerzeichnis/Datei}
+        überarbeitet. 
+*         Offizielle Version
+         
+* 0.0.8_2 (2006-09-09) 
+          
+*         Neu: fileExtensions ergänzt, damit können jetzt beliebige
+        Dateiendungen für LATEX-Dateien benutzt werden. Vom
+        normalen Schema sollte dennoch nicht abgewichen werden.
+        
+*         Fix: command wurde nicht mehr durchgereicht. 
+*         Fix: Bei den Zeichenkettenparametern wurde die Variablenauswertung
+        nicht berücksichtigt 
+*         Fix: Parameter outputDir und auxDir waren falsch beschrieben.
+         
+* 0.0.8_1 (2006-04-09) 
+          
+*         Neu: Verarbeitet jetzt auch *.dtx und *.ins-Dateien
+        und lässt sich somit in die Installationsroutine für
+        LATEX-Distributionen einbauen!
+         
+* 0.0.8 (2006-04-01) 
+          
+*         Internes Release
+         
+* 0.0.7_2 (2006-03-10) 
+          
+*         Fehlerbereinigung. Durch die Änderung der BibTEX- bzw.
+        MakeIndex-Aufrufe waren die entsprechenden Attribute
+        nicht unbedingt gesetzt.
+         
 * 0.0.7 (2006-02-09) 
           
 *         Es können jetzt mehrere BibTEX-Aufrufe im LATEX-Task
