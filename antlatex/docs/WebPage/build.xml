@@ -4,6 +4,7 @@
 Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 -->
 <project name="WebPage" default="all">
+  <property file="${user.home}/berlios_build.properties" />
   <property name="antRoot" value="y:/Ant">
   </property>
 <target name="init">
@@ -40,8 +41,8 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
 <target name="deploy">
   <scp file="index.html" todir="jaloma@shell.berlios.de:/home/groups/antlatex/htdocs"
-passphrase="GibDeinenJobAuf."
-keyfile="${user.home}/.ssh/id_rsa"/>
+passphrase="${passphrase}"
+keyfile="${keyfile}"/>
 </target>
 
 </project>

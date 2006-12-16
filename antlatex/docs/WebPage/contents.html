@@ -1,5 +1,5 @@
 <!--
- $Id: contents.html,v 1.5 2006/02/10 08:03:53 jaloma Exp $
+ $Id: contents.html,v 1.6 2006/12/16 16:09:12 jaloma Exp $
 -->
 
 <!-- {{{ Haupttext -->
@@ -25,11 +25,46 @@ Deswegen musste ich eine eigene Lösung entwickeln:
 	LaTeX-Lauf oder können als eigene Tasks definiert werden.</li>
 <li>PDFLaTeX oder LaTeX als Prozessor auswählbar</li>
 <li><code>multibib</code> Bibliographien werden unterstützt.</li>
-<li>Mit <code>figbib</code> wird das entsprechende Package für kommentierte Abbildungsverzeichnisse unterstützt.</li>
+<li>Die Packages <code>figbib</code> für kommentierte Abbildungsverzeichnisse oder <code>gloss</code> für ein Glossar mit BibTeX sind durch flexible Konfiguration von BibTeX integriert.
+.</li>
 </ul>
 
 <h2><a id="entwicklung" name="entwicklung" title="Entwicklung">Entwicklungsgeschichte</a></h2>
 <dl>
+<dt><strong>[0.0.9 (2006-11-19)]</strong> </dt>
+<dd ><ul>
+          <li>Dokumentation           wegen           <code>auxDir</code>,           <code>outputDir</code> und
+          <code>\include{EinVerzeichnis/Datei}</code> überarbeitet.
+          </li>
+   <li> Offizielle Version</li>
+</ul>
+</dd>
+<dt><strong>[0.0.8_2 (2006-09-09)]</strong> </dt>
+<dd ><ul>
+   <li> Neu: <code>fileExtensions</code> ergänzt, damit können jetzt
+     beliebige Dateiendungen für LaTeX-Dateien benutzt werden. Vom
+     normalen Schema sollte dennoch nicht abgewichen werden.
+     </li>
+          <li>Fix: <code>command </code>wurde nicht mehr durchgereicht.
+          </li>
+          <li>Fix: Bei  den  Zeichenkettenparametern  wurde  die  Variablenauswertung  nicht
+          berücksichtigt
+          </li>
+          <li>Fix: Parameter <code>outputDir </code>und <code>auxDir </code>waren falsch beschrieben.</li>
+</ul>
+     </dd>
+<dt><strong>[0.0.8_1 (2006-04-09)]</strong> </dt>
+<dd><ul>
+          <li>Neu: Verarbeitet jetzt auch <code>*.dtx</code> und <code>*.ins</code>-Dateien
+     und lässt sich somit in die Installationsroutine für
+     LaTeX-Distributionen einbauen!</li>
+</ul>
+</dd>
+<dt><strong>[0.0.8 (2006-04-01)]</strong> </dt>
+<dd><ul>
+          <li>Internes Release</li>
+</ul>
+</dd>
 <dt><strong>[0.0.7 (2006-02-09)]</strong> </dt>
 <dd><ul>
           <li>Es können jetzt mehrere BibTeX-Aufrufe im LaTeX-Task
@@ -154,7 +189,7 @@ war.
 
 <h2><a id="download" title="Download" name="download">Download</a></h2>
 <ul>
-<li><a href="http://developer.berlios.de/project/showfiles.php?group_id=5429&amp;release_id=8666">BerliOS</a></li>
+<li><a href="http://developer.berlios.de/project/showfiles.php?group_id=5429">BerliOS</a></li>
 <li><a href="http://www.longdistcalc.de/service/download.php?fileTag=ant_latex">Mirror</a></li>
 </ul>
 <img src="http://www.longdistcalc.de/service/icon.php?tag=ant_latex" alt="" />
