@@ -72,11 +72,11 @@ import de.dokutransdata.glossar.tools.anttasks.*;
  * 
  */
 public class LaTeX extends SimpleExternalTask {
-	public static final String RCS_ID = "Version @(#) $Revision: 1.8 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.9 $";
 
-	static final String VERSION = "0.0.8";
+	static final String VERSION = "0.0.9";
 
-	static final String BUILD = "2";
+	static final String BUILD = "0";
 
 	/**
 	 * BibTeX-Task
@@ -860,8 +860,7 @@ public class LaTeX extends SimpleExternalTask {
 	}
 
 	/**
-	 * @param fileExtensions
-	 *            The fileExtensions to set.
+	 * @param fileExtensionPattern The fileExtensionsPattern to set.
 	 */
 	public final void setFileExtensions(String fileExtensionPattern) {
 		this.fileExtensions = fileExtensionPattern;

@@ -74,7 +74,7 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class LaTeXTask extends SimpleExternalTask {
 
-	public static final String RCS_ID = "Version @(#) $Revision: 1.7 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.8 $";
 
 	/**
 	 * Gibt an ob es sich um eine MikTeX-Installation handelt.
@@ -269,7 +269,6 @@ public class LaTeXTask extends SimpleExternalTask {
 
 	/**
 	 * @param newValue Name des Ausgabe-Verzeichnisses.
-	 * @see setOutputdir
 	 */
 	public void setOutputdir(File newValue) {
 		outputDir = newValue;
