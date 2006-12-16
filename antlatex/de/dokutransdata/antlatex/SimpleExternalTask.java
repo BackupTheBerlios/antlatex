@@ -112,13 +112,11 @@ public class SimpleExternalTask extends Task {
 		}
 	}
 
-	public static final String RCS_ID = "Version @(#) $Revision: 1.5 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.6 $";
 
 	/**
 	 * Arbeitsverzeichnis für den Task, wird normalerweise mit baseDir
 	 * gleichgesetzt.
-	 * 
-	 * @see baseDir
 	 */
 	protected File workingDir;
 
