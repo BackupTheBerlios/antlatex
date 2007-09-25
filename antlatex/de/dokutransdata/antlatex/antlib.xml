@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<antlib>
+  <taskdef name="latex" classname="de.dokutransdata.antlatex.LaTeX" />
+  <taskdef name="makeindex" classname="de.dokutransdata.antlatex.MakeindexTask" />
+  <taskdef name="bibtex" classname="de.dokutransdata.antlatex.BibTeXTask" />
+  <taskdef name="glosstex" classname="de.dokutransdata.antlatex.GlossTeXTask" />
+  <taskdef name="jxGlossar" classname="de.dokutransdata.glossar.tools.anttasks.GlossTeX" />
+</antlib>

@@ -10,6 +10,11 @@
 
  
  
+* 0.0.9_1 (2007-09-25) 
+          
+*         Integration in antLib ergänzt und entsprechend beschrieben
+        (Hinweis von Simone Tripodi).
+         
 * 0.0.9 (2006-11-20) 
           
 *         Dokumentation wegen auxDir, outputDir und \include{EinVerzeichnis/Datei}

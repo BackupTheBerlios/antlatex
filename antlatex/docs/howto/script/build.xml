@@ -4,6 +4,7 @@
 Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 -->
 <project
+xmlns:antlatex="antlib:de.dokutransdata.antlatex"
  name="ant_howto"
  basedir="."
  default="doLaTeX">
@@ -13,7 +14,44 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
 
 	<property
     file="${buildProperties}" />
+    
+    <target name="build">
+    <antlatex:latex 
+      latexfile="${ltx2.file}" 
+      verbose="${ltx2.verbose}" 
+      clean="${ltx2.doTEXCLEAN}" 
+      pdftex="${ltx2.doPDF}"
+      jobname="${ltx2.jobname}"
+      ><!--  -->
+      <antlatex:makeindex run="${ltx2.doMAKEINDEX}" 
+	compressIntermediateBlanks="${ltx2.idx.compressIntermediateBlanks}"
+	germanWordOrder="${ltx2.idx.germanWordOrder}"
+	letterOrder="${ltx2.idx.letterOrder}"
+	idxstyle="${ltx2.idx.style}"
+	protocolFile="${ltx2.idx.protocolFile}"
+	startingPageNumber="${ltx2.idx.startingPageNumber}"
+	pageRangeFormation="${ltx2.idx.pageRangeFormation}"
+      verbose="on" 
+      >
+<!--
+      <fileset dir="${basedir}">
+        <include name="*.nlo"/>
+      </fileset>
+-->
+      </antlatex:makeindex>
 
+      <antlatex:bibtex run="${ltx2.doBIBTEX}"
+	workingDir="${basedir}"
+	/>
+      <antlatex:jxGlosstex
+      dataFile="${ltx2.gloss.databases.xml}"
+      maxdepth="${ltx2.gloss.maxdepth}"
+      language="${ltx2.gloss.language}"
+      run="${ltx2.doGLOSSTEX}"
+      quiet="on"
+      />
+    </antlatex:latex>
+    </target>
 	<target
     name="doLaTeX">
 		<ant

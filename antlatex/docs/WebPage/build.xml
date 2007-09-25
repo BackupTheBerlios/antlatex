@@ -22,10 +22,13 @@ Author: Jürgen A.Lamers <jaloma@dokutransdata.de>
       <arg value="meta_info.html"/>
       <arg value="css.link"/>
       <arg value="Dein Ant-Task fuer LaTeX"/>
+      <arg value="25. September 2007"/>
     </exec>
+<!-- -->
     <ant target="doTidy" antfile="${antRoot}/tidy.xml">
       <property name="htmlFile" value="index.html"/>
     </ant>
+<!-- -->
     <ant antfile="${antRoot}/showIndex.xml">
       <property name="htmlFile" value="index.html"/>
     </ant>

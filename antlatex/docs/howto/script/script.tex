@@ -30,7 +30,11 @@ Deswegen musste ich eine eigene Lösung entwickeln:
 Es gibt einmal die Möglichkeit einen \LaTeX{}-Task zu definieren in
 dem alle notwendigen Durchläufe von \BibTeX{}, makeindex etc.
 ausgeführt werden, eine zweite Möglichkeit besteht darin, jede
-Anwendung als eigenen Task zu definieren und auszuführen.
+Anwendung als eigenen Task zu definieren und auszuführen. Die
+Benutzung im Zusammenspiel mit \texttt{antLib} wird in Kapitel
+\ref{sec:integration:antlib} beschrieben\footnote{Dieser Hinweis und
+  Anleitung dazu stammt von Simone Tripodi}.
+
 
 
 \subsection{Gesamtaufruf}
@@ -440,6 +444,41 @@ Es muss natürlich \GlossTeX{} installiert sein ;-)
 \end{supertabular}
 }
 
+\subsection{Integration mit antLib}
+\label{sec:integration:antlib}
+
+\begin{verbatim}
+<project
+    xmlns:antlatex="antlib:de.dokutransdata.antlatex"
+    basedir="." default="build">
+    <property file="conf/manual.properties" />
+    <target name="build">
+        <mkdir dir="${manual.target.dir}" />
+        <antlatex:latex outputDir="${manual.target.dir}"
+            auxDir="${manual.target.dir}"
+            workingDir="${manual.target.dir}"
+            latexfile="${basedir}/${manual.main.src}/man.tex"
+            pdftex="on" verbose="on" />
+        <delete>
+            <fileset dir="${manual.target.dir}">
+                <exclude name="**/*.pdf" />
+            </fileset>
+        </delete>
+    </target>
+</project>
+\end{verbatim}
+
+Es muss also ein Namespace \texttt{xmlns:antlatex} im Wurzelelement
+\texttt{project} eingetragen werden, anschliessend können die Tasks
+\begin{itemize}
+\item antlatex:latex
+\item antlatex:makeindex
+\item antlatex:bibtex
+\item antlatex:glosstex
+\item antlatex:jxGlossar
+\end{itemize}
+%
+benutzt werden.
 
 %%% Local Variables: 
 %%% mode: latex

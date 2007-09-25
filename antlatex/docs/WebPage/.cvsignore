@@ -35,3 +35,4 @@ attic_modules.txt
 *.out
 old
 index.html
+log.xml

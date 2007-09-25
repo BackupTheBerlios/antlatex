@@ -71,13 +71,13 @@ import org.apache.tools.ant.types.FileSet;
  */
 public class BibTeXTask extends SimpleExternalTask {
 	
-	public static final String RCS_ID = "Version @(#) $Revision: 1.5 $";
+	public static final String RCS_ID = "Version @(#) $Revision: 1.6 $";
 
 	private String auxFile;
 	private AuxFiles auxFiles;
 	public void addAuxFiles (AuxFiles fSet) {
 		auxFiles = fSet;
-		//System.out.println(fSet);
+		//System.out.println(fSet); 
 	}
 	public AuxFiles getAuxFiles() {
 		return auxFiles;
